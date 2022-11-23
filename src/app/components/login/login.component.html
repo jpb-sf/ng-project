@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit($event.submitter.id)">
+    <input 
+        type="text" 
+        placeholder="enter email"
+        formControlName="email"
+        #email
+    ><br>
+    <input 
+        type="text" 
+        placeholder="enter password"
+        formControlName="password"
+        #password
+    ><br>
+    <button
+        id="login"
+        class="btn btn-primary"
+        >Login 
+    </button>
+    Or
+    <button
+        id="loginGoogle"
+        class="btn btn-primary"
+        >Login with Gmail
+    </button>
+    </form>
