@@ -10,7 +10,7 @@ export class ShoppingCart {
     for (let productId in itemsMap)
     { 
       let product = this.itemsMap[productId].product;
-      product.key = "productId";
+      product.key = productId;
       let item = new ShoppingCartItem(product, this.itemsMap[productId].quantity)
       this.priceTotal += item.itemPriceTotal;
       this.items.push(item)
@@ -30,7 +30,6 @@ export class ShoppingCart {
     else {
       return 0;
     }
-   
   }
 
   get productId(): string[]

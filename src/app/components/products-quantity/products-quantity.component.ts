@@ -11,7 +11,7 @@ import { ShoppingCart } from 'src/models/shopping-cart';
 export class ProductsQuantityComponent  {
   @Input('shopping-cart') shoppingCart?: ShoppingCart;
   @Input('product') product!: ProductAndKey;
-  @Input('key') key!:string;
+  @Input('key') key!: string;
 
   constructor(private cartService: ShoppingCartService) { }
 

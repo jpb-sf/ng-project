@@ -1,9 +1,14 @@
-<div *ngIf="product" class="row no-gutters">
+<div class="row no-gutters">
     <div class="col-2">
-        <button (click)="subtractFromCart()" class="btn btn-warning btn-yellow">-</button>
+        <button 
+            *ngIf="shoppingCart!.getQuantity(key) > 0"
+            (click)="subtractFromCart()" class="btn btn-warning btn-yellow"> -
+        </button>
     </div>
-    <div class="col text-center">{{ shoppingCart?.getQuantity(product.key) }} in cart</div>
+    <div class="col text-center">{{ shoppingCart!.getQuantity(key) }} in cart</div>
     <div class="col-2">
-        <button (click)="addToCart()" class="btn btn-warning btn-yellow">+</button>
+        <button 
+            (click)="addToCart()" class="btn btn-warning btn-yellow"> +
+        </button>
     </div>
 </div>
