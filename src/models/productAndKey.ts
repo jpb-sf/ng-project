@@ -1,4 +1,6 @@
-export interface ProductAndKey {
+
+
+export interface ProductAndKey  {
     key: string,
     title: string;
     price: number;

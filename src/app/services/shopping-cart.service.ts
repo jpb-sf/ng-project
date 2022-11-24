@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/compat/dat
 import { ProductAndKey } from 'src/models/productAndKey';
 import { Observable, take, map } from 'rxjs';
 import { ShoppingCart } from 'src/models/shopping-cart';
+import { ShoppingCartItem } from 'src/models/shopping-cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -47,25 +48,22 @@ export class ShoppingCartService {
     return result.key;
   }
 
-  async addToCart(product: ProductAndKey)
+  async addToCart(product: ProductAndKey | ShoppingCartItem)
   {
     this.updateItem(product, 1)
   }
 
-  async subtractFromCart(product: ProductAndKey)
+  async subtractFromCart(product: ProductAndKey | ShoppingCartItem)
   {
     this.updateItem(product, -1)
   }
 
-  private async updateItem(product: ProductAndKey, change: number)
+  private async updateItem(product: ShoppingCartItem | ProductAndKey, change: number)
   {
-    // this is what is going into the DB
-    // 
-    console.log('updateItem')
     let cartId = await this.getOrCreateCartId();
-    let item = await this.getItem(cartId, product.key)
-
-    // I now have the correct Key to update. boom. 
+    console.log(product.key)
+    console.log('oh hey')
+    let item = await this.getItem(cartId, product.key);
     item.valueChanges()
     .pipe(
       take(1)

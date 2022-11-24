@@ -1,10 +1,10 @@
 
-export class ShoppingCartItem {
-  title!: string;
-  price!: number;
-  imageUrl!: string;
-  quantity!: number;
-  key!: string;
+export class ShoppingCartItem  {
+  title: string;
+  price: number;
+  imageUrl: string;
+  quantity: number;
+  key: string;
   
   constructor(public item: any) {
     this.title = item.title;
@@ -13,7 +13,7 @@ export class ShoppingCartItem {
     this.quantity = item.quantity;
     this.key = item.key
   }
-
+  
   get itemPriceTotal(): number
   {
     if(this.price)

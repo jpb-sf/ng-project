@@ -1,12 +1,9 @@
-import { ProductAndKey } from "./productAndKey";
 import { ShoppingCartItem } from "./shopping-cart-item";
 
 export class ShoppingCart {
   items: ShoppingCartItem[] = [];
   priceTotal?: number
-  // right now the getCart() build this object
-  // right now a key is  stored in db -- shopping-cart: { product: { key: hu4df68Rdf
-  // Important: not using that ' db product: { key ' to build this object's key value
+
   constructor(public itemsMap: { [productId: string]: ShoppingCartItem }) 
   { 
     this.priceTotal = 0;
@@ -22,11 +19,8 @@ export class ShoppingCart {
   }
 
   getQuantity(productId: string) {
-    console.log('hello one')
-    if(this.itemsMap)
+    if(this.itemsMap[productId])
     {
-      console.log('hello two')
-      console.log(productId)
       let item = this.itemsMap[productId];
       console.log(`item quantity is ${item.quantity}`);
       return item ? item.quantity : 0;

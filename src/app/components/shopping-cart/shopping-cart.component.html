@@ -1,7 +1,7 @@
 <div *ngIf="cart$ | async as cart">
     <h1>Shopping Cart</h1>
     <p > 
-        You have {{ cart.totalItemsCount }} items in your cart
+        You have <strong>{{ cart.totalItemsCount }}</strong> items in your cart
     </p>
     <table class="table">
         <thead>
@@ -17,7 +17,8 @@
                 <td>
                     <products-quantity
                         [shopping-cart]="cart" 
-                        [key]="item.key">
+                        [key]="item.key"
+                        [product]="item">
                     </products-quantity>
                 </td>
                 <td>{{ item.itemPriceTotal | currency:'USD' : true }}</td>
