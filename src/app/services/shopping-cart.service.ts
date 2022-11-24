@@ -49,24 +49,32 @@ export class ShoppingCartService {
 
   async addToCart(product: ProductAndKey)
   {
-    this.updateItemQuantity(product, 1)
+    this.updateItem(product, 1)
   }
 
   async subtractFromCart(product: ProductAndKey)
   {
-    this.updateItemQuantity(product, -1)
+    this.updateItem(product, -1)
   }
 
-  private async updateItemQuantity(product: ProductAndKey, change: number)
+  private async updateItem(product: ProductAndKey, change: number)
   {
-    console.log('updateItemQuantity')
+    // this is what is going into the DB
+    // 
+    console.log('updateItem')
     let cartId = await this.getOrCreateCartId();
     let item = await this.getItem(cartId, product.key)
+
+    // I now have the correct Key to update. boom. 
     item.valueChanges()
     .pipe(
       take(1)
     ).subscribe((result: any) => {
-      item.update({'product': product, 'quantity': (result?.quantity || 0) + change })
+      item.update({
+        'title': product.title,
+        'price': product.price,
+        'imageUrl': product.imageUrl,
+        'quantity': (result?.quantity || 0) + change })
     })
   }
 

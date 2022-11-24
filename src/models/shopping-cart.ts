@@ -4,16 +4,20 @@ import { ShoppingCartItem } from "./shopping-cart-item";
 export class ShoppingCart {
   items: ShoppingCartItem[] = [];
   priceTotal?: number
+  // right now the getCart() build this object
+  // right now a key is  stored in db -- shopping-cart: { product: { key: hu4df68Rdf
+  // Important: not using that ' db product: { key ' to build this object's key value
   constructor(public itemsMap: { [productId: string]: ShoppingCartItem }) 
   { 
     this.priceTotal = 0;
-    for (let productId in itemsMap)
+    for (let itemId in itemsMap)
     { 
-      let product = this.itemsMap[productId].product;
-      product.key = productId;
-      let item = new ShoppingCartItem(product, this.itemsMap[productId].quantity)
-      this.priceTotal += item.itemPriceTotal;
-      this.items.push(item)
+      let item = this.itemsMap[itemId];
+      item.key = itemId;
+      let shoppingCartItem = 
+      new ShoppingCartItem(item)
+      this.priceTotal += shoppingCartItem.itemPriceTotal;
+      this.items.push(shoppingCartItem)
     }
   }
 

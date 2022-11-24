@@ -1,14 +1,24 @@
-import { Product } from "./product";
-import { ProductAndKey } from "./productAndKey";
 
 export class ShoppingCartItem {
-  constructor(public product: ProductAndKey, public quantity:number) { }
-  key?: string;
+  title!: string;
+  price!: number;
+  imageUrl!: string;
+  quantity!: number;
+  key!: string;
+  
+  constructor(public item: any) {
+    this.title = item.title;
+    this.price = item.price;
+    this.imageUrl = item.imageUrl;
+    this.quantity = item.quantity;
+    this.key = item.key
+  }
+
   get itemPriceTotal(): number
   {
-    if(this.product.price)
+    if(this.price)
     {
-      return this.product.price * this.quantity;
+      return this.price * this.quantity;
     }
     else
     return 0;
