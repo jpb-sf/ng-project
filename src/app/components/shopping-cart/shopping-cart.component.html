@@ -29,5 +29,6 @@
                 <th>{{ cart.priceTotal | currency: 'USD' : true }}</th>
             </tr>
         </tbody>
+        <button (click)="clearCart()" class="btn btn-sml btn-secondary">Clear Cart</button>
     </table>
 </div>
