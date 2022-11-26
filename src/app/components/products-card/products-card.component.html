@@ -9,7 +9,12 @@
         <button (click)="addToCart()" class="btn btn-warning btn-yellow col-12">Add to Cart</button>
       </div>
       <ng-template #manageQuantity>
-        <products-quantity [shopping-cart]="shoppingCart" [product]="product" [key]="product.key"></products-quantity>
+        <products-quantity 
+            [shopping-cart]="shoppingCart" 
+            [product]="product" 
+            [key]="product.key"
+            [color]="true">
+        </products-quantity>
       </ng-template>
     </div>
   </div>

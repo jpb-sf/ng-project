@@ -1,34 +1,42 @@
 <div *ngIf="cart$ | async as cart">
     <h1>Shopping Cart</h1>
     <p > 
-        You have <strong>{{ cart.totalItemsCount }}</strong> items in your cart
+        You have {{ cart.totalItemsCount }} items in your cart
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of cart.items">
-                <td>{{ item.title }}</td>
-                <td>
-                    <products-quantity
-                        [shopping-cart]="cart" 
-                        [key]="item.key"
-                        [product]="item">
-                    </products-quantity>
-                </td>
-                <td>{{ item.itemPriceTotal | currency:'USD' : true }}</td>
-            </tr>
-            <tr>
-                <th></th>
-                <td class="text-right">SubTotal:</td>
-                <th>{{ cart.priceTotal | currency: 'USD' : true }}</th>
-            </tr>
-        </tbody>
-        <button (click)="clearCart()" class="btn btn-sml btn-secondary">Clear Cart</button>
-    </table>
+    <div class="row col-9">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="width-5"></th>
+                    <th>Product</th>
+                    <th class="text-center width-14">Quantity</th>
+                    <th class="text-right width-14">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cart.items">
+                    <td><img class="cart-img" [src]="item.imageUrl" alt=""></td>
+                    <td>{{ item.title }}</td>
+                    <td class="text-center">
+                        <products-quantity
+                            [shopping-cart]="cart" 
+                            [key]="item.key"
+                            [product]="item"
+                            [color]="false">
+                        </products-quantity>
+                    </td>
+                    <td class="text-right">{{ item.itemPriceTotal | currency:'USD' : true }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right">SubTotal: <strong>{{ cart.priceTotal | currency: 'USD' : true }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="width-11">
+            <button (click)="clearCart()" class="btn  btn-secondary">Clear Cart</button>
+        </div>
+    </div>
 </div>

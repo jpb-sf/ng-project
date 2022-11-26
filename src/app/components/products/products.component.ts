@@ -11,19 +11,26 @@ import { ShoppingCart } from 'src/models/shopping-cart';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnDestroy {  
+export class ProductsComponent implements OnInit {  
   filteredProducts: ProductAndKey[] = [];
   products: ProductAndKey[] = [];
   category: any;
-  cart!: ShoppingCart;
-  subscription?: Subscription;
+  cart$!: Observable<ShoppingCart>;
   itemAdded!: boolean;
 
   constructor(
     private route: ActivatedRoute, 
     private productService: ProductService,
-    private cartService: ShoppingCartService) {
-   this.productService.getAll()
+    private cartService: ShoppingCartService) {}
+
+  async ngOnInit()  {
+    this.cart$ = await this.cartService.getCart();
+    this.populateProducts();
+  }
+
+  private populateProducts()
+  {
+    this.productService.getAll()
     .pipe(
       switchMap((p) => {
       this.products = p as ProductAndKey[];
@@ -32,25 +39,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }))
     .subscribe(params => {
       this.category = params.get('category')
-      
-      let result = this.category ? this.products.filter((item) => { 
-        console.log('filter')
-        return item.category.toLowerCase() == this.category.toLowerCase();
-      }) : this.products;
-      this.filteredProducts = result;
+      this.filteredProducts = this.applyFilter();
     })
   }
 
-  async ngOnInit()  {
-   this.subscription = (await this.cartService.getCart())
-    .subscribe(cart => {
-      console.log('hello')
-      this.cart = cart;
-    });
-  }
 
-  ngOnDestroy(): void {
-      this.subscription?.unsubscribe();
+  private applyFilter()
+  {
+    return this.category ? this.products.filter((item) => { 
+        return item.category.toLowerCase() == this.category.toLowerCase();
+      }) : this.products;
   }
   
 }

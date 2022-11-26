@@ -13,6 +13,7 @@ export class ProductsQuantityComponent  {
   @Input('shopping-cart') shoppingCart?: ShoppingCart;
   @Input('product') product!: ProductAndKey | ShoppingCartItem;
   @Input('key') key!: string;
+  @Input('color') color!: boolean;
 
   constructor(private cartService: ShoppingCartService) { }
 
