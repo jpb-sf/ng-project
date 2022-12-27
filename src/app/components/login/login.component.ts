@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class LoginComponent {
   form;
-  constructor(private auth: AuthService, fb: UntypedFormBuilder) {
+  constructor(private auth: AuthService, fb: FormBuilder) {
     this.form = fb.group({
       email: ['', 
       [
@@ -24,7 +24,8 @@ export class LoginComponent {
   onSubmit(id: string)
   {
     const formVals = this.form.getRawValue();
-    this.auth.login(id, formVals.email, formVals.password)
+    if (formVals.email && formVals.password)
+    this.auth.login(id, formVals.email, formVals.password);
   }
 
 }

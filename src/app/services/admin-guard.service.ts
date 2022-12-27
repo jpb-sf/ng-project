@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
     .pipe(
         switchMap((user:firebase.User | null) => { 
             console.log('adminGuard switchMap')
-            return this.userService.appUser(user)
+            return this.userService.getAppUser(user)
         }),
         map((appUser:AppUser | null) => 
         {

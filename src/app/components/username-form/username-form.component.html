@@ -1,0 +1,12 @@
+<form #f="ngForm" class="form mt-5 text-center" (ngSubmit)="submitUser(f)">
+    <div class="form-group">
+        <label for="please choose a username">Please choose a username</label><br>
+        <input
+            type="text" 
+            ngModel
+            name="displayName"
+            maxLength="12" 
+            placeholder="Choose username">
+    </div>
+    <button class="btn btn-primary">Save</button>
+</form>

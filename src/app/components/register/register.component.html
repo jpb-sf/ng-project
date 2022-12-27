@@ -1,0 +1,66 @@
+<div  *ngIf="stepOne; then step2; else step1"></div>
+    <ng-template class="text-center mt-1" #step2>
+        <h1>Register</h1>
+        <form [formGroup]="form" class="form">
+            <div class="form-group">
+                <!-- "focused" is just a boolean switch. Why didn't I think of this sooner? -->
+                <input
+                
+                    (focus)="focused = true"
+                    (blur)="focused = false" 
+                    type="text" 
+                    placeholder="enter email" 
+                    formControlName="email"
+                    class="form-control"
+                ><br>
+                <div *ngIf="email?.errors && email?.touched && !focused" class="alert alert-danger">
+                    <div *ngIf="email?.errors?.['customMinLength']">
+                        An email address is required
+                    </div>
+                    <div *ngIf="email?.errors?.['email']">
+                        Entry is not a valid email
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    placeholder="choose password" 
+                    formControlName="password"
+                    id="password"  
+                    class="form-control"
+                ><br>
+                <div *ngIf="password?.errors && password?.touched"class="alert alert-danger">
+                    <p *ngIf="password?.errors!required">A password is required</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    placeholder="confirm password" 
+                    formControlName="confirm"
+                    name="confirm"
+                    id="confirm" 
+                    class="form-control"
+                ><br>
+                <div *ngIf="confirm?.errors && confirm?.touched" class="alert alert-danger">
+                    <div *ngIf="confirm?.errors?.['required']; then test; else match"> </div>
+                        <ng-template #test > Please confirm your password.</ng-template>
+                        <ng-template #match> Passwords do not match.</ng-template>
+                </div>
+            </div>
+        </form>
+        <button
+            id="login"
+            class="btn btn-primary"
+            (click)="registerSubmit()" 
+            >Register 
+        </button>
+    <div class="text-center">
+        <p>Already have an account?</p>
+        <a routerLink="/login">Log in</a>
+    </div>
+</ng-template>
+<ng-template #step1>
+    <username-form (submitEvent)="submit($event)"></username-form>
+</ng-template>

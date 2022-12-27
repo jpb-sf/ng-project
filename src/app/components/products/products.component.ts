@@ -43,12 +43,10 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-
   private applyFilter()
   {
     return this.category ? this.products.filter((item) => { 
         return item.category.toLowerCase() == this.category.toLowerCase();
       }) : this.products;
   }
-  
 }

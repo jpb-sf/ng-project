@@ -1,1 +1,29 @@
-<p>admin-orders works!</p>
+<h1>Orders</h1>
+<div class="row">
+    <div class="col-md-6">
+        <table 
+            datatable 
+            [dtOptions]="dtOptions" 
+            [dtTrigger]="dtTrigger" 
+            class="table table-striped" >
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="orders">
+                <tr *ngFor="let order of orders" [class.table-primary]="order.key === key">
+                    <td> {{ order.customer.name}}</td>
+                    <td>{{ order.order.date}}</td>
+                    <td><a (click)="getOrderKey(order.key)" [routerLink]="['/admin/admin-orders/', order.key]">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <view-order></view-order>
+    </div>
+</div>
+

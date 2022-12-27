@@ -1,1 +1,32 @@
-<p>my-order works!</p>
+<h1>My Orders</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngIf="orders.length > 0; then ordersTrue; else ordersFalse" ></div>
+            <ng-template #ordersTrue>
+                <table
+                    datatable 
+                    [dtOptions]="dtOptions" 
+                    [dtTrigger]="dtTrigger" 
+                    class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="orders">
+                        <tr *ngFor="let order of orders" [class.table-primary]="order.key === key">
+                            <td> {{ order.customer.name}}</td>
+                            <td>{{ order.order.date}}</td>
+                            <td><a (click)="getOrderKey(order.key)" [routerLink]="['/my-orders/', order.key]">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+            <ng-template #ordersFalse> You have not placed any orders.</ng-template>
+        </div>
+        <div class="col-md-6">
+            <view-order></view-order>
+        </div>
+    </div>

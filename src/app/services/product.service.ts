@@ -10,12 +10,11 @@ export class ProductService {
 
   constructor(private db: AngularFireDatabase) { }
 
-
   create(product:any)
   {
     return this.db.list('/products').push(product);
   }
-//   
+  
   getAll(): Observable<ProductAndKey[]>
   {
     return this.db.list('/products').snapshotChanges()
@@ -30,9 +29,10 @@ export class ProductService {
         })
     )
   }
+  
   get(productId: string)
   {
-    return this.db.object('/products/' + productId).valueChanges();
+    return this.db.object('/products/' + productId).valueChanges() as Observable<ProductAndKey>;
   }
 
   update(productId: string, product:string)

@@ -1,0 +1,42 @@
+<div *ngIf="orderDisplay === 'admin'; then admin; else my"></div>
+    <ng-template #admin>
+        <h1>Orders</h1>
+    </ng-template>
+    <ng-template #my>
+        <h1> My Orders</h1>
+    </ng-template>
+    <div class="row">
+        <div class="col-md-6">
+            <table 
+                datatable 
+                [dtOptions]="dtOptions" 
+                [dtTrigger]="dtTrigger" 
+                class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                
+                <tbody *ngIf="orders">
+                    <tr *ngFor="let order of orders" [class.table-primary]="order.key === key">
+                        <td> {{ order.customer.name}}</td>
+                        <td>{{ order.order.date}}</td>
+                        <div *ngIf="orderDisplay === 'admin'; then admin2; else my2"></div>
+                        <ng-template #admin2>
+                            <td><a (click)="getOrderKey(order.key)" [routerLink]="['/admin/admin-orders/', order.key]">View</a></td>
+                        </ng-template>
+                        <ng-template #my2>
+                            <td><a (click)="getOrderKey(order.key)" [routerLink]="['/my-orders/', order.key]">View</a></td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <view-order></view-order>
+        </div>
+    </div>
+

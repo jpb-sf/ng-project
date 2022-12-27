@@ -18,6 +18,13 @@ export class ShoppingCartService {
     this.db.object('shopping-carts/' + cartId + '/items').remove()
   }
 
+  async deleteCart()
+  {
+    let cartId = await this.getOrCreateCartId();
+    this.db.object('shopping-carts/' + cartId).remove();
+    localStorage.removeItem('cartId');
+  }
+
   async getCart(): Promise<Observable<ShoppingCart>>
   {
     let cartId = await this.getOrCreateCartId();
@@ -32,12 +39,12 @@ export class ShoppingCartService {
     )
   }
 
-  async addToCart(product: ProductAndKey | ShoppingCartItem)
+  async addToCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
   {
     this.updateItem(product, 1)
   }
 
-  async subtractFromCart(product: ProductAndKey | ShoppingCartItem)
+  async subtractFromCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
   {
     this.updateItem(product, -1)
   }

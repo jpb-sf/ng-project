@@ -3,11 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 
-import { environment } from 'Environments/environment';
+import { environment } from 'environments/environment';
 import * as firebase from 'firebase/app';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -27,6 +26,8 @@ import { ProductService } from './services/product.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminGuard } from './services/admin-guard.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
+import { DateTimeService } from './services/date-time.service';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
@@ -43,6 +44,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductsFilterComponent } from './components/products-filter/products-filter.component';
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
+import { AdminViewOrderComponent } from './admin/admin-view-order/admin-view-order.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UsernameFormComponent } from './components/username-form/username-form.component';
+import { ViewOrderComponent } from './components/view-order/view-order.component';
+import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +67,12 @@ import { ProductsQuantityComponent } from './components/products-quantity/produc
     ProductsComponent,
     ProductsFilterComponent,
     ProductsCardComponent,
-    ProductsQuantityComponent
+    ProductsQuantityComponent,
+    AdminViewOrderComponent,
+    RegisterComponent,
+    UsernameFormComponent,
+    ViewOrderComponent,
+    DisplayOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -82,8 +93,11 @@ import { ProductsQuantityComponent } from './components/products-quantity/produc
     CategoryService,
     ProductService,
     ShoppingCartService,
+    OrderService,
+    DateTimeService,
     AuthGuard,
-    AdminGuard
+    AdminGuard,
+    
     // AngularFireAuth,
     // {
     //     provide: SETTINGS,

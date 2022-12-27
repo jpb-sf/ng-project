@@ -1,15 +1,13 @@
 
-import { Component, OnInit } from '@angular/core';
-import { Observable, subscribeOn } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { Categories } from 'src/models/Category';
 import { ProductService } from 'src/app/services/product.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router';
-import { SnapshotAction } from '@angular/fire/compat/database';
-import { take,map } from 'rxjs';
-import { Product } from 'src/models/product';
-import { Category } from 'src/models/Category';
+import { take } from 'rxjs';
+import { ProductAndKey } from 'src/models/productAndKey';
 
 @Component({
     selector: 'admin-product-form',
@@ -21,17 +19,12 @@ export class AdminProductFormComponent {
   categories$: Observable<Categories[]>;
   form;
   urlRegEx: string ='(http(s)?://.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)';
-  product: any = {
-    title: '',     
-    price: NaN,
-    category: '',
-    imageUrl: ''
-  };
+  product!: ProductAndKey;
   test:string = "test";
   id;
   
   constructor(
-    fb: UntypedFormBuilder, 
+    fb: FormBuilder, 
     private categoryService: CategoryService, 
     private productService: ProductService,
     private router: Router,
@@ -60,7 +53,6 @@ export class AdminProductFormComponent {
     }
     if (this.id) 
     {
-      console.log(this.id)
       let item;
       try {
         item = this.productService.get(this.id)
@@ -74,11 +66,9 @@ export class AdminProductFormComponent {
         item.pipe( 
           take(1)
         ).subscribe((p) => {
-						console.log(`productService.get() observable returns:`);
-						console.log(p)
-						this.product = p;
-						return this.product;
-        	})
+            this.product = p;
+            return this.product;
+        })
       }
     }
   }
@@ -98,7 +88,7 @@ export class AdminProductFormComponent {
 		return result;
 	}
 
-	save(form: UntypedFormGroup) {
+	save(form: FormGroup) {
 		console.log(form.value)
 		if(form.valid)
 		{

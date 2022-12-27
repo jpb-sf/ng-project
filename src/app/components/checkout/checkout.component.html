@@ -1,1 +1,38 @@
-<p>checkout works!</p>
+<h1>Shipping</h1>
+<div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm" (ngSubmit)="submit(f)">
+            <div class="mb-2">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" ngModel name="name" required>
+            </div>
+            <div class="mb-2">
+                <label for="address" class="form-label">Address Line 1</label>
+                <input type="text" class="form-control mb-2" required ngModel name="addressFirst">
+            </div>
+            <div class="mb-2">
+                <label for="address" class="form-label">Address Line 2 (optional)</label>
+                <input type="text" class="form-control" ngModel name="addressSecond">
+            </div>
+            <div class="mb-2">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" ngModel name="city" required>
+            </div>
+            <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-bordered row-border" *ngIf="cart">
+            <h2>Order Summary</h2>
+            <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+            <tr *ngFor=" let item of cart.items">
+                <td class="pt-2 pb-2"> {{ item.quantity}} x {{ item.title}}</td>
+                <td class="text-end pt-2 pb-2">{{ item.price | currency: 'USD' : true}}</td>
+            </tr>
+            <tr>
+                <th class="pt-2 pb-2">Total</th>
+                <th class="text-end pt-2 pb-2">{{ cart.priceTotal | currency: 'USD' : true }}</th>
+            </tr>
+        </table>
+    </div>
+</div>

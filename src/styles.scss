@@ -6,11 +6,21 @@
 @media (min-width: 981px) { body { 
     padding-top: 60px; 
  } }
+  .pt--2 {
+      position: relative;
+      display: block;
+      padding-top: 3.5rem; 
+    }
 
- .product-img {
-    height: 12rem;
-    object-fit: cover;
- }
+  .router-outlet {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+  
+  .product-img {
+      height: 12rem;
+      object-fit: cover;
+  }
 
  .btn-yellow {
     background-color: #FFDD00;
@@ -18,3 +28,14 @@
  }
 
  .table .text-right {text-align: right}
+ 
+ .table-bordered {
+    border-collapse: collapse;
+  }
+ 
+  .row-pad-0 {
+    padding-left: 0rem;
+    padding-top: 0rem;
+    padding-right: 0rem;
+    padding-bottom: 0rem;
+ }

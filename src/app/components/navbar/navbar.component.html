@@ -27,22 +27,19 @@
                     class="nav-link active" 
                     data-toggle="dropdown" aria-haspopup="true" 
                     aria-expanded="false">
-                    {{ appUser.name }}
+                    {{ appUser.displayName }}
                 </a>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <a ngbDropdownItem>My Orders</a>
+                    <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
                     <ng-container *ngIf="appUser.isAdmin">
-                        <a ngbDropdownItem>Manage Orders</a>
+                        <a ngbDropdownItem routerLink="/admin/admin-orders">Manage Orders</a>
                         <a ngbDropdownItem routerLink="admin/products">Manage Products</a>
                     </ng-container>
                     <a ngbDropdownItem (click)="auth.logout()">Log Out</a>
                 </div>
             </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+    
       </div>
     </div>
   </nav>

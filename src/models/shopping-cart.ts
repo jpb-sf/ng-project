@@ -9,11 +9,28 @@ export class ShoppingCart {
     {
       for (let itemId in itemsMap)
       { 
-          this.items.push(new ShoppingCartItem( { ...this.itemsMap[itemId], key: itemId }))
+        this.items.push(new ShoppingCartItem( { ...this.itemsMap[itemId], key: itemId }))
       }
     }
   }
 
+  get productId(): string[]
+  {
+      return Object.keys(this.items);
+  }
+  
+  getQuantity(productId: string) {
+      
+    if(this.itemsMap && this.itemsMap[productId])
+    {
+        let item = this.itemsMap[productId];
+        return item ? item.quantity : 0;
+    }
+    else {
+        return 0;
+    }
+  }
+    
   get priceTotal() 
   {
     let total = 0;
@@ -24,31 +41,13 @@ export class ShoppingCart {
     return total;
   }
 
-  getQuantity(productId: string) {
-
-    if(this.itemsMap && this.itemsMap[productId])
-    {
-      let item = this.itemsMap[productId];
-      console.log(`item quantity is ${item.quantity}`);
-      return item ? item.quantity : 0;
-    }
-    else {
-      return 0;
-    }
-  }
-
-  get productId(): string[]
-  {
-    return Object.keys(this.items);
-  }
-    
   get totalItemsCount() 
   {
-    let count = 0;
-    for (let item of this.items)
-    { 
-      count += item.quantity;
-    }
-    return count;
+      let count = 0;
+      for (let item of this.items)
+      { 
+          count += item.quantity;
+      }
+      return count;
   }
 }

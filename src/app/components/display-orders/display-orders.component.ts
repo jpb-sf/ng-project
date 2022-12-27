@@ -1,15 +1,17 @@
-import { Component, ViewChild, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from 'src/models/order';
 import { Subject, Subscription } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { Route, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'admin-orders',
-  templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.scss']
-})
-export class AdminOrdersComponent implements OnDestroy, OnInit {
+    selector: 'display-orders',
+    templateUrl: './display-orders.component.html',
+    styleUrls: ['./display-orders.component.scss']
+  })
+
+export class DisplayOrdersComponent  implements OnDestroy, OnInit {
   orders: Order[] = []; 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
@@ -18,12 +20,27 @@ export class AdminOrdersComponent implements OnDestroy, OnInit {
   dtElement!: DataTableDirective;
   isDtInitialized:boolean = false;
   key: string | undefined = '';
+  baseroute?: string;
+  orderServiceMethod: any;
+  orderDisplay: 'admin' | 'my' | undefined;
   
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private route: ActivatedRoute) {
+    this.baseroute = this.route.snapshot.url.join('/').slice(0,5);
+  }
   ngOnInit(): void {
-   
-      this.subscription = this.orderService.getAll()
-      .subscribe(orders => {
+
+      if(this.baseroute === 'admin')
+      {
+        this.orderServiceMethod = this.orderService.getAll()
+        this.orderDisplay = 'admin';
+      }
+      else {
+        this.orderServiceMethod = this.orderService.getAllMyOrders();
+        this.orderDisplay = 'my';
+      }
+      
+      this.subscription = this.orderServiceMethod
+      .subscribe((orders: any) => {
         this.orders = orders;
         if (this.isDtInitialized)
         {
