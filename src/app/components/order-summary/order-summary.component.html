@@ -1,4 +1,3 @@
-
 <div *ngIf="order" class="border rounded ps-3 pe-3 pb-3 pt-3">
     <div *ngIf="orderIsSelected; then selected; else notSelected"></div>
     <ng-template #notSelected>
@@ -8,15 +7,15 @@
     </ng-template>
     
     <ng-template #selected>
-        <h5>Order: {{order.key}}</h5>
+        <h5>Order: {{order.orderId}}</h5>
          <table class="table table-striped">
             <tbody>
                 <tr> 
                     <th>Name: <br>
-                        <p>{{order.customer.name}}</p>
+                        <p>{{order.shipping.name}}</p>
                     </th>
                     <th>Date: <br> 
-                        <p>{{order.order.date}}, {{order.order.time}}</p>
+                        <p>{{order.datePlaced}}</p>
                     </th>
                 </tr>
             </tbody>

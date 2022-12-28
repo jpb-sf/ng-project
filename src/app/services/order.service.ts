@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { DateTimeService } from './date-time.service';
+import { AngularFireDatabase, QueryFn } from '@angular/fire/compat/database';
 import { ShoppingCart } from 'src/models/shopping-cart';
 import { Order } from 'src/models/order';
 import { ShoppingCartService } from './shopping-cart.service';
 import { Observable, map, of } from 'rxjs';
 import { AuthService } from './auth.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +13,22 @@ import { AuthService } from './auth.service';
 export class OrderService {
   constructor(
     private db: AngularFireDatabase,
-    private dateService: DateTimeService,
     private cartService: ShoppingCartService, 
     private authService: AuthService
   ) { }
   
-  async createOrder(customer: {}, order: ShoppingCart)
+  async createOrder(shipping: {}, order: ShoppingCart)
   {
-    let items = this.modifyCartItemsforOrder(order);
     let user = this.authService.user;
-    console.log('user is')
-    console.log(user)
     if (user)
     {
       let result = await this.db.list('/orders/')
       .push({
-          customer: { ...customer, id: user.uid },
+          datePlaced: new Date().getTime(),
+          userId: user.uid, 
+          shipping: shipping,
           order: {
-            date: this.dateService.getDate,
-            time: this.dateService.getTime,
-            items: items,
+            items: order.items,
             totalPrice: order.priceTotal
           }
       })
@@ -43,7 +39,7 @@ export class OrderService {
     }
     console.log('Something went wrong placing the order')
     return;
-    }
+  }
   
   getOrder(key: string)
   {
@@ -51,8 +47,7 @@ export class OrderService {
     .pipe(
       map((action:any) => {
         const data = action.payload.val();
-        console.log({key: key, ...data})
-        return {key: key, ...data};
+        return {orderId: key, ...data};
       })
     )
   }
@@ -64,51 +59,43 @@ export class OrderService {
       map((orders:any) => {
         return orders.map((o:any) => {
           const data = o.payload.val();
-          const id = o.key;
-          return {key: id, ...data}
+          const orderId = o.key;
+          return {orderId: orderId, ...data}
         })}
       )
     ) as Observable<Order[]>
   }
 
-  getAllMyOrders(): Observable<Order[]> 
+  getAllByUser(): Observable<Order[]> 
   {
-    console.log('welcome to getAllMyOrders')
     const user = this.authService.user;
-    console.log(user)
     if (user)
     {
-      return this.db.list('/orders/').snapshotChanges()
+      return this.db.list('/orders/',
+        ref => ref.orderByChild('userId').equalTo(user.uid)
+    ).snapshotChanges()
       .pipe(
         map((orders:any) => {
-          return orders.filter((o:any) => {
-            const userId = o.payload.val().customer.id;
-            if (user.uid === userId)
-            {
-                return true;
-            }
-            else {
-                return false;
-            }
-          }).map((o:any) => {
+          return orders.map((o:any) => {
             const data = o.payload.val();
-            const orderId = o.key;
-            return { key: orderId, ...data}
-        })
-      })
-      ) as Observable<Order[]>
+            const orderKey = o.key;
+            return { orderId: orderKey, ...data}
+          })
+        }) 
+      )
     }
     return of() as Observable<Order[]>
   }
 
-  private modifyCartItemsforOrder(order: ShoppingCart)
-  {
-    let items = [];
-    for (let item of order.items)
-    {
-      const { imageUrl, ...rest } = item;
-      items.push(rest);
-    }
-    return items;
-  }
+//   private modifyCartItemsforOrder(order: ShoppingCart)
+//   {
+//     let items = [];
+//     for (let item of order.items)
+//     {
+//         // remove imageUrl
+//       const { imageUrl, ...rest } = item;
+//       items.push(rest);
+//     }
+//     return items;
+//   }
 }

@@ -36,10 +36,7 @@ export class AdminOrdersComponent implements OnDestroy, OnInit {
           this.isDtInitialized = true;
           this.dtTrigger.next(orders);      
         }
-        for (let order of this.orders)
-        {
-           console.log(order.key)
-        }
+    
       })
     }
 

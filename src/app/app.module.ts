@@ -44,11 +44,11 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductsFilterComponent } from './components/products-filter/products-filter.component';
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
-import { AdminViewOrderComponent } from './admin/admin-view-order/admin-view-order.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UsernameFormComponent } from './components/username-form/username-form.component';
-import { ViewOrderComponent } from './components/view-order/view-order.component';
-import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
+import { OrderSelectComponent } from './components/order-select/order-select.component';
+import { OrderManageComponent } from './components/order-manage/order-manage.component';
 
 @NgModule({
   declarations: [
@@ -68,11 +68,11 @@ import { DisplayOrdersComponent } from './components/display-orders/display-orde
     ProductsFilterComponent,
     ProductsCardComponent,
     ProductsQuantityComponent,
-    AdminViewOrderComponent,
     RegisterComponent,
     UsernameFormComponent,
-    ViewOrderComponent,
-    DisplayOrdersComponent
+    OrderSummaryComponent,
+    OrderSelectComponent,
+    OrderManageComponent
   ],
   imports: [
     BrowserModule,

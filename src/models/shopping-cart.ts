@@ -16,7 +16,7 @@ export class ShoppingCart {
 
   get productId(): string[]
   {
-      return Object.keys(this.items);
+    return Object.keys(this.items);
   }
   
   getQuantity(productId: string) {

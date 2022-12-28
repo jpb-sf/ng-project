@@ -16,10 +16,10 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="orders">
-                        <tr *ngFor="let order of orders" [class.table-primary]="order.key === key">
-                            <td> {{ order.customer.name}}</td>
-                            <td>{{ order.order.date}}</td>
-                            <td><a (click)="getOrderKey(order.key)" [routerLink]="['/my-orders/', order.key]">View</a></td>
+                        <tr *ngFor="let order of orders" [class.table-primary]="order.orderId === key">
+                            <td> {{ order.shipping.name}}</td>
+                            <td>{{ order.datePlaced}}</td>
+                            <td><a (click)="getOrderKey(order.orderId)" [routerLink]="['/my-orders/', order.orderId]">View</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -27,6 +27,6 @@
             <ng-template #ordersFalse> You have not placed any orders.</ng-template>
         </div>
         <div class="col-md-6">
-            <view-order></view-order>
+            <order-summary></order-summary>
         </div>
     </div>

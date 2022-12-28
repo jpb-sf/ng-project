@@ -22,7 +22,7 @@ export class MyOrderComponent implements OnInit {
     constructor(private orderService: OrderService) {}
     ngOnInit(): void {
         
-        this.subscription = this.orderService.getAllMyOrders()
+        this.subscription = this.orderService.getAllByUser()
         .subscribe((orders:any) => {
           this.orders = orders;
           if (this.isDtInitialized)

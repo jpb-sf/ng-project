@@ -15,7 +15,7 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminGuard } from './services/admin-guard.service';
-import { DisplayOrdersComponent } from './components/display-orders/display-orders.component';
+import { OrderManageComponent } from './components/order-manage/order-manage.component';
 
 
 const routes: Routes = [
@@ -69,7 +69,7 @@ const routes: Routes = [
     },
     {
         path: 'my-orders/:id', 
-        component: DisplayOrdersComponent,
+        component: OrderManageComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -80,7 +80,7 @@ const routes: Routes = [
     },
     {
         path: 'admin/admin-orders/:id', 
-        component: DisplayOrdersComponent,
+        component: OrderManageComponent,
         canActivate: [AuthGuard, AdminGuard]
     },
     {
@@ -89,7 +89,6 @@ const routes: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuard, AdminGuard]
     }
-   
 ];
 
 
