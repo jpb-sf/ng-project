@@ -1,0 +1,16 @@
+<!-- Create filtered products with loop -->
+<div class="row products-wrapper no-gutters g-3" *ngIf="cart$ | async as cart">
+    <ng-container *ngFor="let p of filteredProducts; index as i">
+        <div class="col-sm-6 col-md-4 col-xxl-3">
+            <products-card
+            [product]="p" 
+            [shopping-cart]="cart" 
+            [show-actions]="true"
+            [filteredProducts]="filteredProducts">
+            </products-card>
+        </div>
+    </ng-container>
+</div>
+
+
+  

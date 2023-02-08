@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand navbar-light fixed-top bg-light py-0">
+  <div class="page-container container-fluid ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
+    <a class="navbar-brand" routerLink="/">MyShop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ms-auto mb-1 mb-md-0">
+        <ng-template #anonymousUser>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="login">Login</a>
+            </li>
+        </ng-template>
+        <li *ngIf="appUser$ | async as appUser; else anonymousUser" class="nav-item" ngbDropdown>
+            <a ngbDropdownToggle id="dropdownMenuButton"
+                class="nav-link active" 
+                data-toggle="dropdown" aria-haspopup="true" 
+                aria-expanded="false">
+                Hi {{ appUser.displayName }}
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
+                <ng-container *ngIf="appUser.isAdmin">
+                    <a ngbDropdownItem routerLink="/admin/admin-orders">Manage Orders</a>
+                    <a ngbDropdownItem routerLink="admin/products">Manage Products</a>
+                </ng-container>
+                <a ngbDropdownItem (click)="auth.logout()">Log Out</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" 
+                aria-current="page" 
+                routerLink="shopping-cart">
+                <fa-icon 
+                    [icon]="['fas', 'cart-shopping']"
+                    [styles]="{ 'color': '#bd8d0c' }"
+                    >
+                </fa-icon>
+                <span class="badge badge-pill btn-yellow"
+                    *ngIf="cart$ | async as cart">
+                    {{ cart.totalItemsCount }}
+                </span>
+            </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+             
+    
+                

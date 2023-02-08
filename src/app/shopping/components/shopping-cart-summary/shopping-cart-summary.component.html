@@ -1,0 +1,33 @@
+<!-- <table class="table table-bordered row-border" *ngIf="cart">
+    <h2>Order Summary</h2>
+    <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+    <tr *ngFor=" let item of cart.items">
+        <td class="pt-2 pb-2"> {{ item.quantity}} x {{ item.title}}</td>
+        <td class="text-end pt-2 pb-2">{{ item.price | currency: 'USD' : true}}</td>
+    </tr>
+    <tr>
+        <th class="pt-2 pb-2">Total</th>
+        <th class="text-end pt-2 pb-2">{{ cart.priceTotal | currency: 'USD' : true }}</th>
+    </tr>
+</table> -->
+
+<div class="card" *ngIf="cart">
+    <div class="card-body">
+        <h5>Order Summary</h5>
+        <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+        <ul class="list-group list-group-flush">
+            <li *ngFor=" let item of cart.items" class="list-group-item pt-2">
+                {{ item.quantity }} x {{ item.title }}
+                <div class="float-end pt-2 pb-2">
+                    {{ item.price | currency: 'USD' : true }}
+                </div>
+            </li>
+            <li class="list-group-item fw-bold pt-2 pb-2">
+                Total
+                <div class="float-end pt-2 pb-2">
+                    {{ cart.priceTotal | currency: 'USD' : true }}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

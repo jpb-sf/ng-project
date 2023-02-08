@@ -1,103 +1,34 @@
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire/compat';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataTablesModule } from 'angular-datatables';
-
 import { environment } from 'environments/environment';
 import * as firebase from 'firebase/app';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
-import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
-import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/compat/database';
-// import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
-import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/compat/functions';
-
-import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
-import { CategoryService } from './services/category.service'
-import { ProductService } from './services/product.service';
-import { AuthGuard } from './services/auth-guard.service';
-import { AdminGuard } from './services/admin-guard.service';
-import { ShoppingCartService } from './services/shopping-cart.service';
-import { OrderService } from './services/order.service';
-import { DateTimeService } from './services/date-time.service';
-
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { MyOrderComponent } from './components/my-order/my-order.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { ProductsComponent } from './components/products/products.component';
-import { ProductsFilterComponent } from './components/products-filter/products-filter.component';
-import { ProductsCardComponent } from './components/products-card/products-card.component';
-import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
-import { RegisterComponent } from './components/register/register.component';
-import { UsernameFormComponent } from './components/username-form/username-form.component';
-import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-import { OrderSelectComponent } from './components/order-select/order-select.component';
-import { OrderManageComponent } from './components/order-manage/order-manage.component';
+import { CommonModule } from '@angular/common';
+import { AdminModule } from './admin/admin.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { ShoppingModule } from './shopping/shopping.module';
+import { SharedModule } from 'shared/shared.module';
+import { PromosModule } from './promos/promos.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    ShoppingCartComponent,
-    CheckoutComponent,
-    OrderSuccessComponent,
-    LoginComponent,
-    HomeComponent,
-    AdminOrdersComponent,
-    MyOrderComponent,
-    OrdersComponent,
-    AdminProductFormComponent,
-    AdminProductsComponent,
-    ProductsComponent,
-    ProductsFilterComponent,
-    ProductsCardComponent,
-    ProductsQuantityComponent,
-    RegisterComponent,
-    UsernameFormComponent,
-    OrderSummaryComponent,
-    OrderSelectComponent,
-    OrderManageComponent
+    AppComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
-    DataTablesModule
+    SharedModule,
+    CoreModule,
+    ShoppingModule,
+    PromosModule,
+    AdminModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
-    AuthService,
-    UserService,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-    OrderService,
-    DateTimeService,
-    AuthGuard,
-    AdminGuard,
-    
     // AngularFireAuth,
     // {
     //     provide: SETTINGS,

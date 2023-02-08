@@ -1,0 +1,32 @@
+<div *ngIf="order" class="border rounded ps-3 pe-3 pb-3 pt-3">
+    <div *ngIf="orderIsSelected; then selected; else notSelected"></div>
+    <ng-template #notSelected>
+        <div class="text-center">
+            <p>Orders will be displayed here.</p>
+        </div>
+    </ng-template>
+    
+    <ng-template #selected>
+        <div class="card">
+            <div class="card-body">
+                <h5>Order: {{ order.orderId }}</h5>
+                <ul class="list-group list-group-flush">
+                    <li *ngFor="let item of order.order.items" class="list-group-item pt-2">
+                        {{ item.quantity }} x {{ item.title }}
+                        <div class="float-end pt-2 pb-2">
+                            {{ item.itemPriceTotal| currency: 'USD' : true }}
+                        </div>
+                    </li>
+                    <li class="list-group-item fw-bold pt-2 pb-2">
+                        Total
+                        <div class="float-end pt-2 pb-2">
+                            {{ order.order.totalPrice | currency: 'USD' : true }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </ng-template>
+</div>
+   
+

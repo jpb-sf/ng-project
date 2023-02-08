@@ -1,0 +1,38 @@
+ <!-- Mobile/Small Screen Nav -->
+<nav *ngIf="currentBreakingPoint === 'xs' ||
+            currentBreakingPoint === 'sm'; else desktop" 
+            class="products-nav-wrapper">
+    <div class="products-nav-container flex ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
+        <div class="nav-item" ngbDropdown>
+            <a ngbDropdownToggle id="dropdownMenuButton"
+                class="nav-link active dropdown-toggles" 
+                data-toggle="dropdown" aria-haspopup="true" 
+                aria-expanded="false">
+                <fa-icon [icon]="faBars" class="color1"></fa-icon>   
+            </a>
+            <div ngbDropdownMenu class="border-none" aria-labelledby="dropdownBasic2">
+                <!-- Populate categories -->
+                <products-filter
+                    [currentBreakingPoint] = "currentBreakingPoint" 
+                    [category]="category">
+                </products-filter>
+            </div>
+        </div>
+        <div>
+            <p *ngIf="category; else all" class="ml--10p color1">{{ category }}</p>
+            <ng-template #all>
+                <p class="ml--10p color1">All</p>
+            </ng-template>
+        </div>  
+    </div>
+</nav> 
+<!-- Medium to larger size Nav -->
+<ng-template #desktop>
+    <nav class="products-nav-wrapper bg-color-1">
+        <products-filter
+        [currentBreakingPoint] = "currentBreakingPoint"  
+        [category]="category">
+        </products-filter>
+    </nav>
+</ng-template>
+

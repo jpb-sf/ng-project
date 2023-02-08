@@ -1,41 +1,177 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap.scss';
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+}
 
-@media (min-width: 981px) { body { 
-    padding-top: 60px; 
- } }
-  .pt--2 {
-      position: relative;
-      display: block;
-      padding-top: 3.5rem; 
-    }
 
-  .router-outlet {
-    padding-left: 8rem;
-    padding-right: 8rem;
-  }
+.underline {
+  text-decoration: underline;
+}
+
+.bold {
+  text-decoration: bold;
+}
+.bg-color-1{
+    background-color: #bd8d0c;
+}
+
+.color1 {
+  color: #bd8d0c;
+}
+
+.ml--2p {
+  margin-left: 2px;
+}
+
+.ml--5p {
+  margin-left: 5px;
+}
+
   
-  .product-img {
-      height: 12rem;
-      object-fit: cover;
-  }
+.ml--10p {
+  margin-left: 10px;
+}
 
- .btn-yellow {
-    background-color: #FFDD00;
-    color: #000;
- }
+.mt--2 {
+  margin-top: 1.3rem; 
+}
 
- .table .text-right {text-align: right}
- 
- .table-bordered {
-    border-collapse: collapse;
-  }
- 
-  .row-pad-0 {
-    padding-left: 0rem;
-    padding-top: 0rem;
-    padding-right: 0rem;
-    padding-bottom: 0rem;
- }
+.mt--10p {
+  margin-top: 10px;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.navbar-bm-fix {
+  padding-bottom: 0 !important;
+}
+
+// .page-wrapper {
+//   position: relative;
+// //   background-color: pink;
+//  }
+
+.dropdown-toggles::after {
+  display: none;
+}
+
+.products-nav-wrapper {
+  position: sticky;
+  top: 2.5rem;
+  z-index: 4;
+  width: 100%;
+}
+
+.products-wrapper {
+    margin-top: .1rem;
+}
+
+.testy {
+  background-color: orange;
+}
+
+.products-nav-container {
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  background-color: white;
+  vertical-align: text-top; 
+}
+
+.products-nav-dropdown-container {
+  line-height: 20px;
+}
+
+.nav-item {
+  left: -1px;
+}
+
+.nav-link-vertical-line {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 1px; 
+  background-color:  #8a6706;
+  height: 60%; 
+}
+
+.border-none {
+  top: -1rem;
+  border-style: none;
+  background-color: transparent !important;
+}
+
+.btn-color2:hover { 
+    background-color: #e0ac1d;
+}
+
+.flex {
+  display: flex;
+}
+
+.card-img-container {
+  position: relative;
+  padding-bottom: 85%;
+  height: 0;
+}
+
+.card-img-top {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.text-aln-r {
+  padding: 0;
+  text-align: right;
+  margin-right: 10px
+}
+
+.btn-yellow {
+  background-color: #FFDD00;
+  color: #000;
+}
+
+.table .text-right {
+  text-align: right
+}
+
+.table-bordered {
+  border-collapse: collapse;
+}
+
+.row-pad-0 {
+  padding-left: 0rem;
+  padding-top: 0rem;
+  padding-right: 0rem;
+  padding-bottom: 0rem;
+}
+
+// lg
+@media (min-width: 1200px) { 
+    .page-wrapper, .page-container {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+}

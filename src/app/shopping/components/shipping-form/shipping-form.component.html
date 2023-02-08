@@ -1,0 +1,19 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div class="mb-2">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" class="form-control" ngModel name="name" required>
+    </div>
+    <div class="mb-2">
+        <label for="address" class="form-label">Address Line 1</label>
+        <input type="text" class="form-control mb-2" required ngModel name="addressFirst">
+    </div>
+    <div class="mb-2">
+        <label for="address" class="form-label">Address Line 2 (optional)</label>
+        <input type="text" class="form-control" ngModel name="addressSecond">
+    </div>
+    <div class="mb-2">
+        <label for="city" class="form-label">City</label>
+        <input type="text" class="form-control" ngModel name="city" required>
+    </div>
+    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Place Order</button>
+</form>

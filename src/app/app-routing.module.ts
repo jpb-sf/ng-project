@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProductsComponent } from './components/products/products.component';
-import { AdminProductFormComponent } from './admin/admin-product-form/admin-product-form.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { OrdersComponent } from './components/orders/orders.component'
-import { OrderSuccessComponent } from './components/order-success/order-success.component';
-import { MyOrderComponent } from './components/my-order/my-order.component';
-import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
-import { RegisterComponent } from './components/register/register.component';
+import { CheckoutComponent } from './shopping/components/checkout/checkout.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { AdminProductFormComponent } from './admin/components/admin-product-form/admin-product-form.component';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { OrderManageComponent } from './core/components/order-manage/order-manage.component';
+import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
+import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
+import { RegisterComponent } from './core/components/register/register.component';
 
-import { AuthGuard } from './services/auth-guard.service';
-import { AdminGuard } from './services/admin-guard.service';
-import { OrderManageComponent } from './components/order-manage/order-manage.component';
+import { AuthGuard } from './shared/services/auth-guard.service';
+import { AdminGuard } from './admin/services/admin-guard.service';
 
 
 const routes: Routes = [
@@ -39,7 +35,7 @@ const routes: Routes = [
     },
     {
         path: 'orders',
-        component: OrdersComponent,
+        component: OrderManageComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -54,11 +50,6 @@ const routes: Routes = [
     },
     {
         path: 'admin/products/:id',
-        component: AdminProductFormComponent,
-        canActivate: [AuthGuard, AdminGuard]
-    },
-    {
-        path: 'admin/products/new',
         component: AdminProductFormComponent,
         canActivate: [AuthGuard, AdminGuard]
     },
@@ -90,7 +81,6 @@ const routes: Routes = [
         canActivate: [AuthGuard, AdminGuard]
     }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
