@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTablesModule } from 'angular-datatables';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping} from '@fortawesome/free-solid-svg-icons';
+import { faBasketShopping as fasBasketShopping} from '@fortawesome/free-solid-svg-icons';
 
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
@@ -63,6 +64,6 @@ import { UserService } from './services/user.service';
 })
 export class SharedModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(fasCartShopping)
+        library.addIcons(fasCartShopping, fasBasketShopping)
     }
  }

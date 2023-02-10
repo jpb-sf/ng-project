@@ -28,7 +28,8 @@ import { ProductsNavComponent } from './components/products-nav/products-nav.com
     SharedModule
   ],
   exports: [
-    ProductsNavComponent
+    ProductsNavComponent,
+    ShoppingCartComponent
   ]
 })
 export class ShoppingModule { }

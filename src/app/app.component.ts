@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from './shared/services/auth.service';
-import { UserService } from './shared/services/user.service';
+import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +11,14 @@ import { UserService } from './shared/services/user.service';
 })
 export class AppComponent implements OnInit {
     path: string = '';
-    show?: boolean;
+    showProductNav?: boolean;
+    showCart: boolean = false;
+    currentBreakingPoint: string = '';
+
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
-  constructor( private authService: AuthService, private userService: UserService, private router: Router,
+  constructor( private authService: AuthService, 
+    private responsiveService: ResponsiveService, 
+    private router: Router,
     private location: Location) {
     // app component is a single instance so don't worry about unsubscribing
     console.log(window.innerWidth)
@@ -33,6 +38,12 @@ export class AppComponent implements OnInit {
     })
 }
     ngOnInit(): void {
+        this.responsiveService.mediaBreakpoint$
+        .subscribe((bp: string) => {
+          console.log(bp);
+          this.currentBreakingPoint = bp;
+        })
+
         this.path = this.location.path();
         this.isShow()
         this._setPath()
@@ -54,9 +65,13 @@ export class AppComponent implements OnInit {
     isShow() {
       if (this.path === "/shopping-cart")
       {
-        this.show = false;
+        this.showProductNav = false;
         return;
       }
-      this.show = true;
+      this.showProductNav = true;
+    }
+
+    onShow() {
+      this.showCart = !this.showCart;
     }
 }

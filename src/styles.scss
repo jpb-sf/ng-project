@@ -17,7 +17,6 @@ time, mark, audio, video {
     padding: 0;
 }
 
-
 .underline {
   text-decoration: underline;
 }
@@ -25,12 +24,17 @@ time, mark, audio, video {
 .bold {
   text-decoration: bold;
 }
-.bg-color-1{
-    background-color: #bd8d0c;
+
+.bg-color-1 {
+  background-color: #bd8d0c;
 }
 
 .color1 {
   color: #bd8d0c;
+}
+
+.color-8 {
+  color: #777
 }
 
 .ml--2p {
@@ -41,7 +45,6 @@ time, mark, audio, video {
   margin-left: 5px;
 }
 
-  
 .ml--10p {
   margin-left: 10px;
 }
@@ -55,8 +58,21 @@ time, mark, audio, video {
 }
 
 .navbar {
-    position: sticky;
-    top: 0;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.btn-x {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 25px;
+  height: 25px;
+  text-decoration: none;
+  background-color: #ddd;
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
 .navbar-bm-fix {
@@ -79,8 +95,39 @@ time, mark, audio, video {
   width: 100%;
 }
 
+.shopping-cart-wrapper { 
+  position: fixed;
+  overflow: hidden; 
+  background-color: white;
+  right: 0;
+  top: 0;
+  z-index: 15;
+  transform: translateX(200%);
+  transition: transform 0.4s ease;
+}
+
+.shopping-cart-wrapper.flyout {
+  
+    transform: translateX(0%);
+  }
+
+.shopping-cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.shopping-cart__table-container {
+  max-height: 35rem;
+  overflow-y: scroll;
+}
 .products-wrapper {
-    margin-top: .1rem;
+  top: 3rem;
+  margin-top: .1rem;
 }
 
 .testy {
@@ -102,6 +149,10 @@ time, mark, audio, video {
   left: -1px;
 }
 
+.shopping-cart-mobile-wrapper {
+    width: 10rem;
+}
+
 .nav-link-vertical-line {
   position: absolute;
   top: 50%;
@@ -120,7 +171,7 @@ time, mark, audio, video {
 }
 
 .btn-color2:hover { 
-    background-color: #e0ac1d;
+  background-color: #e0ac1d;
 }
 
 .flex {
@@ -148,13 +199,13 @@ time, mark, audio, video {
   margin-right: 10px
 }
 
+.table .text-right {
+  text-align: right
+}
+
 .btn-yellow {
   background-color: #FFDD00;
   color: #000;
-}
-
-.table .text-right {
-  text-align: right
 }
 
 .table-bordered {

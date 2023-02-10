@@ -27,7 +27,8 @@
                 <a ngbDropdownItem (click)="auth.logout()">Log Out</a>
             </div>
         </li>
-        <li class="nav-item">
+        <!-- Shopping cart link -- Mobile screen sizes -->
+        <li class="nav-item" *ngIf="currentBreakingPoint == 'xs' || currentBreakingPoint == 'sm'; else desktop">
             <a class="nav-link active" 
                 aria-current="page" 
                 routerLink="shopping-cart">
@@ -42,10 +43,29 @@
                 </span>
             </a>
         </li>
+        <!-- Shopping cart button FLYOUT -- Sreen sizes 'md' and larger -- -->
+        <ng-template #desktop>
+            <li class="nav-item">
+                <a class="nav-link active" 
+                aria-current="page" 
+                (click)="onShow()">
+                <fa-icon 
+                    [icon]="['fas', 'basket-shopping']"
+                    [styles]="{ 'color': '#bd8d0c' }"
+                    >
+                </fa-icon>
+                <span class="badge badge-pill btn-yellow"
+                    *ngIf="cart$ | async as cart">
+                    {{ cart.totalItemsCount }}
+                </span>
+                </a>
+            </li>
+        </ng-template>
       </ul>
     </div>
   </div>
+
 </nav>
-             
+
     
                 

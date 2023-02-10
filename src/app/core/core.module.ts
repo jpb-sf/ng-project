@@ -8,6 +8,7 @@ import { OrderSelectComponent } from './components/order-select/order-select.com
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UsernameFormComponent } from './components/username-form/username-form.component';
+import { ShoppingModule } from '../shopping/shopping.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UsernameFormComponent } from './components/username-form/username-form.
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ShoppingModule
   ],
   exports: [
     NavbarComponent
