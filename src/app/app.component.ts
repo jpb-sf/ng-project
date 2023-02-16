@@ -11,9 +11,9 @@ import { ResponsiveService } from 'shared/services/responsive.service';
 })
 export class AppComponent implements OnInit {
     path: string = '';
-    showProductNav?: boolean;
-    showCart: boolean = false;
-    currentBreakingPoint: string = '';
+    displayProductNav?: boolean;
+    displayCart: boolean = false;
+    swMediumOrSmaller: boolean = false;
 
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
   constructor( private authService: AuthService, 
@@ -38,14 +38,17 @@ export class AppComponent implements OnInit {
     })
 }
     ngOnInit(): void {
-        this.responsiveService.mediaBreakpoint$
-        .subscribe((bp: string) => {
-          console.log(bp);
-          this.currentBreakingPoint = bp;
+        this.responsiveService.screenWidth$
+        .subscribe((sw: number) => {
+          if (sw <= 1200 ) {
+              this.swMediumOrSmaller = true;
+            }
+            else {
+              this.swMediumOrSmaller = false;
+            }
         })
-
         this.path = this.location.path();
-        this.isShow()
+        this._setDisplayProductNav()
         this._setPath()
       }
 
@@ -57,21 +60,21 @@ export class AppComponent implements OnInit {
           this.path = this.location.path();
           this.path = this.path? this.path : '/';
           console.log(this.path)
-          this.isShow()
+          this._setDisplayProductNav()
         }
       })
     }
 
-    isShow() {
+    _setDisplayProductNav() {
       if (this.path === "/shopping-cart")
       {
-        this.showProductNav = false;
+        this.displayProductNav = false;
         return;
       }
-      this.showProductNav = true;
+      this.displayProductNav = true;
     }
 
-    onShow() {
-      this.showCart = !this.showCart;
+    _setDisplayCart() {
+      this.displayCart = !this.displayCart;
     }
 }

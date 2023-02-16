@@ -1,4 +1,5 @@
 import { Component,OnInit, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 import { AuthService } from 'shared/services/auth.service';
 import { AppUser } from 'shared/models/app-user';
 import { Observable } from 'rxjs';
@@ -22,7 +23,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public auth: AuthService, 
     private shoppingCartService: ShoppingCartService,
-    private responsiveService: ResponsiveService) {}
+    private responsiveService: ResponsiveService,
+    private location: Location) {}
     
   async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();
@@ -41,8 +43,12 @@ export class NavbarComponent implements OnInit {
   }
 
   onShow() {
-    // this.show = !this.show;
-    this.showCart.emit()
+    // If user is not already on '/shopping-cart' path; this avoids the desktop fly-out cart redudanty showing over a mobile cart page
+    if(this.location.path() !== '/shopping-cart')
+    {
+        console.log(this.location.path)
+        this.showCart.emit()
+    }
   }
 
 }

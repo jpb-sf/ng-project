@@ -14,6 +14,7 @@ export class ProductsQuantityComponent  {
   @Input('product') product!: ProductAndKey | ShoppingCartItem;
   @Input('key') key!: string;
   @Input('color') color!: boolean;
+  @Input('btnSize') btnSize!: 'large' | 'small';
 
   constructor(private cartService: ShoppingCartService) { }
 

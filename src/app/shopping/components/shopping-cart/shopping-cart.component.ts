@@ -1,4 +1,4 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
@@ -12,16 +12,22 @@ import { ResponsiveService } from 'shared/services/responsive.service';
 })
 export class ShoppingCartComponent implements OnInit {
   cart$?: Observable<ShoppingCart>;
-  currentBreakingPoint?: string;
-  @Output('showCart') showCart = new EventEmitter;
+  swMediumOrSmaller: boolean = false;
+  @Input('inputDisplayCart') inputDisplayCart: boolean = false;
+  @Output('hideCart') hideCart = new EventEmitter;
 
   constructor(private shoppingCartService: ShoppingCartService,
     private responsiveService: ResponsiveService,
     private router: Router) {
-      this.responsiveService.mediaBreakpoint$
-      .subscribe((bp: string) => {
-          console.log(bp)
-          this.currentBreakingPoint = bp;
+      this.responsiveService.screenWidth$
+      .subscribe((sw: number) => {
+          console.log(sw)
+          if (sw <= 992 ) {
+            this.swMediumOrSmaller = true;
+          }
+          else {
+            this.swMediumOrSmaller = false;
+          }
       })
    }
 
@@ -29,17 +35,17 @@ export class ShoppingCartComponent implements OnInit {
     this.cart$ = await this.shoppingCartService.getCart();
   }
 
-  clearCart()
-  {
+  clearCart(){
     this.shoppingCartService.clearCart();
   }
 
-  onShow() {
-    this.showCart.emit();
+  onHide() {
+    this.hideCart.emit();
+    this.inputDisplayCart = false;
   }
 
   onCheckOut() {
-    this.showCart.emit();
+    this.hideCart.emit();
     this.router.navigate(['check-out'])
   }
 }
