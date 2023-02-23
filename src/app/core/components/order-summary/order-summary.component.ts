@@ -1,7 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/shared/models/order';
+import { formatDate } from '@angular/common';
+import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
+import { OrderViewService } from 'shared/services/order-view.service';
+import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
   selector: 'order-summary',
@@ -11,11 +15,18 @@ import { Order } from 'src/app/shared/models/order';
 export class OrderSummaryComponent {
   id: string = '';
   order?: Order;
+  formattedDate: string = '';
+  formattedTime: string = '';
+  @Output('deselectEvent') deselectEvent = new EventEmitter();
   orderIsSelected:boolean = false;
+  showAddress: boolean = false;
+  @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
 
   constructor (
     private orderService: OrderService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private screenBrightness: ScreenBrightnessService,
+    private orderViewService: OrderViewService
     ) {
     
     this.route.paramMap
@@ -28,16 +39,35 @@ export class OrderSummaryComponent {
       this.orderService.getOrder(this.id)
       .subscribe(order => {
         this.order = order;
-        console.log(`g`)
-        console.log(this.order)
         if (this.order?.orderId)
+        this.orderIsSelected = true;
+    
+        if(this.order)
         {
-          console.log('o')
-          this.orderIsSelected = true;
+          this.formattedDate = formatDate(this.order.datePlaced, 'MM/dd/yyyy', 'en-US');
+          this.formattedTime = formatDate(this.order.datePlaced, 'hh:mm aa', 'en-US');
         }
-        console.log(this.order)
       })
     })
+
+    this.orderViewService.orderView$
+    .subscribe((orderView: any) => {
+        this.orderIsSelected = orderView;
+    })
+  }
+
+  onDropDown() {
+    this.showAddress = !this.showAddress;
+  }
+
+  onDeselect()
+  {
+    this.orderIsSelected = !this.orderIsSelected;
+    this.orderViewService.changeOrderView(false);
+    if (this.screenBrightness.darkenedScreen)
+    {
+        this.screenBrightness.changeBrightness();
+    }
   }
 
 

@@ -16,10 +16,10 @@
             <td>{{ order.datePlaced}}</td>
             <div *ngIf="orderDisplay === 'admin'; then admin2; else my2"></div>
             <ng-template #admin2>
-                <td><a (click)="getOrderKey(order.orderId)" [routerLink]="['/admin/admin-orders/', order.orderId]">View</a></td>
+                <td><a (click)="viewOrder(order.orderId)" [routerLink]="['/admin/admin-orders/', order.orderId]">View</a></td>
             </ng-template>
             <ng-template #my2>
-                <td><a (click)="getOrderKey(order.orderId)" [routerLink]="['/my-orders/', order.orderId]">View</a></td>
+                <td><a (click)="viewOrder(order.orderId)" [routerLink]="['/my-orders/', order.orderId]">View</a></td>
             </ng-template>
         </tr>
     </tbody>

@@ -1,9 +1,12 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'src/app/shared/models/order';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { Route, ActivatedRoute } from '@angular/router';
+import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
+import { OrderViewService } from 'shared/services/order-view.service';
+import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
     selector: 'order-select',
@@ -12,19 +15,27 @@ import { Route, ActivatedRoute } from '@angular/router';
   })
 
 export class OrderSelectComponent  implements OnDestroy, OnInit {
-  orders: Order[] = []; 
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
-  orderDisplay: 'admin' | 'my' | undefined;
-  subscription: Subscription = new Subscription;
   @ViewChild(DataTableDirective, {static: false} )
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
   dtElement!: DataTableDirective;
   isDtInitialized:boolean = false;
+  
+  orders: Order[] = []; 
+  orderDisplay: 'admin' | 'my' | undefined;
+  subscription: Subscription = new Subscription;
   key: string | undefined = '';
   baseroute?: string;
   orderServiceMethod!: Observable<Order[]>;
+  @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
+  // @Output('darkenScreen') darkenScreen = new EventEmitter();
   
-  constructor(private orderService: OrderService, private route: ActivatedRoute) {
+  constructor(
+    private orderService: OrderService, 
+    private route: ActivatedRoute,
+    private screenBrightness: ScreenBrightnessService,
+    private orderViewService: OrderViewService,
+    private responsiveService: ResponsiveService) {
     this.baseroute = this.route.snapshot.url.join('/').slice(0,5);
   }
   ngOnInit(): void {
@@ -41,7 +52,7 @@ export class OrderSelectComponent  implements OnDestroy, OnInit {
       }
       
       this.subscription = this.orderServiceMethod
-      .subscribe((orders: any) => {
+      .subscribe((orders: Order[]) => {
         this.orders = orders;
         if (this.isDtInitialized)
         {
@@ -55,15 +66,20 @@ export class OrderSelectComponent  implements OnDestroy, OnInit {
           this.dtTrigger.next(orders);      
         }
       })
-    }
+  }
   
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.dtTrigger.unsubscribe();
   }
   
-  getOrderKey(key: string | undefined)
+  viewOrder(key: string | undefined)
   {
+    // set key for highlighting class in template
     this.key = key;
+    this.orderViewService.changeOrderView(true);
+    if (this.swMediumOrSmaller) {
+        this.screenBrightness.changeBrightness();
+    }
   }
 }

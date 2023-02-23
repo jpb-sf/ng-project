@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
   appUser$!: Observable<AppUser | null>;
   cart$?: Observable<ShoppingCart | null>;
   currentBreakingPoint: string = '';
-  // show: boolean = true;
   
   constructor(
     public auth: AuthService, 

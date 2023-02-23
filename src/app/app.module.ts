@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'environments/environment';
 import * as firebase from 'firebase/app';
@@ -12,6 +13,8 @@ import { CoreModule } from './core/core.module';
 import { ShoppingModule } from './shopping/shopping.module';
 import { SharedModule } from 'shared/shared.module';
 import { PromosModule } from './promos/promos.module';
+import { DataTablesModule } from 'angular-datatables';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { PromosModule } from './promos/promos.module';
     ShoppingModule,
     PromosModule,
     AdminModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FontAwesomeModule,
+    DataTablesModule
   ],
   providers: [
     // AngularFireAuth,

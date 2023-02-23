@@ -9,6 +9,7 @@ export class ResponsiveService implements OnDestroy {
     private unsubscriber$: Subject<any> = new Subject();
     screenWidth$: BehaviorSubject<number> = new BehaviorSubject(NaN);
     mediaBreakpoint$: BehaviorSubject<string> = new BehaviorSubject('');
+    swMediumOrSmaller$: BehaviorSubject<any> = new BehaviorSubject(true);
   
     constructor() {
       this.init();
@@ -25,6 +26,17 @@ export class ResponsiveService implements OnDestroy {
           this._setScreenWidth(evt.target.innerWidth);
           this._setMediaBreakpoint(evt.target.innerWidth);
         });
+    
+        this.screenWidth$
+        .subscribe((sw: number) => {
+            console.log(sw)
+            if (sw <= 760 ) {
+              this.swMediumOrSmaller$.next(true)
+            }
+            else {
+                this.swMediumOrSmaller$.next(false)
+            }
+        })
     }
   
     ngOnDestroy() {
@@ -51,4 +63,6 @@ export class ResponsiveService implements OnDestroy {
         this.mediaBreakpoint$.next('xxl');
       }
     }
+
+
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from 'shared/services/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Order } from 'src/app/shared/models/order';
+import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
   selector: 'order-manage',
@@ -12,8 +10,12 @@ import { Order } from 'src/app/shared/models/order';
 export class OrderManageComponent implements OnInit {
   baseroute: string = '';
   orderDisplay: 'admin' | 'my' | undefined;
+  swMediumOrSmaller: boolean = false;
+//   orderView: boolean = false;
 
-  constructor(private orderService: OrderService, private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private responsiveService: ResponsiveService) {
     this.baseroute = this.route.snapshot.url.join('/').slice(0,5);
   }
 
@@ -29,6 +31,13 @@ export class OrderManageComponent implements OnInit {
       console.log(this.baseroute)
       this.orderDisplay = 'my';
     }
+
+    this.responsiveService.swMediumOrSmaller$
+    .subscribe((sw: true | false) => {
+        this.swMediumOrSmaller = sw;
+    })
+
+   
   }
 
 }

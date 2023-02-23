@@ -1,17 +1,21 @@
 <div class="w-100">
     <div *ngIf="orderDisplay === 'admin'; then admin; else my"></div>
     <ng-template #admin>
-        <h1>Orders</h1>
+        <h5>Orders</h5>
     </ng-template>
     <ng-template #my>
-        <h1> My Orders</h1>
+
+        <h5> My Orders</h5>
     </ng-template>
     <div class="row">
         <div class="col-md-6">
-            <order-select></order-select>
+            <order-select
+            [swMediumOrSmaller]="swMediumOrSmaller"></order-select>
         </div>
-        <div class="col-md-6">
-            <order-summary></order-summary>
+        <div  class="col-md-6 order-summary-wrapper" 
+            [ngClass]="{'absolute': swMediumOrSmaller}"
+            >
+            <order-summary [swMediumOrSmaller]="swMediumOrSmaller"></order-summary>
         </div>
     </div>
 </div>
