@@ -379,13 +379,26 @@ time, mark, audio, video {
   background-color: white;
 }
 
-.order-summary-wrapper.absolute {
-  z-index: 35;
-  position: absolute;
-  // Resets the margins????
-  left: 0;
-  margin-top: .5rem;
+.order-manage-container.relative {
+  position: relative;
+  margin-left: .5rem;
+  margin-right: .5rem;
 }
+
+.order-summary-wrapper.absolute {
+  position: absolute;
+  margin-top: .5rem;
+ }
+
+.order-summary-container.absolute {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  width: 100%;
+  z-index: 35;
+  background-color: white;
+}
+
 
 // lg
 @media (min-width: 1200px) { 

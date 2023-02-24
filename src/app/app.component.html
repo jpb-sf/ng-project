@@ -1,19 +1,16 @@
-<div class="app-wrapper-blackout" 
-    [ngClass]="{'app-wrapper-blackout-show': darkenedScreen}"
-    (click)="_setDarkenScreen()">
+<screen-brightness [swMediumOrSmaller]="swMediumOrSmaller"></screen-brightness>
+<top-promo></top-promo>
+<bs-navbar (showCart)="_setDisplayCart()"></bs-navbar>
+<products-nav [hidden]="!displayProductNav"></products-nav>
+<div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
+    <router-outlet ></router-outlet>
 </div>
-    <top-promo></top-promo>
-    <bs-navbar (showCart)="_setDisplayCart()"></bs-navbar>
-    <products-nav [hidden]="!displayProductNav"></products-nav>
-    <div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
-        <router-outlet ></router-outlet>
-    </div>
 <shopping-cart
-    class="shopping-cart-wrapper" 
-    (hideCart)="_setDisplayCart()" 
-    [ngClass]="{
-        'flyout': displayCart
-    }"
-    [inputDisplayCart]="displayCart"
-    >
+class="shopping-cart-wrapper" 
+(hideCart)="_setDisplayCart()" 
+[ngClass]="{
+    'flyout': displayCart
+}"
+[inputDisplayCart]="displayCart"
+>
 </shopping-cart>  

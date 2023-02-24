@@ -7,7 +7,7 @@
 
         <h5> My Orders</h5>
     </ng-template>
-    <div class="row">
+    <div class="row order-manage-container" [ngClass]="{'relative': swMediumOrSmaller && orderIsSelected}">
         <div class="col-md-6">
             <order-select
             [swMediumOrSmaller]="swMediumOrSmaller"></order-select>
@@ -15,7 +15,9 @@
         <div  class="col-md-6 order-summary-wrapper" 
             [ngClass]="{'absolute': swMediumOrSmaller}"
             >
-            <order-summary [swMediumOrSmaller]="swMediumOrSmaller"></order-summary>
+            <order-summary 
+            [swMediumOrSmaller]="swMediumOrSmaller"
+            [orderIsSelected]="orderIsSelected"></order-summary>
         </div>
     </div>
 </div>

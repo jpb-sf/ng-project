@@ -1,5 +1,6 @@
 <div *ngIf="order">
-    <div *ngIf="(!swMediumOrSmaller || orderIsSelected)" class="border rounded ps-3 pe-3 pb-3 pt-3">
+    <div *ngIf="(!swMediumOrSmaller || orderIsSelected)" 
+    [ngClass]="{'absolute': swMediumOrSmaller}" class="order-summary-container border rounded ps-3 pe-3 pb-3 pt-3">
         <div *ngIf="orderIsSelected; then selected; else notSelected"></div>
         <ng-template #notSelected>
             <div  class="text-center">

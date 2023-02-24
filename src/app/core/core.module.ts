@@ -9,6 +9,7 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 import { RegisterComponent } from './components/register/register.component';
 import { UsernameFormComponent } from './components/username-form/username-form.component';
 import { ShoppingModule } from '../shopping/shopping.module';
+import { ScreenBrightnessComponent } from './components/screen-brightness/screen-brightness.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ShoppingModule } from '../shopping/shopping.module';
     UsernameFormComponent,
     OrderSummaryComponent,
     OrderSelectComponent,
-    OrderManageComponent
+    OrderManageComponent,
+    ScreenBrightnessComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { ShoppingModule } from '../shopping/shopping.module';
     ShoppingModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    ScreenBrightnessComponent
   ]
 })
 export class CoreModule { }

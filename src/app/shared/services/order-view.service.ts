@@ -10,7 +10,6 @@ export class OrderViewService {
   constructor() { }
 
   changeOrderView(value: boolean) {
-    // this.orderView = this.orderView;
     this.orderView$.next(value);
   }
 }

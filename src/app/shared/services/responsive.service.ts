@@ -63,6 +63,4 @@ export class ResponsiveService implements OnDestroy {
         this.mediaBreakpoint$.next('xxl');
       }
     }
-
-
 }

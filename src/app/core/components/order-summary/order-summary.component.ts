@@ -17,9 +17,9 @@ export class OrderSummaryComponent {
   order?: Order;
   formattedDate: string = '';
   formattedTime: string = '';
-  @Output('deselectEvent') deselectEvent = new EventEmitter();
-  orderIsSelected:boolean = false;
   showAddress: boolean = false;
+  @Output('deselectEvent') deselectEvent = new EventEmitter();
+  @Input('orderIsSelected') orderIsSelected:boolean = false;
   @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
 
   constructor (
@@ -39,8 +39,6 @@ export class OrderSummaryComponent {
       this.orderService.getOrder(this.id)
       .subscribe(order => {
         this.order = order;
-        if (this.order?.orderId)
-        this.orderIsSelected = true;
     
         if(this.order)
         {
@@ -48,11 +46,6 @@ export class OrderSummaryComponent {
           this.formattedTime = formatDate(this.order.datePlaced, 'hh:mm aa', 'en-US');
         }
       })
-    })
-
-    this.orderViewService.orderView$
-    .subscribe((orderView: any) => {
-        this.orderIsSelected = orderView;
     })
   }
 
@@ -62,7 +55,6 @@ export class OrderSummaryComponent {
 
   onDeselect()
   {
-    this.orderIsSelected = !this.orderIsSelected;
     this.orderViewService.changeOrderView(false);
     if (this.screenBrightness.darkenedScreen)
     {
