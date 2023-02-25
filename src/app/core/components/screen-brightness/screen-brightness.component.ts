@@ -16,58 +16,62 @@ export class ScreenBrightnessComponent implements OnInit {
     displayOrder: boolean = false;
     displayCart: boolean = false;
     darkenedScreen: boolean = false;
-    @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
-    // swBreakingPoint: string = '';
+    swMediumOrSmaller: boolean = false;
 
     constructor( 
-        // private responsiveService: ResponsiveService, 
-        private router: Router,
-        private location: Location,
-        private screenBrightnessService: ScreenBrightnessService,
-        private orderViewService: OrderViewService, 
-        private displayCartService: DisplayCartService) {
+      private responsiveService: ResponsiveService,
+      private router: Router,
+      private location: Location,
+      private screenBrightnessService: ScreenBrightnessService,
+      private orderViewService: OrderViewService, 
+      private displayCartService: DisplayCartService) {
     }
 
     ngOnInit(): void {
+      
+      this.screenBrightnessService.brightness$
+      .subscribe((bright: boolean) => {
+        this.darkenedScreen = bright;
+      })
         
-        this.screenBrightnessService.brightness$
-        .subscribe((bright: boolean) => {
-          this.darkenedScreen = bright;
-        })
-          
-        this.orderViewService.orderView$
-        .subscribe((view: boolean) => {
-          this.displayOrder = view;
-        })
+      this.orderViewService.orderView$
+      .subscribe((view: boolean) => {
+        this.displayOrder = view;
+      })
 
-        this.displayCartService.displayCart$
-        .subscribe((displayCart: boolean) => {
-          this.displayCart = displayCart;
-        })
+      this.displayCartService.displayCart$
+      .subscribe((displayCart: boolean) => {
+        this.displayCart = displayCart;
+      })
 
-        this.router.events
-        .subscribe(evt => {
-          if(this.path != this.location.path())
+      this.router.events
+      .subscribe(evt => {
+        if(this.path != this.location.path())
+        {
+          this.path = this.location.path();
+        }
+      })
+        this.responsiveService.swMediumOrSmaller$
+        .subscribe((response: boolean) => {
+          if (this.swMediumOrSmaller != response)
           {
-            this.path = this.location.path();
-            console.log(`path issss  ${this.path.slice(0,19)}`);
-            if (this.path.slice(0,19) === '/admin/admin-orders' )
+            this.swMediumOrSmaller = response;
+          }
+      
+          if (this.path.slice(0,19) === '/admin/admin-orders' )
+          {
+    
+            if (this.swMediumOrSmaller && this.displayOrder && !this.darkenedScreen)
             {
-              console.log('test 0 is passing')
-              if (this.swMediumOrSmaller && this.displayOrder && !this.darkenedScreen)
-              {
-                console.log(`test 1 passing`);
-                this.screenBrightnessService.changeBrightness();
-              }
-              if (!this.swMediumOrSmaller && this.displayOrder && this.darkenedScreen)
-              {
-                console.log(`test 2 passing`);
-                this.screenBrightnessService.changeBrightness();
-              }
+              this.screenBrightnessService.changeBrightness();
+            }
+            if (!this.swMediumOrSmaller && this.displayOrder && this.darkenedScreen)
+            {
+              this.screenBrightnessService.changeBrightness();
             }
           }
         })
-      }
+    }
 
     _setDarkenScreen() {
       this.screenBrightnessService.changeBrightness()

@@ -21,7 +21,6 @@ export class ShoppingCartComponent implements OnInit {
     private router: Router) {
       this.responsiveService.screenWidth$
       .subscribe((sw: number) => {
-          console.log(sw)
           if (sw <= 992 ) {
             this.swMediumOrSmaller = true;
           }

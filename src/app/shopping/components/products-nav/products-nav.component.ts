@@ -20,7 +20,6 @@ export class ProductsNavComponent implements OnInit {
       private responsiveService: ResponsiveService) {
         this.responsiveService.mediaBreakpoint$
         .subscribe((bp: string) => {
-          console.log(bp)
           this.currentBreakingPoint = bp;
         })
     }

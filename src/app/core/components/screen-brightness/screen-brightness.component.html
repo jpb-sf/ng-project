@@ -1,2 +1,6 @@
 <div class="app-wrapper-blackout" 
-[ngClass]="{'app-wrapper-blackout-show': darkenedScreen}" (click)="_setDarkenScreen()"></div>
+[ngClass]="{
+    'app-wrapper-blackout-show': darkenedScreen,
+    'app-wrapper-blackout-hide': !darkenedScreen}" 
+    (click)="_setDarkenScreen()"></div>
+

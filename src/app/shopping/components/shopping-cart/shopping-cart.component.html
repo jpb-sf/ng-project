@@ -1,8 +1,4 @@
-<div *ngIf="cart$ | async as cart" 
-    [ngClass]="{
-        'shopping-cart-container': inputDisplayCart,
-        'shopping-cart-container__larger-padding': !swMediumOrSmaller && !inputDisplayCart
-    }">
+<div *ngIf="cart$ | async as cart" class="shopping-cart-container">
     <div *ngIf="inputDisplayCart; else mobile" class="d-flex justify-content-between">
         <h4 class="">Shopping Bag</h4>
         <a class=" bg-color-5 btn-x" (click)="onHide()">  
@@ -29,8 +25,8 @@
                 <tr>
                     <th [ngClass]="swMediumOrSmaller == true ? 'width-3' : 'width-5'"> </th>
                     <th></th>
-                    <th class=" text-center">Qty</th>
-                    <th class="text-right">Totals</th>
+                    <th class=" text-center width-7">Qty</th>
+                    <th class="text-right width-6">Totals</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,8 +51,8 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td class="text-right">SubTotal: <strong> {{ cart.priceTotal | currency: 'USD' : true }}</strong></td>
+                    
+                    <td class="text-right" scope="col" colspan="2">SubTotal: <strong> {{ cart.priceTotal | currency: 'USD' : true }}</strong></td>
                 </tr>
             </tbody>
         </table>

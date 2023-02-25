@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit {
     this.appUser$ = this.auth.appUser$;
     this.responsiveService.mediaBreakpoint$
     .subscribe((bp: string) => {
-      console.log(bp);
       this.currentBreakingPoint = bp;
     })
   }

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
   constructor( private authService: AuthService, 
-    private responsiveService: ResponsiveService, 
+    // private responsiveService: ResponsiveService, 
     private router: Router,
     private location: Location,
     private screenBrightnessService: ScreenBrightnessService,
@@ -50,14 +50,13 @@ export class AppComponent implements OnInit {
     })
     this._setDisplayProductNav();
     this._setPath();
-    this.responsiveService.swMediumOrSmaller$
-    .subscribe((response: boolean) => {
-        if (this.swMediumOrSmaller != response)
-        {
-          this.swMediumOrSmaller = response;
-   
-        }
-    })
+    // this.responsiveService.swMediumOrSmaller$
+    // .subscribe((response: boolean) => {
+    //     if (this.swMediumOrSmaller != response)
+    //     {
+    //       this.swMediumOrSmaller = response;
+    //     }
+    // })
   }
 
   _setPath() {
