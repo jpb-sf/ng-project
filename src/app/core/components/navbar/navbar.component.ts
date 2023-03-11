@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { ResponsiveService } from 'shared/services/responsive.service';
+import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
 
 
  @Component({
@@ -18,12 +19,14 @@ export class NavbarComponent implements OnInit {
   appUser$!: Observable<AppUser | null>;
   cart$?: Observable<ShoppingCart | null>;
   currentBreakingPoint: string = '';
+  @Output('onShowLogin')onShowLogin = new EventEmitter;
   
   constructor(
     public auth: AuthService, 
     private shoppingCartService: ShoppingCartService,
     private responsiveService: ResponsiveService,
-    private location: Location) {}
+    private location: Location,
+    private screenBrightnessService: ScreenBrightnessService) {}
     
   async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();
@@ -32,6 +35,12 @@ export class NavbarComponent implements OnInit {
     .subscribe((bp: string) => {
       this.currentBreakingPoint = bp;
     })
+  }
+
+  onLogin() 
+  {
+    this.onShowLogin.emit();
+    this.screenBrightnessService.changeBrightness();
   }
 
   logout() 

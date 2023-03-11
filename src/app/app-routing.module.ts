@@ -26,12 +26,10 @@ const routes: Routes = [
     {
         path: '',
         component: ProductsComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'shopping-cart',
         component: ShoppingCartComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: 'orders',

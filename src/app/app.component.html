@@ -1,10 +1,11 @@
 <screen-brightness ></screen-brightness>
 <top-promo></top-promo>
-<bs-navbar (showCart)="_setDisplayCart()"></bs-navbar>
+<bs-navbar (onShowLogin)="_setDisplayLogin()" (showCart)="_setDisplayCart()"></bs-navbar>
 <products-nav [hidden]="!displayProductNav"></products-nav>
 <div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
     <router-outlet ></router-outlet>
 </div>
+<login [displayLogin]="displayLogin"></login>
 <shopping-cart
 class="shopping-cart-wrapper" 
 (hideCart)="_setDisplayCart()" 

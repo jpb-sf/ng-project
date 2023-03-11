@@ -30,7 +30,8 @@ import { ScreenBrightnessComponent } from './components/screen-brightness/screen
   ],
   exports: [
     NavbarComponent,
-    ScreenBrightnessComponent
+    ScreenBrightnessComponent,
+    LoginComponent
   ]
 })
 export class CoreModule { }

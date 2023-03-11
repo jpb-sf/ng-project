@@ -1,64 +1,66 @@
-<div *ngIf="cart$ | async as cart" class="shopping-cart-container">
-    <div *ngIf="inputDisplayCart; else mobile" class="d-flex justify-content-between">
-        <h4 class="">Shopping Bag</h4>
-        <a class=" bg-color-5 btn-x" (click)="onHide()">  
-            <fa-icon 
-            [icon]="['fas', 'xmark']"
-            class="color-8">
-            </fa-icon>
-        </a>
+<div class="shopping-cart-route-wrapper">
+    <div *ngIf="cart$ | async as cart" class="shopping-cart-container">
+        <div *ngIf="inputDisplayCart; else mobile" class="d-flex justify-content-between">
+            <h4 class="">Shopping Bag</h4>
+            <a class=" bg-color-5 btn-x" (click)="onHide()">  
+                <fa-icon 
+                [icon]="['fas', 'xmark']"
+                class="color-8">
+                </fa-icon>
+            </a>
+        </div>
+        <ng-template #mobile>
+            <h4>Shopping Basket</h4>
+        </ng-template>
+        <p> 
+            You have {{ cart.totalItemsCount }} items in your basket.  
+            <span> 
+                <a role="button" *ngIf="cart.items.length" (click)="clearCart()" class="color-8 ms-2">Clear Basket</a> 
+            </span>
+        </p>
+        <div class="row col-12" 
+            [ngClass]="{
+                'shopping-cart__table-container': inputDisplayCart }">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th [ngClass]="swMediumOrSmaller == true ? 'width-3' : 'width-5'"> </th>
+                        <th></th>
+                        <th class=" text-center width-7">Qty</th>
+                        <th class="text-right width-6">Totals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cart.items">
+                        <td>
+                            <img [ngClass]="{'cart-img__small': swMediumOrSmaller == true }" 
+                                class="cart-img" 
+                                [src]="item.imageUrl">
+                        </td>
+                        <td>{{ item.title }}</td>
+                        <td class="text-right">
+                            <products-quantity
+                                [shopping-cart]="cart" 
+                                [key]="item.key"
+                                [product]="item"
+                                [color]="false"
+                                [btnSize]="'small'">
+                            </products-quantity>
+                        </td>
+                        <td class="text-right">{{ item.itemPriceTotal | currency:'USD' : true }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right" scope="col" colspan="2">SubTotal: <strong> {{ cart.priceTotal | currency: 'USD' : true }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-grid">
+            <a *ngIf="cart.items.length" role="button" (click)="onCheckOut()" class="w-100 pt--1 pb--1 text-center text-dec-none color-7 bg-color-2">Check Out</a>
+        </div>
     </div>
-    <ng-template #mobile>
-        <h4>Shopping Basket</h4>
-    </ng-template>
-    <p> 
-        You have {{ cart.totalItemsCount }} items in your basket.  
-        <span> 
-            <a role="button" *ngIf="cart.items.length" (click)="clearCart()" class="color-8 ms-2">Clear Basket</a> 
-        </span>
-    </p>
-    <div class="row col-12" 
-        [ngClass]="{
-            'shopping-cart__table-container': inputDisplayCart }">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th [ngClass]="swMediumOrSmaller == true ? 'width-3' : 'width-5'"> </th>
-                    <th></th>
-                    <th class=" text-center width-7">Qty</th>
-                    <th class="text-right width-6">Totals</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of cart.items">
-                    <td>
-                        <img [ngClass]="{'cart-img__small': swMediumOrSmaller == true }" 
-                            class="cart-img" 
-                            [src]="item.imageUrl">
-                    </td>
-                    <td>{{ item.title }}</td>
-                    <td class="text-right">
-                        <products-quantity
-                            [shopping-cart]="cart" 
-                            [key]="item.key"
-                            [product]="item"
-                            [color]="false"
-                            [btnSize]="'small'">
-                        </products-quantity>
-                    </td>
-                    <td class="text-right">{{ item.itemPriceTotal | currency:'USD' : true }}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    
-                    <td class="text-right" scope="col" colspan="2">SubTotal: <strong> {{ cart.priceTotal | currency: 'USD' : true }}</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="d-grid">
-        <a *ngIf="cart.items.length" role="button" (click)="onCheckOut()" class="pt--1 pb--1 text-center text-dec-none color-7 bg-color-2">Check Out</a>
-    </div>
+                        
 </div>
 

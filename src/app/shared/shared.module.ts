@@ -13,9 +13,11 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faPlus as fasPlus } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
+import { QuantityMenuComponent } from './components/quantity-menu/quantity-menu.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
@@ -33,7 +35,8 @@ import { ResponsiveService } from './services/responsive.service';
 @NgModule({
   declarations: [
     ProductsCardComponent,
-    ProductsQuantityComponent
+    ProductsQuantityComponent,
+    QuantityMenuComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { ResponsiveService } from './services/responsive.service';
   exports: [
     ProductsCardComponent,
     ProductsQuantityComponent,
+    QuantityMenuComponent,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -78,6 +82,13 @@ import { ResponsiveService } from './services/responsive.service';
 })
 export class SharedModule {
     constructor(library: FaIconLibrary) {
-        library.addIcons(fasCartShopping, fasBasketShopping, faXmark, fasPlus, faShoppingBag, faCaretDown)
+        library.addIcons(
+            fasCartShopping, 
+            fasBasketShopping, 
+            faXmark, 
+            fasPlus, 
+            faShoppingBag, 
+            faCaretDown,
+            faUser)
     }
  }

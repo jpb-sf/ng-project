@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   products: ProductAndKey[] = [];
   category: any = '';
   cart$!: Observable<ShoppingCart>;
+//   displayQuantityId: number = NaN;
   
   constructor(
     private route: ActivatedRoute, 
@@ -56,5 +57,10 @@ export class ProductsComponent implements OnInit {
         return item.category.toLowerCase() == this.category.toLowerCase();
       }) : this.products;
   }
+
+//   displayQuantityMenu(cardId: number)
+//   {
+//     this.displayQuantityId = cardId;
+//   }
 
 }

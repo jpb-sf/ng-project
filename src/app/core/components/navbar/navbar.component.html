@@ -8,9 +8,11 @@
       <ul class="navbar-nav ms-auto mb-1 mb-md-0">
         <ng-template #anonymousUser>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" routerLink="login">Login</a>
+                <a role="button" class="nav-link active" aria-current="page" (click)="onLogin()">
+                    <fa-icon class="mr--5p" [icon]="['fas', 'user']"></fa-icon>SIGN IN</a>
             </li>
         </ng-template>
+    
         <li *ngIf="appUser$ | async as appUser; else anonymousUser" class="nav-item" ngbDropdown>
             <a ngbDropdownToggle id="dropdownMenuButton"
                 class="nav-link active" 
@@ -24,7 +26,7 @@
                     <a ngbDropdownItem routerLink="/admin/admin-orders">Manage Orders</a>
                     <a ngbDropdownItem routerLink="admin/products">Manage Products</a>
                 </ng-container>
-                <a ngbDropdownItem (click)="auth.logout()">Log Out</a>
+                <a ngbDropdownItem (click)="auth.logout()">Sign Out</a>
             </div>
         </li>
         <!-- Shopping cart link -- Mobile screen sizes -->

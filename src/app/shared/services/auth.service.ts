@@ -6,6 +6,8 @@ import { Observable, switchMap, of,catchError } from 'rxjs';
 import { UserService } from './user.service';
 import { AppUser } from 'shared/models/app-user';
 import firebase from 'firebase/compat/app';
+import { ScreenBrightnessService } from './screen-brightness.service';
+import { DisplayLoginService } from './display-login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,9 @@ export class AuthService {
       private router: Router, 
 			private route: ActivatedRoute, 
       private db: AngularFireDatabase,
-      private userService: UserService) {
+      private userService: UserService,
+      private screenBrightnessService: ScreenBrightnessService,
+      private displayLoginService: DisplayLoginService) {
         this.user$ = this.afAuth.authState;
         this.afAuth.authState.subscribe(user => {
           if (user)
@@ -49,24 +53,27 @@ export class AuthService {
       if(id === 'login')
       {      
         console.log('another test');
-          this.afAuth.signInWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            if(userCredential.user)
-            {
-            //   this.userService.saveUser(userCredential.user)
-            }
-            if (!returnUrl || returnUrl == "null")
-            {   
-              // if (userCredential.user) {this.userService.save(userCredential.user)}
-              console.log('login home passed')
-              this.router.navigate([''])
-            }
-          })
-          .catch(function(error){ 
-            console.log(error)
-            return error
-          })
-          return
+        this.afAuth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+        if(userCredential.user)
+        {
+          this.screenBrightnessService.changeBrightness();
+          this.displayLoginService._setDisplayLogin();
+
+          if (!returnUrl || returnUrl == "null")
+          {   
+    
+            console.log('login home passed')
+            this.router.navigate([''])
+          }
+        }
+      
+        })
+        .catch(function(error){ 
+        console.log(error)
+        return error
+        })
+        return
       }
     }
 

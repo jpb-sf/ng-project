@@ -21,7 +21,7 @@ export class ProductsQuantityComponent  {
   addToCart() {
     console.log('add to cart')
     console.log(this.product)
-    this.cartService.addToCart(this.product);
+    this.cartService.addToCart(this.product, 1);
   }
 
   subtractFromCart() {

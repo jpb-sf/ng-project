@@ -1,0 +1,49 @@
+
+    <div class="quantity-form-wrapper--arrow"></div>
+    <div class="quantity-form-wrapper" >
+        <div
+            class="quantity-form" 
+            id="quantity-form" 
+            (blur)="deselect()"
+            (focus)="onFocus()"
+            contentEditable>
+            <div class="quantity-form--menu-container">
+                <div class="quantity-form--menu-row">
+                    <div (click)="addToCart(0)" role="button" class="btn--quantity-form-menu">0</div>
+                    <div (click)="addToCart(5)" role="button" class="btn--quantity-form-menu">5</div>
+                    <div (click)="addToCart(12)" role="button" class="btn--quantity-form-menu">12</div>
+                </div>
+                <span class="quantity-menu-vertical-line"></span>
+                <div class="quantity-form--menu-row">
+                    <div (click)="addToCart(1)" role="button" class="btn--quantity-form-menu">1</div>
+                    <div (click)="addToCart(6)" role="button" class="btn--quantity-form-menu">6</div>
+                    <div (click)="addToCart(15)" role="button" class="btn--quantity-form-menu">15</div>
+                </div>
+                <span class="quantity-menu-vertical-line"></span>
+                <div class="quantity-form--menu-row">
+                    <div (click)="addToCart(2)" role="button" class="btn--quantity-form-menu">2</div>
+                    <div (click)="addToCart(7)" role="button" class="btn--quantity-form-menu">7</div>
+                    <div (click)="addToCart(20)" role="button" class="btn--quantity-form-menu">20</div>
+                </div>
+                <span class="quantity-menu-vertical-line"></span>
+                <div class="quantity-form--menu-row">
+                    <div (click)="addToCart(3)" role="button" class="btn--quantity-form-menu">3</div>
+                    <div (click)="addToCart(8)" role="button" class="btn--quantity-form-menu">8</div>
+                    <div (click)="addToCart(24)" role="button" class="btn--quantity-form-menu">24</div>
+                </div>
+                <span class="quantity-menu-vertical-line"></span>
+                <div class="quantity-form--menu-row">
+                    <div (click)="addToCart(4)" role="button" class="btn--quantity-form-menu">4</div>
+                    <div (click)="addToCart(9)" role="button" class="btn--quantity-form-menu">9</div>
+                    <div (click)="addToCart(30)" role="button" class="btn--quantity-form-menu">30</div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input id="quantity-form-input" (blur)="deselect()" 
+                class="form-control quantity--form-control" type="number" name="quantity" placeholder="Add specific quantity">
+                <div class="input-group-append">
+                    <div (click)="addToCart(quantityInput.value)" id="quantity-form-button"  class="btn bg-color-2">OK</div>
+                </div>
+            </div>
+        </div>
+    </div>

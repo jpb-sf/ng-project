@@ -5,6 +5,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ResponsiveService } from 'shared/services/responsive.service';
 import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
 import { DisplayCartService } from 'shared/services/display-cart.service';
+import { DisplayLoginService } from 'shared/services/display-login.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   displayOrder: boolean = false;
   darkenedScreen: boolean = false;
   swMediumOrSmaller: boolean = false;
+  displayLogin: boolean = false;
 
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
   constructor( private authService: AuthService, 
@@ -25,7 +27,9 @@ export class AppComponent implements OnInit {
     private router: Router,
     private location: Location,
     private screenBrightnessService: ScreenBrightnessService,
-    private displayCartService: DisplayCartService) {
+    private displayCartService: DisplayCartService,
+    private displayLoginService: DisplayLoginService) {
+    
     // app component is a single instance so don't worry about unsubscribing
     console.log(window.innerWidth)
     this.authService.user$.subscribe(user => {
@@ -46,17 +50,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.displayCartService.displayCart$
     .subscribe((display: boolean) => {
-        this.displayCart = display;
+      this.displayCart = display;
+    })
+
+    this.displayLoginService.displayLogin$
+    .subscribe((display: boolean) => {
+      this.displayLogin = display;
     })
     this._setDisplayProductNav();
     this._setPath();
-    // this.responsiveService.swMediumOrSmaller$
-    // .subscribe((response: boolean) => {
-    //     if (this.swMediumOrSmaller != response)
-    //     {
-    //       this.swMediumOrSmaller = response;
-    //     }
-    // })
   }
 
   _setPath() {
@@ -84,6 +86,10 @@ export class AppComponent implements OnInit {
   _setDisplayCart() {
     this.displayCartService._setDisplayCart();
     this.screenBrightnessService.changeBrightness();
+  }
+
+  _setDisplayLogin() {
+    this.displayLoginService._setDisplayLogin();
   }
 
 }

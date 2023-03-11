@@ -39,9 +39,9 @@ export class ShoppingCartService {
     )
   }
 
-  async addToCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
+  async addToCart(product: ProductAndKey | ShoppingCartItem, quantity: number): Promise<void>
   {
-    this.updateItem(product, 1)
+    this.updateItem(product, quantity)
   }
 
   async subtractFromCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
@@ -64,24 +64,20 @@ export class ShoppingCartService {
   {
     let cartId = localStorage.getItem('cartId');
     // TODO, check if cartId exists in DB
-    console.log(cartId)
     if (cartId) return cartId
     let result = await this.createCart();
     localStorage.setItem('cartId', result.key!)
     return result.key;
   }
 
-  private async updateItem(product: ShoppingCartItem | ProductAndKey, change: number)
+  private async updateItem(product: ShoppingCartItem | ProductAndKey, quantity: number)
   {
     let cartId = await this.getOrCreateCartId();
-    console.log(product.key)
-    console.log('oh hey')
     let item = await this.getItem(cartId, product.key);
     item.valueChanges()
     .pipe(
       take(1)
     ).subscribe((result: any) => {
-      let quantity = (result?.quantity || 0) + change;
       if (quantity === 0) item.remove();
       else item.update({
         'title': product.title,

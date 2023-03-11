@@ -1,32 +1,38 @@
-<div class="text-center">
-    <form [formGroup]="form" (ngSubmit)="onSubmit($event.submitter.id)">
+<div *ngIf="displayLogin" class="login-container text-center">
+    <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
+    <form [formGroup]="form" class="form" (ngSubmit)="onSubmit($event.submitter.id)">
         <input 
-            type="text" 
-            placeholder="enter email"
+            type="email"  
+            placeholder="email"
             formControlName="email"
             #email
+            class="form-control"
         ><br>
         <input 
-            type="text" 
-            placeholder="enter password"
+            type="password" 
+            placeholder="password"
             formControlName="password"
             #password
+            class="form-control"
         ><br>
-        <div ></div>
-        <button
+        <div class="d-grid">
+            <button
+            type="submit"
+            role="button"
             id="login"
-            class="btn btn-primary"
-            >Login 
+            class="text-dec-none btn-login"
+            >SIGN IN 
         </button>
-        Or
-        <button
-            id="loginGoogle"
-            class="btn btn-primary"
-            >Login with Gmail
-        </button>
-    </form>
-</div>
-<div class="text-center">
-    <p>Don't have an account?</p>
-    <a routerLink="/register">Register</a>
-</div>
+        </div>
+        <p class="t--callout-sml">New user?</p>
+        <div class="d-grid">
+            <a
+            role="button"
+            id="register"
+            class="text-dec-none btn-login"
+            >CHECKOUT</a>
+            </div>
+        <!-- <a routerLink="/register">Register</a> -->
+        </form>
+    </div>
+

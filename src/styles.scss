@@ -99,6 +99,10 @@ time, mark, audio, video {
   margin-top: 10px;
 }
 
+.mr--5p {
+  margin-right: 5px;
+}
+
 .width-3 {
   width: 2rem;
 }
@@ -135,6 +139,11 @@ time, mark, audio, video {
   width: 14rem;
 }
 
+.max-content--h {
+  height: max-content;
+}
+
+
 .cart-img {
  height: 5rem;
  width: 5rem; 
@@ -145,9 +154,8 @@ time, mark, audio, video {
 .cart-img__small {
   height: 3rem;
   width: 3rem; 
- }
+}
  
-
 .navbar {
   position: sticky;
   top: 0;
@@ -184,14 +192,14 @@ time, mark, audio, video {
 }
 
 @keyframes brightenPage {
-  0% {background-color: rgba(9, 8, 8, .6); height: 100vh; width: 100vw;}
-  99% { height: 100vh; width: 100vw;}
+  0% {background-color: rgba(9, 8, 8, .6); height: 100%; width: 100%;}
+  99% { height: 100%; width: 100%;}
  100%  {background-color: rgba(9, 8, 8, 0); height: 0; width: 0;};
 }
 
 .app-wrapper-blackout::before {
   content: "";
-  position: absolute;
+  position: fixed;
   z-index: 25;
   overflow:hidden;
   height: 0;
@@ -209,8 +217,8 @@ time, mark, audio, video {
   background-color: rgba(9, 8, 8, .6);
   animation-name: darkenPage;
   animation-duration: .3s;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 .btn-x {
@@ -240,6 +248,7 @@ time, mark, audio, video {
   width: 100%;
 }
 
+// Only for flyout
 .shopping-cart-wrapper { 
   position: fixed;
   overflow: hidden; 
@@ -250,6 +259,13 @@ time, mark, audio, video {
   transform: translateX(200%);
   // going back
   transition: transform .8s ease;
+}
+
+.shopping-cart-route-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 40rem;
 }
 
 .shopping-cart-wrapper.flyout {
@@ -270,14 +286,13 @@ time, mark, audio, video {
   margin-bottom: 1rem;
   max-height: 70vh;
   width: 33rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .products-wrapper {
   margin-top: .1rem;
   position: static !important;
 }
-
 
 .products-nav-container {
   padding-top: .2rem;
@@ -315,12 +330,16 @@ time, mark, audio, video {
   background-color: transparent !important;
 }
 
-.btn-color2:hover { 
-  background-color: #e0ac1d;
-}
+// .btn-color2:hover { 
+//   background-color: #e0ac1d;
+// }
 
 .flex {
   display: flex;
+}
+
+.card-c {
+  position: relative;
 }
 
 .card-img-container {
@@ -344,6 +363,14 @@ time, mark, audio, video {
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 1.8rem;
+  background-color:#FFDD00;
+  color: white;
+
+}
+.card-btn.selected {
+  color:#FFDD00;
+  background-color: white;
+  border: 1px solid #FFDD00;
 }
 
 .card-body-bottom {
@@ -379,6 +406,7 @@ time, mark, audio, video {
   padding-top: .25rem;
   padding-left: .5rem;
 }
+
 .card-c-table {
   margin-top: 1rem;
   width: 100%;
@@ -406,6 +434,7 @@ time, mark, audio, video {
 
 .order-summary-wrapper {
   background-color: white;
+  z-index: auto;
 }
 
 .order-manage-container.relative {
@@ -428,11 +457,149 @@ time, mark, audio, video {
   background-color: white;
 }
 
+.navbar-relative {
+  position: relative;  
+}
 
-// lg
+.t--user-header {
+  font-size: 1.25rem;
+  font-weight: 300;
+  padding-bottom: 1rem;
+}
+
+.t--callout-sml {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #333;
+}
+
+.btn-login {
+  border: 2px solid transparent;
+  color: #777;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: white;
+}
+
+.btn-login:hover {
+  border: 2px solid #111;
+  color: #111;
+}
+
+.login-container {
+  right: 0rem;
+  top: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: absolute;
+  background-color: white;
+  z-index: 100;
+}
+
+.quantity-menu-component {
+  position: absolute;
+  bottom: 5rem;
+  right: 0;
+}
+
+.quantity-form-wrapper {
+  position: relative;
+  width: max-content;
+  z-index: 20;
+  background-color: #f0f0f0;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-bottom: 1rem;
+  box-shadow: -5px -5px 5px rgba(100, 100, 100, 0.3);
+}
+// down arrow 
+.quantity-form-wrapper:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0rem;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-top: 12px solid #f0f0f0;;
+  border-left: 15px solid transparent;;
+  border-right: 15px solid transparent;
+}
+
+.quantity-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quantity--form-control {
+  width: 10rem;
+  font-size: .8rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+// input[type=number] {
+//     -moz-appearance:textfield; /* Firefox */
+// }
+
+.quantity-form--menu-container {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: max-content;
+}
+
+.quantity-form--menu-row {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: .25rem;
+  margin-right: .25rem;
+}
+
+.btn--quantity-form-menu {
+  border: 1px solid rgba(22, 22, 22, 0);
+  box-shadow: none;
+  background-color: none;
+  border-radius: 25%;
+  height: 2em;
+  width: 2rem;
+}
+  .btn--quantity-form-menu:hover {
+    border: 1px solid black;
+    background-color: none;
+  }
+
+.quantity-form--menu-row p {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.quantity-menu-vertical-line {
+  width: 1px; 
+  background-color: black;
+  height: 100%; 
+}
+  
 @media (min-width: 1200px) { 
     .page-wrapper, .page-container {
         padding-left: 5rem;
         padding-right: 5rem;
     }
-}
+
+    @media (min-width: 762px) { 
+      .login-container {
+        right: 11.5rem;
+      }
+    }
+  }

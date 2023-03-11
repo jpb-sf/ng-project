@@ -19,21 +19,23 @@
     </div>
 </div>
 
-
 <!-- <div class="row no-gutters">
-    <div class="col-2">
-        <button 
-            (click)="subtractFromCart()" 
-            class="btn"
-            [style.background-color]="color? '#FFDD00' : '#DDD'"> -
-        </button>
+    <div class="col-2" [ngClass]="{'qty-btn-container__small': btnSize == 'small'}">
+        <button  
+        role="button"
+        (click)="subtractFromCart()" 
+        [ngClass]="btnSize == 'small' ? 'qty-btn' : 'btn'"
+        [style.background-color]="color? '#FFDD00' : '#DDD'"> -
+    </button>
     </div>
-    <div class="col text-center"> {{ shoppingCart!.getQuantity(key) }} in cart</div>
-    <div class="col-2 text-aln-r">
+    <div class="col text-center" *ngIf="btnSize == 'small'">{{ shoppingCart!.getQuantity(key) }}</div>
+    <div class="col text-center qty-center" *ngIf="btnSize == 'large'"> {{ shoppingCart!.getQuantity(key) }} in bag </div>
+    <div class="col-2 qty-btn-add-container" [ngClass]="{'qty-btn-container__small': btnSize == 'small'}">
         <button 
-            (click)="addToCart()" 
-            class="btn"
-            [style.background-color]="color? '#FFDD00' : '#DDD'"> +
+        role="button"
+        (click)="addToCart()" 
+        [ngClass]="btnSize == 'small' ? 'qty-btn' : 'btn'"
+        [style.background-color]="color? '#FFDD00' : '#DDD'"> +
         </button>
     </div>
 </div> -->

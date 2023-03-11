@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'shared/services/auth.service';
 
@@ -10,6 +10,7 @@ import { AuthService } from 'shared/services/auth.service';
 
 export class LoginComponent {
   form;
+  @Input('displayLogin') displayLogin: boolean = false;
   constructor(private auth: AuthService, fb: FormBuilder) {
     this.form = fb.group({
       email: ['', 

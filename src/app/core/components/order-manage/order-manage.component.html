@@ -7,16 +7,17 @@
 
         <h5> My Orders</h5>
     </ng-template>
-    <div class="row order-manage-container" [ngClass]="{'relative': swMediumOrSmaller && orderIsSelected}">
+    <div class="row order-manage-container" [ngClass]="{'relative': swMediumOrSmaller}">
         <div class="col-md-6">
             <order-select
             [swMediumOrSmaller]="swMediumOrSmaller"></order-select>
         </div>
         <div  class="col-md-6 order-summary-wrapper" 
-            [ngClass]="{'absolute': swMediumOrSmaller}"
+            [ngClass]="{'absolute': swMediumOrSmaller && !displayCart}"
             >
             <order-summary 
             [swMediumOrSmaller]="swMediumOrSmaller"
+            [displayCart]="displayCart"
             [orderIsSelected]="orderIsSelected"></order-summary>
         </div>
     </div>

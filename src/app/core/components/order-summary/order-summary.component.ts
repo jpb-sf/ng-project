@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy} from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/shared/models/order';
@@ -12,7 +12,7 @@ import { ResponsiveService } from 'shared/services/responsive.service';
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss']
 })
-export class OrderSummaryComponent {
+export class OrderSummaryComponent implements OnDestroy{
   id: string = '';
   order?: Order;
   formattedDate: string = '';
@@ -21,6 +21,7 @@ export class OrderSummaryComponent {
   @Output('deselectEvent') deselectEvent = new EventEmitter();
   @Input('orderIsSelected') orderIsSelected:boolean = false;
   @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
+  @Input('displayCart') displayCart: boolean = false;
 
   constructor (
     private orderService: OrderService,
@@ -47,6 +48,11 @@ export class OrderSummaryComponent {
         }
       })
     })
+  }
+
+  ngOnDestroy(): void {
+    console.log(`ngOnDestroy`);
+    this.orderViewService.changeOrderView(false);
   }
 
   onDropDown() {

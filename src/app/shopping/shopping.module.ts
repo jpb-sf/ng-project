@@ -11,7 +11,6 @@ import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductsNavComponent } from './components/products-nav/products-nav.component';
 
-
 @NgModule({
   declarations: [
     ShoppingCartComponent,
