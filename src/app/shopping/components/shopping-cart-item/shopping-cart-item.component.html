@@ -1,0 +1,27 @@
+
+    <td>
+        <img [ngClass]="{'cart-img__small': swMediumOrSmaller == true }" 
+            class="cart-img" 
+            [src]="item.imageUrl">
+    </td>
+    <td>{{ item.title }}</td>
+    <td class="text-right">
+        <quantity-menu 
+        *ngIf="displayQuantityMenu" 
+        [displayQuantityMenu]="displayQuantityMenu"
+        (onDeselect)="deselect()"
+        (onAddtoCart)="addToCart(item, $event)"
+        ></quantity-menu>
+        <products-quantity
+            *ngIf="!displayQuantityMenu"
+            (onShowQuantityMenu)="-_setDisplayQuantityMenu()" 
+            [shopping-cart]="cart" 
+            [key]="item.key"
+            [product]="item"
+            [color]="false"
+            [btnSize]="'small'">
+        </products-quantity>
+    </td>
+    <td class="text-right">{{ item.itemPriceTotal | currency:'USD' : true }}</td>
+
+

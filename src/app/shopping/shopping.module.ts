@@ -10,6 +10,7 @@ import { ShippingFormComponent } from './components/shipping-form/shipping-form.
 import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary/shopping-cart-summary.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductsNavComponent } from './components/products-nav/products-nav.component';
+import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProductsNavComponent } from './components/products-nav/products-nav.com
     ProductsFilterComponent,
     ShippingFormComponent,
     ShoppingCartSummaryComponent,
-    ProductsNavComponent
+    ProductsNavComponent,
+    ShoppingCartItemComponent
   ],
   imports: [
     CommonModule,

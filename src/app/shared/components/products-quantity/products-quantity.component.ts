@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { ProductAndKey } from 'shared/models/product';
 import { ShoppingCart } from 'shared/models/shopping-cart';
@@ -15,16 +15,17 @@ export class ProductsQuantityComponent  {
   @Input('key') key!: string;
   @Input('color') color!: boolean;
   @Input('btnSize') btnSize!: 'large' | 'small';
+  @Output('onShowQuantityMenu') onShowQuantityMenu = new EventEmitter();
 
   constructor(private cartService: ShoppingCartService) { }
 
-  addToCart() {
+  showQuanitityMenu() {
     console.log('add to cart')
     console.log(this.product)
-    this.cartService.addToCart(this.product, 1);
+    this.onShowQuantityMenu.emit();
   }
 
-  subtractFromCart() {
-    this.cartService.subtractFromCart(this.product)
-  }
+//   subtractFromCart() {
+//     this.cartService.subtractFromCart(this.product)
+//   }
 }

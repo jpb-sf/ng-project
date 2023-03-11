@@ -15,10 +15,12 @@ export class ShoppingCartComponent implements OnInit {
   swMediumOrSmaller: boolean = false;
   @Input('inputDisplayCart') inputDisplayCart: boolean = false;
   @Output('hideCart') hideCart = new EventEmitter;
+  displayQuantityMenu: boolean = false;
 
   constructor(private shoppingCartService: ShoppingCartService,
     private responsiveService: ResponsiveService,
-    private router: Router) {
+    private router: Router,
+    private cartService: ShoppingCartService) {
       this.responsiveService.screenWidth$
       .subscribe((sw: number) => {
           if (sw <= 992 ) {
@@ -34,8 +36,23 @@ export class ShoppingCartComponent implements OnInit {
     this.cart$ = await this.shoppingCartService.getCart();
   }
 
+  updateCart(){
+    this.displayQuantityMenu = true;
+  }
+
+  deselect() 
+  {
+    this.displayQuantityMenu = false;
+  }
+  
   clearCart(){
     this.shoppingCartService.clearCart();
+  }
+
+  addToCart(product: any, quantity: number) {
+    console.log(`time to add to cart, ${quantity}`);
+    this.cartService.addToCart(product, Number(quantity));
+    this.displayQuantityMenu = false;
   }
 
   onHide() {
