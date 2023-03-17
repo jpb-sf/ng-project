@@ -19,6 +19,7 @@ import { ProductsCardComponent } from './components/products-card/products-card.
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
 import { QuantityMenuComponent } from './components/quantity-menu/quantity-menu.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { RegisterGuard } from './services/register-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
 import { DateTimeService } from './services/date-time.service';
@@ -26,6 +27,7 @@ import { OrderService } from './services/order.service';
 import { OrderViewService } from './services/order-view.service';
 import { ScreenBrightnessService } from './services/screen-brightness.service';
 import { DisplayCartService } from './services/display-cart.service';
+
 
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
@@ -77,18 +79,19 @@ import { ResponsiveService } from './services/responsive.service';
     ResponsiveService,
     ScreenBrightnessService,
     DisplayCartService,
-    AuthGuard
+    AuthGuard,
+    RegisterGuard
   ]
 })
 export class SharedModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(
-            fasCartShopping, 
-            fasBasketShopping, 
-            faXmark, 
-            fasPlus, 
-            faShoppingBag, 
-            faCaretDown,
-            faUser)
-    }
- }
+  constructor(library: FaIconLibrary) {
+  library.addIcons(
+      fasCartShopping, 
+      fasBasketShopping, 
+      faXmark, 
+      fasPlus, 
+      faShoppingBag, 
+      faCaretDown,
+      faUser)
+  }
+}

@@ -44,10 +44,10 @@ export class ShoppingCartService {
     this.updateItem(product, quantity)
   }
 
-  async subtractFromCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
-  {
-    this.updateItem(product, -1)
-  }
+//   async subtractFromCart(product: ProductAndKey | ShoppingCartItem): Promise<void>
+//   {
+//     this.updateItem(product, -1)
+//   }
 
   private createCart()
   {

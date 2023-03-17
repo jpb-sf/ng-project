@@ -8,16 +8,18 @@ import { AdminProductsComponent } from './admin/components/admin-products/admin-
 import { OrderManageComponent } from './core/components/order-manage/order-manage.component';
 import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
 import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
-import { RegisterComponent } from './core/components/register/register.component';
+import { RegisterComponent } from './shopping/components/register/register.component';
 
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { AdminGuard } from './admin/services/admin-guard.service';
+import { RegisterGuard } from 'shared/services/register-guard.service';
 
 
 const routes: Routes = [
     {
         path: 'register', 
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [RegisterGuard]
     },
     {
         path: 'login',

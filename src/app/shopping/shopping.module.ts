@@ -11,6 +11,7 @@ import { ShoppingCartSummaryComponent } from './components/shopping-cart-summary
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ProductsNavComponent } from './components/products-nav/products-nav.component';
 import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopp
     ShippingFormComponent,
     ShoppingCartSummaryComponent,
     ProductsNavComponent,
-    ShoppingCartItemComponent
+    ShoppingCartItemComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

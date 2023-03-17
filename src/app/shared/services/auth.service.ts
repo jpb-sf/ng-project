@@ -19,7 +19,7 @@ export class AuthService {
     constructor(
       private afAuth: AngularFireAuth, 
       private router: Router, 
-			private route: ActivatedRoute, 
+	    private route: ActivatedRoute, 
       private db: AngularFireDatabase,
       private userService: UserService,
       private screenBrightnessService: ScreenBrightnessService,
@@ -81,7 +81,7 @@ export class AuthService {
     {
       console.log('logout')
       this.afAuth.signOut()
-      this.router.navigate(['/login'])
+      this.router.navigate(['/'])
     }
 
     async registerUser(user: any)

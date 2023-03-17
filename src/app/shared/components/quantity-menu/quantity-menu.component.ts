@@ -9,27 +9,31 @@ export class QuantityMenuComponent implements AfterViewInit, OnChanges {
   @Output('onDeselect') onDeselect = new EventEmitter;
   @Output('onAddtoCart')onAddToCart = new EventEmitter;
   @Input('displayQuantityMenu') displayQuantityMenu: boolean = false;
+  @Input('boxShadow') boxShadow: boolean = false;
   quantityInput: any;
   quantityForm: any;
   quantityFormBtn: any;
   
-  ngAfterViewInit(){
+  ngAfterViewInit() {
+    this.quantityForm = document.querySelector('#quantity-form');
     this.quantityInput = document.querySelector('#quantity-form-input');
-    this.quantityForm = document.querySelector('#quantity-form-input');
     this.quantityFormBtn = document.querySelector('#quantity-form-button');
-    this.quantityForm.focus();
+    if(this.quantityForm)
+    { 
+      this.quantityInput.focus();
+    }
   }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.displayQuantityMenu && (document.activeElement !== this.quantityInput))
+  ngOnChanges(changes: SimpleChanges): void 
+  {
+    if(this.displayQuantityMenu && this.quantityInput && this.quantityForm
+      && (document.activeElement !== this.quantityInput))
     {
       this.quantityForm.focus();
     }
   }
 
   addToCart(quantity?: number | HTMLElement) {
-    console.log(`add to cart`);
-    console.log(quantity);
     if (quantity)
     {
       this.onAddToCart.emit(quantity);
@@ -39,18 +43,16 @@ export class QuantityMenuComponent implements AfterViewInit, OnChanges {
   deselect() 
   {
     window.setTimeout(() => {
-      console.log(document.activeElement)
-      if ((document.activeElement !== this.quantityInput) ||
-      (document.activeElement !== this.quantityForm))
+      if (document.activeElement != this.quantityInput &&
+      document.activeElement != this.quantityForm)
       {
         this.onDeselect.emit();
       }
-    },10)
+    }, 10)
   }
 
   onFocus()
   {
-    console.log(document.activeElement)
     this.quantityForm.focus();
   }
 }

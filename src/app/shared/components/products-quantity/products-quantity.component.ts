@@ -20,7 +20,6 @@ export class ProductsQuantityComponent  {
   constructor(private cartService: ShoppingCartService) { }
 
   showQuanitityMenu() {
-    console.log('add to cart')
     console.log(this.product)
     this.onShowQuantityMenu.emit();
   }

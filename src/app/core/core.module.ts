@@ -6,7 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrderManageComponent } from './components/order-manage/order-manage.component';
 import { OrderSelectComponent } from './components/order-select/order-select.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from '../shopping/components/register/register.component';
 import { UsernameFormComponent } from './components/username-form/username-form.component';
 import { ShoppingModule } from '../shopping/shopping.module';
 import { ScreenBrightnessComponent } from './components/screen-brightness/screen-brightness.component';

@@ -171,15 +171,15 @@ time, mark, audio, video {
   height: 15px;
   width: 15px;
 }
-
-.qty-btn-add-container {
-  padding: 0;
-  text-align: right;
-  margin-right: 10px
+.qty-container {
+  display: flex;
+  justify-content: center;
 }
 
-.qty-btn-container__small {
+.qty-btn-container {
   padding-top: 4px;
+  text-align: left;
+  margin-left: 8px;
 }
 
 .qty-center {
@@ -479,10 +479,11 @@ time, mark, audio, video {
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: white;
+  border: 1px solid #111;
 }
 
 .btn-login:hover {
-  border: 2px solid #111;
+  border: 1px solid #FFDD00;
   color: #111;
 }
 
@@ -512,8 +513,12 @@ time, mark, audio, video {
   padding-left: .5rem;
   padding-right: .5rem;
   padding-bottom: 1rem;
+}
+
+.quantity-form-wrapper.box-shadow {
   box-shadow: -5px -5px 5px rgba(100, 100, 100, 0.3);
 }
+
 // down arrow 
 .quantity-form-wrapper:after {
   content: '';
@@ -552,11 +557,16 @@ input::-webkit-inner-spin-button {
 
 .quantity-form--menu-container {
   display: flex;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
-  height: max-content;
+  margin-bottom: 1rem;
+  height: 5.5rem;
+}
+
+div:focus {
+    outline: none !important;
+    border: none !important;
 }
 
 .quantity-form--menu-row {
@@ -587,7 +597,7 @@ input::-webkit-inner-spin-button {
 
 .quantity-menu-vertical-line {
   width: 1px; 
-  background-color: black;
+  background-color: #888;
   height: 100%; 
 }
   
