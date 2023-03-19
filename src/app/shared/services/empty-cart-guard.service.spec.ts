@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RegisterGuard } from './register-guard.service';
+import { EmptyCartGuard } from './empty-cart-guard.service';
 
-describe('RegisterGuard', () => {
-  let service: RegisterGuard;
+describe('EmptyCartGuard', () => {
+  let service: EmptyCartGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RegisterGuard);
+    service = TestBed.inject(EmptyCartGuard);
   });
 
   it('should be created', () => {

@@ -6,32 +6,33 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrderManageComponent } from './components/order-manage/order-manage.component';
 import { OrderSelectComponent } from './components/order-select/order-select.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
-import { RegisterComponent } from '../shopping/components/register/register.component';
-import { UsernameFormComponent } from './components/username-form/username-form.component';
-import { ShoppingModule } from '../shopping/shopping.module';
+
 import { ScreenBrightnessComponent } from './components/screen-brightness/screen-brightness.component';
+import { RegisterComponent } from './register/register.component';
+import { UsernameFormComponent } from './username-form/username-form.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     LoginComponent,
-    RegisterComponent,
-    UsernameFormComponent,
     OrderSummaryComponent,
     OrderSelectComponent,
     OrderManageComponent,
-    ScreenBrightnessComponent
+    ScreenBrightnessComponent,
+    RegisterComponent,
+    UsernameFormComponent
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    ShoppingModule
+    SharedModule
   ],
   exports: [
     NavbarComponent,
     ScreenBrightnessComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    UsernameFormComponent
   ]
 })
 export class CoreModule { }

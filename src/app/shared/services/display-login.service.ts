@@ -8,9 +8,12 @@ export class DisplayLoginService {
     displayLogin$: BehaviorSubject<any> = new BehaviorSubject(false);
     displayLogin: boolean = false;
   
-    _setDisplayLogin() {
+    _setDisplayLogin(location?: string) 
+    {
       this.displayLogin = !this.displayLogin;
-      this.displayLogin$.next(this.displayLogin);
+      if(!location) location = '';
+      this.displayLogin$.next({'display': this.displayLogin, 'location': location});
+    
     }
   }
   

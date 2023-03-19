@@ -1,11 +1,10 @@
 <div  *ngIf="stepOne; then step2; else step1"></div>
     <ng-template class="text-center mt-1" #step2>
-        <h1>Register</h1>
+        <h4>Sign Up</h4>
         <form [formGroup]="form" class="form">
             <div class="form-group">
                 <!-- "focused" is just a boolean switch. Why didn't I think of this sooner? -->
                 <input
-                
                     (focus)="focused = true"
                     (blur)="focused = false" 
                     type="text" 
@@ -58,7 +57,7 @@
         </button>
     <div class="text-center">
         <p>Already have an account?</p>
-        <a routerLink="/login">Log in</a>
+        <a routerLink="/check-out/login" (click)="displayLogin()">Log in</a>
     </div>
 </ng-template>
 <ng-template #step1>

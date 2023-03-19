@@ -25,8 +25,7 @@ export class NavbarComponent implements OnInit {
     public auth: AuthService, 
     private shoppingCartService: ShoppingCartService,
     private responsiveService: ResponsiveService,
-    private location: Location,
-    private screenBrightnessService: ScreenBrightnessService) {}
+    private location: Location) {}
     
   async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();
@@ -40,12 +39,10 @@ export class NavbarComponent implements OnInit {
   onLogin() 
   {
     this.onShowLogin.emit();
-    this.screenBrightnessService.changeBrightness();
   }
 
   logout() 
   {
-    console.log('logout')
     this.auth.logout();
   }
 
@@ -53,7 +50,6 @@ export class NavbarComponent implements OnInit {
     // If user is not already on '/shopping-cart' path; this avoids the desktop fly-out cart redudanty showing over a mobile cart page
     if(this.location.path() !== '/shopping-cart')
     {
-        console.log(this.location.path)
         this.showCart.emit()
     }
   }

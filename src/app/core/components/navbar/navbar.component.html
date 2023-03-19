@@ -17,9 +17,10 @@
             <a ngbDropdownToggle id="dropdownMenuButton"
                 class="nav-link active" 
                 data-toggle="dropdown" aria-haspopup="true" 
-                aria-expanded="false">
+                aria -expanded="false">
                 Hi {{ appUser.displayName }}
             </a>
+            <!-- Navbar user dropdown -->
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
                 <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
                 <ng-container *ngIf="appUser.isAdmin">
@@ -66,7 +67,6 @@
       </ul>
     </div>
   </div>
-
 </nav>
 
     

@@ -1,4 +1,4 @@
-<div *ngIf="displayLogin" class="login-container text-center">
+<div  class="login-container text-center" [ngClass]="{'locationOfLogin': locationOfLogin == 'navbar'}">
     <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
     <form [formGroup]="form" class="form" (ngSubmit)="onSubmit($event.submitter.id)">
         <input 
@@ -29,7 +29,8 @@
             <button
             role="button"
             id="register"
-            routerLink="/register"
+            (click)="checkout()"
+            routerLink="/check-out/sign-up"
             class="text-dec-none btn-login"
             >CHECKOUT</button>
             </div>

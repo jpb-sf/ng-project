@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
 import { AuthService } from 'shared/services/auth.service';
 import { CustomValidators } from 'Validators/validators';
@@ -13,6 +13,7 @@ export class RegisterComponent{
   focused: boolean = false;
   formVals?: any;
   stepOne?: boolean = true;
+  @Output('onDisplayLogin') onDisplayLogin = new EventEmitter();
   
   constructor(private auth: AuthService, fb: FormBuilder) {
     this.form = fb.group({
@@ -62,6 +63,11 @@ export class RegisterComponent{
     // Combining properties
     this.formVals = {...rest, ...event }
     this.auth.registerUser(this.formVals)
+  }
+
+  displayLogin()
+  {
+    this.onDisplayLogin.emit();
   }
 }
 

@@ -7,7 +7,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterGuard implements CanActivate {
+export class EmptyCartGuard implements CanActivate {
   constructor(private cartService: ShoppingCartService, private router: Router) { 
   }
 
@@ -19,6 +19,7 @@ export class RegisterGuard implements CanActivate {
       if(!cart.totalItemsCount)
       {
         resolve(false);
+        this.router.navigate(['/checkout/empty-cart'])
       }
       else {
        resolve(true);

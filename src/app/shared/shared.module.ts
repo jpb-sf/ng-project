@@ -19,7 +19,7 @@ import { ProductsCardComponent } from './components/products-card/products-card.
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
 import { QuantityMenuComponent } from './components/quantity-menu/quantity-menu.component';
 import { AuthGuard } from './services/auth-guard.service';
-import { RegisterGuard } from './services/register-guard.service';
+import { EmptyCartGuard } from './services/empty-cart-guard.service';
 import { AuthService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
 import { DateTimeService } from './services/date-time.service';
@@ -80,7 +80,7 @@ import { ResponsiveService } from './services/responsive.service';
     ScreenBrightnessService,
     DisplayCartService,
     AuthGuard,
-    RegisterGuard
+    EmptyCartGuard
   ]
 })
 export class SharedModule {

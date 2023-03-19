@@ -488,16 +488,19 @@ time, mark, audio, video {
 }
 
 .login-container {
-  right: 0rem;
-  top: 1.5rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  position: absolute;
   background-color: white;
   z-index: 100;
 }
+
+.login-container.locationOfLogin {
+    position: absolute;
+    right: 5rem;
+    top: 1.5rem;
+  }
 
 .quantity-menu-component {
   position: absolute;

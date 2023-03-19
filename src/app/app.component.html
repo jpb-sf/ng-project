@@ -5,7 +5,7 @@
 <div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
     <router-outlet ></router-outlet>
 </div>
-<login [displayLogin]="displayLogin"></login>
+<login [locationOfLogin]="locationOfLogin" *ngIf="displayLogin && (locationOfLogin == 'navbar')"></login>
 <shopping-cart
 class="shopping-cart-wrapper" 
 (hideCart)="_setDisplayCart()" 

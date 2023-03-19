@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   darkenedScreen: boolean = false;
   swMediumOrSmaller: boolean = false;
   displayLogin: boolean = false;
+  locationOfLogin?: string = '';
 
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
   constructor( private authService: AuthService, 
@@ -31,18 +32,16 @@ export class AppComponent implements OnInit {
     private displayLoginService: DisplayLoginService) {
     
     // app component is a single instance so don't worry about unsubscribing
-    console.log(window.innerWidth)
     this.authService.user$.subscribe(user => {
-      if(user){
-          let returnUrl = localStorage.getItem('returnUrl');
-          console.log('appComponent refresh')
-          if (returnUrl && returnUrl != "null")
-          {       
-            console.log(`returnUrl is ${returnUrl}`);
-            localStorage.removeItem('returnUrl');
-            return router.navigateByUrl(returnUrl);
-          }
-          return; 
+      if(user)
+      {
+        let returnUrl = localStorage.getItem('returnUrl');
+        if (returnUrl && returnUrl != "null")
+        {       
+          localStorage.removeItem('returnUrl');
+          return router.navigateByUrl(returnUrl);
+        }
+        return; 
       }
       return;
     })
@@ -54,8 +53,10 @@ export class AppComponent implements OnInit {
     })
 
     this.displayLoginService.displayLogin$
-    .subscribe((display: boolean) => {
-      this.displayLogin = display;
+    .subscribe((display: any) => {
+      this.displayLogin = display.display;
+      this.locationOfLogin = display.location;
+      console.log(`locationOfLogin is ${this.locationOfLogin}`);
     })
     this._setDisplayProductNav();
     this._setPath();
@@ -89,7 +90,8 @@ export class AppComponent implements OnInit {
   }
 
   _setDisplayLogin() {
-    this.displayLoginService._setDisplayLogin();
+    this.displayLoginService._setDisplayLogin('navbar');
+    this.screenBrightnessService.changeBrightness();
   }
 
 }

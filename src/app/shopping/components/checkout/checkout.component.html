@@ -1,11 +1,16 @@
 <p>Check Out</p>
-<h4>Delivery Address</h4>
+
 <div class="row">
-    <div class="col-md-6">
+    <div *ngIf="address === 'check-out'" class="col-md-6">
         <shipping-form [cart]="cart"></shipping-form>
     </div>
-    <div class="col-md-6">
-        <register></register>
+    <div *ngIf="address === 'check-out/sign-up'"
+    class="col-md-6">
+        <register (onDisplayLogin)="showLogin()"></register>
+    </div>
+    <div *ngIf="address === 'check-out/login'"
+    class="col-md-6">
+        <login [locationOfLogin]="locationOfLogin" *ngIf="displayLogin"></login>
     </div>
     <div class="col-md-6">
         <shopping-cart-summary [cart]="cart"></shopping-cart-summary>

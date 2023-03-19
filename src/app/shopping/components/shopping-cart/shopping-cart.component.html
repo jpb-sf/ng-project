@@ -10,12 +10,12 @@
             </a>
         </div>
         <ng-template #mobile>
-            <h4>Shopping Basket</h4>
+            <h4>Shopping Bag</h4>
         </ng-template>
         <p> 
-            You have {{ cart.totalItemsCount }} items in your basket.  
+            You have {{ cart.totalItemsCount }} items in your bag.  
             <span> 
-                <a role="button" *ngIf="cart.items.length" (click)="clearCart()" class="color-8 ms-2">Clear Basket</a> 
+                <a role="button" *ngIf="cart.items.length" (click)="clearCart()" class="color-8 ms-2">Clear bag</a> 
             </span>
         </p>
         <div class="row col-12" 

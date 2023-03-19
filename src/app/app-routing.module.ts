@@ -8,18 +8,17 @@ import { AdminProductsComponent } from './admin/components/admin-products/admin-
 import { OrderManageComponent } from './core/components/order-manage/order-manage.component';
 import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
 import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
-import { RegisterComponent } from './shopping/components/register/register.component';
-
+import { RegisterComponent} from './core/register/register.component';
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { AdminGuard } from './admin/services/admin-guard.service';
-import { RegisterGuard } from 'shared/services/register-guard.service';
+import { EmptyCartGuard } from 'shared/services/empty-cart-guard.service';
 
 
 const routes: Routes = [
     {
         path: 'register', 
         component: RegisterComponent,
-        canActivate: [RegisterGuard]
+        canActivate: [EmptyCartGuard]
     },
     {
         path: 'login',
@@ -38,10 +37,23 @@ const routes: Routes = [
         component: OrderManageComponent,
         canActivate: [AuthGuard]
     },
+    {   
+        path: 'check-out/empty-cart',
+        component: CheckoutComponent
+    },
+    {   
+        path: 'check-out/login',
+        component: CheckoutComponent
+    },
+    {   
+        path: 'check-out/sign-up',
+        component: CheckoutComponent,
+        canActivate: [EmptyCartGuard]
+    },
     {
         path: 'check-out',
         component: CheckoutComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, EmptyCartGuard]
     },
     {
         path: 'order-success',
