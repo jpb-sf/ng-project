@@ -19,8 +19,7 @@ export class AppComponent implements OnInit {
   displayOrder: boolean = false;
   darkenedScreen: boolean = false;
   swMediumOrSmaller: boolean = false;
-  displayLogin: boolean = false;
-  locationOfLogin?: string = '';
+  displayLoginNav: boolean = false;
 
   // navigating the user when they login to the intended url. Doing this here because OAuth, redrirect
   constructor( private authService: AuthService, 
@@ -53,10 +52,8 @@ export class AppComponent implements OnInit {
     })
 
     this.displayLoginService.displayLogin$
-    .subscribe((display: any) => {
-      this.displayLogin = display.display;
-      this.locationOfLogin = display.location;
-      console.log(`locationOfLogin is ${this.locationOfLogin}`);
+    .subscribe((display: boolean) => {
+      this.displayLoginNav = display
     })
     this._setDisplayProductNav();
     this._setPath();
@@ -90,7 +87,7 @@ export class AppComponent implements OnInit {
   }
 
   _setDisplayLogin() {
-    this.displayLoginService._setDisplayLogin('navbar');
+    this.displayLoginService._setDisplayLogin(true);
     this.screenBrightnessService.changeBrightness();
   }
 

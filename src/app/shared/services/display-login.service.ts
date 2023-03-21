@@ -6,14 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DisplayLoginService {
     displayLogin$: BehaviorSubject<any> = new BehaviorSubject(false);
-    displayLogin: boolean = false;
-  
-    _setDisplayLogin(location?: string) 
+    _setDisplayLogin(stateNav?: boolean) 
     {
-      this.displayLogin = !this.displayLogin;
-      if(!location) location = '';
-      this.displayLogin$.next({'display': this.displayLogin, 'location': location});
-    
+      this.displayLogin$.next(stateNav);
     }
   }
   

@@ -5,12 +5,12 @@
 <div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
     <router-outlet ></router-outlet>
 </div>
-<login [locationOfLogin]="locationOfLogin" *ngIf="displayLogin && (locationOfLogin == 'navbar')"></login>
+<login [displayLoginNav]="displayLoginNav" *ngIf="displayLoginNav"></login>
 <shopping-cart
 class="shopping-cart-wrapper" 
 (hideCart)="_setDisplayCart()" 
 [ngClass]="{
-    'flyout': displayCart
+  'flyout': displayCart
 }"
 [inputDisplayCart]="displayCart"
 >

@@ -19,7 +19,7 @@ export class AuthService {
     constructor(
       private afAuth: AngularFireAuth, 
       private router: Router, 
-	    private route: ActivatedRoute, 
+	  private route: ActivatedRoute, 
       private db: AngularFireDatabase,
       private userService: UserService,
       private screenBrightnessService: ScreenBrightnessService,
@@ -58,7 +58,7 @@ export class AuthService {
         if(userCredential.user)
         {
           this.screenBrightnessService.changeBrightness();
-          this.displayLoginService._setDisplayLogin();
+          this.displayLoginService._setDisplayLogin(false);
 
           if (!returnUrl || returnUrl == "null")
           {   

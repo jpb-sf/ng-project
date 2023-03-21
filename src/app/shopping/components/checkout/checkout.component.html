@@ -6,11 +6,11 @@
     </div>
     <div *ngIf="address === 'check-out/sign-up'"
     class="col-md-6">
-        <register (onDisplayLogin)="showLogin()"></register>
+        <register></register>
     </div>
     <div *ngIf="address === 'check-out/login'"
     class="col-md-6">
-        <login [locationOfLogin]="locationOfLogin" *ngIf="displayLogin"></login>
+        <login></login>
     </div>
     <div class="col-md-6">
         <shopping-cart-summary [cart]="cart"></shopping-cart-summary>

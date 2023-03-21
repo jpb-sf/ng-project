@@ -16,19 +16,18 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   cart: ShoppingCart = new ShoppingCart();
   subscription: Subscription = new Subscription();
   address: string = '';
-  displayLogin: boolean = false; 
-  locationOfLogin: string = ''; 
 
-  constructor(
+
+  constructor (
     private router: Router,
     private route: ActivatedRoute,
     private cartService: ShoppingCartService,
     private orderService: OrderService,
     private displayLoginService: DisplayLoginService) 
-    {
-        this.address = this.route.snapshot.url.join('/');
-        console.log(`baseroute is ${this.address}`);
-    }
+  {
+      this.address = this.route.snapshot.url.join('/');
+     
+  }
 
   async ngOnInit() {
     this.subscription = (await this.cartService.getCart())
@@ -36,12 +35,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.cart = cart;
      });
 
-     this.displayLoginService.displayLogin$
-     .subscribe((display: any) => {
-        this.displayLogin = display.display;
-        this.locationOfLogin = display.location;
-     })
   }
+  
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -52,8 +47,4 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.router.navigate(['order-success'])
   }
 
-  showLogin()
-  {
-    this.displayLoginService._setDisplayLogin();
-  }
 }

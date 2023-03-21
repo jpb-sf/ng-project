@@ -104,13 +104,15 @@ export class ScreenBrightnessComponent implements OnInit {
         this.displayCartService._setDisplayCart();
         return;
       }
+      
       if (this.displayOrder)
       {
         this.orderViewService.changeOrderView(false);
       }
+      
       if (this.displayLogin)
       {
-        this.displayLoginService._setDisplayLogin();
+        this.displayLoginService._setDisplayLogin(false);
       }
 
     }

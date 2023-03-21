@@ -1,4 +1,4 @@
-<div  class="login-container text-center" [ngClass]="{'locationOfLogin': locationOfLogin == 'navbar'}">
+<div  class="login-container text-center" [ngClass]="{'locationOfLogin': displayLoginNav}">
     <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
     <form [formGroup]="form" class="form" (ngSubmit)="onSubmit($event.submitter.id)">
         <input 
@@ -24,8 +24,8 @@
             >SIGN IN 
         </button>
         </div>
-        <p class="t--callout-sml">New user?</p>
-        <div class="d-grid">
+        <p *ngIf="displayLoginNav" class="t--callout-sml">New user?</p>
+        <div *ngIf="displayLoginNav; else signup" class="d-grid">
             <button
             role="button"
             id="register"
@@ -34,7 +34,12 @@
             class="text-dec-none btn-login"
             >CHECKOUT</button>
             </div>
-        <!-- <a routerLink="/register">Register</a> -->
+        <ng-template #signup >
+            <div class="text-center">
+                <p>Don't have an account?</p>
+                <a routerLink="/check-out/sign-up"> Sign Up</a>
+            </div>
+        </ng-template>
         </form>
     </div>
 

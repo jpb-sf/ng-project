@@ -12,8 +12,8 @@ import { DisplayLoginService } from 'shared/services/display-login.service';
 
 export class LoginComponent {
   form;
-  @Input('displayLogin') displayLogin: boolean = false;
-  @Input('locationOfLogin') locationOfLogin: string = '';
+  @Input('displayLoginNav') displayLoginNav: boolean = false;
+
   
   constructor(
     private auth: AuthService, 
@@ -41,7 +41,7 @@ export class LoginComponent {
   checkout()
   {
     this.screenBrightnessService.changeBrightness();
-    this.displayLoginService._setDisplayLogin();
+    this.displayLoginService._setDisplayLogin(false);
   }
 
 }
