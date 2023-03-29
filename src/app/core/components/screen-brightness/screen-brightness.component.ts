@@ -71,7 +71,7 @@ export class ScreenBrightnessComponent implements OnInit {
       
           if (this.path.slice(0,19) === '/admin/admin-orders' )
           {
-    
+            console.log(`onInit() is being called from screen-brightness comp`);
             if (this.swMediumOrSmaller && this.displayOrder && !this.darkenedScreen)
             {
               this.screenBrightnessService.changeBrightness();
@@ -86,7 +86,7 @@ export class ScreenBrightnessComponent implements OnInit {
 
     checkForDisplay()
     {
-      if (this.displayCart || this.displayLogin || this.displayLogin)
+      if (this.displayCart || this.displayLogin)
       {
           document.body.style.overflow = 'hidden';
       }
@@ -97,6 +97,7 @@ export class ScreenBrightnessComponent implements OnInit {
 
 
     _setDarkenScreen() {
+      console.log(`_setDarkenScreen() is being called from screen-brightness comp`);
       this.screenBrightnessService.changeBrightness();
 
       if (this.displayCart)
@@ -114,6 +115,5 @@ export class ScreenBrightnessComponent implements OnInit {
       {
         this.displayLoginService._setDisplayLogin(false);
       }
-
     }
 }

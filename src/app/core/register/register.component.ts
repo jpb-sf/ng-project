@@ -22,7 +22,7 @@ export class RegisterComponent{
           Validators.email,
           Validators.required
       ]],
-      password:['', Validators.required],
+      password:['', [Validators.required, Validators.minLength(6)]],
       confirm: ['', Validators.required]
     }, { validators: Validators.compose(
         [
@@ -36,33 +36,29 @@ export class RegisterComponent{
   get password() { return this.form.get('password') };
   get confirm() { return this.form.get('confirm') };
 
-  test(ctrl: any)
-  { 
-    console.log(ctrl.value.length)
-    console.log('test')
-    console.log(ctrl)
-  }
-
   removeEmailError(ctrl: any)
   {
-    ctrl.setErrors({email: null, customLength: null})
+    ctrl.setErrors({ email: null, customLength: null })
   }
 
   registerSubmit()
   {
     this.formVals = this.form.getRawValue();
+    if (this.formVals.email && this.formVals.password)
     this.stepOne = false;
-    // if (formVals.email && formVals.password)
-    // this.auth.login(id, formVals.email, formVals.password);
+    // this.auth.login("register", this.formVals.email, this.formVals.password);
   }
 
   submit(event: any)
   {
-    // Removing property
-    const {['confirm']: remove, ...rest } = this.formVals;
-    // Combining properties
-    this.formVals = {...rest, ...event }
-    this.auth.registerUser(this.formVals)
+    if (this.form.valid)
+    {
+      // Removing property
+      const { ['confirm']: remove, ...rest } = this.formVals;
+      // Combining properties
+      this.formVals = {...rest, ...event }
+      this.auth.registerUser(this.formVals)
+    }
   }
 
   displayLogin()

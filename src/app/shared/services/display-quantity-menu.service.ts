@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DisplayQuantityMenuService {
-  displayQuantityId$: BehaviorSubject<number> = new BehaviorSubject(NaN); 
+  displayQuantityId$: Subject<number> = new Subject(); 
   constructor() { }
   
   setId(cardId: number)

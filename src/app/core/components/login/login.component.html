@@ -1,13 +1,19 @@
-<div  class="login-container text-center" [ngClass]="{'locationOfLogin': displayLoginNav}">
+<div class="login-container text-center" [ngClass]="{'locationOfLogin': displayLoginNav}">
     <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
     <form [formGroup]="form" class="form" (ngSubmit)="onSubmit($event.submitter.id)">
-        <input 
-            type="email"  
-            placeholder="email"
-            formControlName="email"
-            #email
-            class="form-control"
-        ><br>
+        <div class="form-group">
+            <input
+                (focus)="focused = true"
+                (blur)="focused = false"  
+                type="email"  
+                placeholder="email"
+                formControlName="email"
+                class="form-control"
+            ><br>
+            <div *ngIf="email?.errors?.['email'] && email?.touched && !focused" class="alert alert-danger">
+                <p>Not a valid email address</p>
+            </div>
+        </div>
         <input 
             type="password" 
             placeholder="password"
@@ -17,12 +23,21 @@
         ><br>
         <div class="d-grid">
             <button
+            *ngIf="!displayLoginNav"
             type="submit"
             role="button"
-            id="login"
+            id="login-checkout"
             class="text-dec-none btn-login"
             >SIGN IN 
-        </button>
+            </button>
+            <button
+            *ngIf="displayLoginNav"
+            type="submit"
+            role="button"
+            id="loginNav"
+            class="text-dec-none btn-login"
+            >SIGN IN 
+            </button>
         </div>
         <p *ngIf="displayLoginNav" class="t--callout-sml">New user?</p>
         <div *ngIf="displayLoginNav; else signup" class="d-grid">
@@ -34,6 +49,7 @@
             class="text-dec-none btn-login"
             >CHECKOUT</button>
             </div>
+            <p class="mt--5p" *ngIf="emptyCartError">Your bag is currently empty.</p>
         <ng-template #signup >
             <div class="text-center">
                 <p>Don't have an account?</p>

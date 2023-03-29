@@ -84,11 +84,13 @@ export class AppComponent implements OnInit {
   _setDisplayCart() {
     this.displayCartService._setDisplayCart();
     this.screenBrightnessService.changeBrightness();
+    console.log(`setDisplayCart() is being called from app.comp`);
   }
 
   _setDisplayLogin() {
     this.displayLoginService._setDisplayLogin(true);
     this.screenBrightnessService.changeBrightness();
+    console.log(`setDisplayLogin() is being called from app.comp`);
   }
 
 }

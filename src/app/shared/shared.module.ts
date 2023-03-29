@@ -27,7 +27,7 @@ import { OrderService } from './services/order.service';
 import { OrderViewService } from './services/order-view.service';
 import { ScreenBrightnessService } from './services/screen-brightness.service';
 import { DisplayCartService } from './services/display-cart.service';
-
+import { ErrorMessagesService } from './services/error-messages.service';
 
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
@@ -80,6 +80,7 @@ import { ResponsiveService } from './services/responsive.service';
     ScreenBrightnessService,
     DisplayCartService,
     AuthGuard,
+    ErrorMessagesService,
     EmptyCartGuard
   ]
 })

@@ -2,13 +2,17 @@ import { Injectable, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { ShoppingCart } from 'shared/models/shopping-cart';
+import { ErrorMessagesService } from './error-messages.service';
 import { ShoppingCartService } from './shopping-cart.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmptyCartGuard implements CanActivate {
-  constructor(private cartService: ShoppingCartService, private router: Router) { 
+  constructor(
+    private cartService: ShoppingCartService, 
+    private router: Router,
+    private errorMessageService: ErrorMessagesService) { 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
@@ -18,10 +22,12 @@ export class EmptyCartGuard implements CanActivate {
     .subscribe((cart: ShoppingCart) => {
       if(!cart.totalItemsCount)
       {
+        console.log('emptyCartGuard defenses are up')
+        this.errorMessageService._setEmptyCartError(true);
         resolve(false);
-        this.router.navigate(['/checkout/empty-cart'])
       }
       else {
+      this.errorMessageService._setEmptyCartError(false);
        resolve(true);
       }
     })})

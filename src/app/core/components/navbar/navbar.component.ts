@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { ResponsiveService } from 'shared/services/responsive.service';
-import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
 
 
  @Component({
@@ -47,11 +46,10 @@ export class NavbarComponent implements OnInit {
   }
 
   onShow() {
-    // If user is not already on '/shopping-cart' path; this avoids the desktop fly-out cart redudanty showing over a mobile cart page
+    // If user is not already on '/shopping-cart' path; this avoids the desktop fly-out cart redudantly showing over a mobile cart page
     if(this.location.path() !== '/shopping-cart')
     {
         this.showCart.emit()
     }
   }
-
 }

@@ -38,10 +38,6 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {   
-        path: 'check-out/empty-cart',
-        component: CheckoutComponent
-    },
-    {   
         path: 'check-out/login',
         component: CheckoutComponent
     },
@@ -91,6 +87,10 @@ const routes: Routes = [
         redirectTo: 'admin/admin-orders/', 
         pathMatch: 'full',
         canActivate: [AuthGuard, AdminGuard]
+    },
+    {
+        path: '**',
+        component: ProductsComponent,
     }
 ];
 

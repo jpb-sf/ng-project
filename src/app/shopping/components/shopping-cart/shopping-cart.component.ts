@@ -23,14 +23,14 @@ export class ShoppingCartComponent implements OnInit {
     private cartService: ShoppingCartService) {
       this.responsiveService.screenWidth$
       .subscribe((sw: number) => {
-          if (sw <= 992 ) {
-            this.swMediumOrSmaller = true;
-          }
-          else {
-            this.swMediumOrSmaller = false;
-          }
+        if (sw <= 992 ) {
+        this.swMediumOrSmaller = true;
+        }
+        else {
+        this.swMediumOrSmaller = false;
+        }
       })
-   }
+  }
 
   async ngOnInit() {
     this.cart$ = await this.shoppingCartService.getCart();

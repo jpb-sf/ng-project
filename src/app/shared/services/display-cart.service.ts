@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DisplayCartService {
-  displayCart$: BehaviorSubject<any> = new BehaviorSubject(false);
+  displayCart$: Subject<any> = new Subject();
   displayCart: boolean = false;
 
   _setDisplayCart() {

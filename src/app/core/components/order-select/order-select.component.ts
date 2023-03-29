@@ -3,10 +3,9 @@ import { OrderService } from 'shared/services/order.service';
 import { Order } from 'src/app/shared/models/order';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { Route, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
 import { OrderViewService } from 'shared/services/order-view.service';
-import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
     selector: 'order-select',
@@ -28,44 +27,42 @@ export class OrderSelectComponent  implements OnDestroy, OnInit {
   baseroute?: string;
   orderServiceMethod!: Observable<Order[]>;
   @Input('swMediumOrSmaller') swMediumOrSmaller: boolean = false;
-  // @Output('darkenScreen') darkenScreen = new EventEmitter();
   
   constructor(
     private orderService: OrderService, 
     private route: ActivatedRoute,
     private screenBrightness: ScreenBrightnessService,
-    private orderViewService: OrderViewService,
-    private responsiveService: ResponsiveService) {
+    private orderViewService: OrderViewService) {
     this.baseroute = this.route.snapshot.url.join('/').slice(0,5);
   }
   ngOnInit(): void {
 
-      if(this.baseroute == 'admin')
-      {
-        this.orderServiceMethod = this.orderService.getAll();
-        this.orderDisplay = 'admin';
-      }
-      if (this.baseroute == 'my-or')
-      {
-        this.orderServiceMethod = this.orderService.getAllByUser();
-        this.orderDisplay = 'my';
-      }
-      
-      this.subscription = this.orderServiceMethod
-      .subscribe((orders: Order[]) => {
-        this.orders = orders;
-        if (this.isDtInitialized)
-        {
-          this.dtElement.dtInstance
-          .then((dtInstance: DataTables.Api) => {
-              dtInstance.destroy();
-              this.dtTrigger.next(orders);
-          })
-        } else {
-          this.isDtInitialized = true;
-          this.dtTrigger.next(orders);      
-        }
-      })
+    if(this.baseroute == 'admin')
+    {
+    this.orderServiceMethod = this.orderService.getAll();
+    this.orderDisplay = 'admin';
+    }
+    if (this.baseroute == 'my-or')
+    {
+    this.orderServiceMethod = this.orderService.getAllByUser();
+    this.orderDisplay = 'my';
+    }
+    
+    this.subscription = this.orderServiceMethod
+    .subscribe((orders: Order[]) => {
+    this.orders = orders;
+    if (this.isDtInitialized)
+    {
+        this.dtElement.dtInstance
+        .then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTrigger.next(orders);
+        })
+    } else {
+        this.isDtInitialized = true;
+        this.dtTrigger.next(orders);      
+    }
+    })
   }
   
   ngOnDestroy(): void {
@@ -75,6 +72,7 @@ export class OrderSelectComponent  implements OnDestroy, OnInit {
   
   viewOrder(key: string | undefined)
   {
+    console.log(`viewOrder() is being called from order-select.comp`);
     // set key for highlighting class in template
     this.key = key;
     this.orderViewService.changeOrderView(true);

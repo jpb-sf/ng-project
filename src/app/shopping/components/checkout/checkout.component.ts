@@ -5,7 +5,6 @@ import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { Subscription } from 'rxjs';
 import { NgForm} from '@angular/forms';
 import { OrderService } from 'shared/services/order.service';
-import { DisplayLoginService } from 'shared/services/display-login.service';
  
 @Component({
   selector: 'checkout',
@@ -22,11 +21,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private cartService: ShoppingCartService,
-    private orderService: OrderService,
-    private displayLoginService: DisplayLoginService) 
+    private orderService: OrderService) 
   {
       this.address = this.route.snapshot.url.join('/');
-     
   }
 
   async ngOnInit() {

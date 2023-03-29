@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject, snapshotChanges, SnapshotAction } from '@angular/fire/compat/database';
-import { Observable, map, pipe, switchMap } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable, map } from 'rxjs';
 import { ProductAndKey } from 'shared/models/product';
 @Injectable({
   providedIn: 'root'

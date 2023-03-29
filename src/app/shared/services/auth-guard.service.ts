@@ -13,26 +13,22 @@ export class AuthGuard implements CanActivate {
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 
   boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-     return this.authService.user$
+    return this.authService.user$
      .pipe(
         map((user) => {
-            console.log(`auth guard`);
-            if ((user && state.url === '/check-out/login') ||
-            (user && state.url === '/check-out/sign-up') )
-            {
-              this.router.navigate(['/check-out']);
-              return true;
-            }
-            if (user) { return true };
-            console.log(`canActivated activated, state.url is ${state.url}`)
-            // if (state.url === '/check-out')
-            // {
-              this.router.navigate(['/check-out/login'],  { queryParams: { returnUrl: state.url } })
-            // }
-            // else {
-            //   this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } })
-            // }
-            return false;
+        console.log(`auth guard`);
+        console.log(`state.url is ${state.url}`);
+    
+        if (user) { return true };
+        console.log(`canActivated activated, state.url is ${state.url}`)
+        // if (state.url === '/check-out')
+        // {
+          this.router.navigate(['/check-out/login'],  { queryParams: { returnUrl: state.url } })
+        // }
+        // else {
+        //   this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } })
+        // }
+        return false;
         })
       )
     }

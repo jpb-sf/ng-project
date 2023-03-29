@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, QueryFn } from '@angular/fire/compat/database';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { ShoppingCart } from 'shared/models/shopping-cart';
 import { Order } from 'shared/models/order';
 import { ShoppingCartService } from './shopping-cart.service';

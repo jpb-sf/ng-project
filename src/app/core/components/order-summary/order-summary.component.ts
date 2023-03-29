@@ -5,7 +5,6 @@ import { Order } from 'src/app/shared/models/order';
 import { formatDate } from '@angular/common';
 import { ScreenBrightnessService } from 'shared/services/screen-brightness.service';
 import { OrderViewService } from 'shared/services/order-view.service';
-import { ResponsiveService } from 'shared/services/responsive.service';
 
 @Component({
   selector: 'order-summary',
@@ -61,6 +60,7 @@ export class OrderSummaryComponent implements OnDestroy{
 
   onDeselect()
   {
+    console.log(`onDeselect() is being called from order-summary.comp`);
     this.orderViewService.changeOrderView(false);
     if (this.screenBrightness.darkenedScreen)
     {

@@ -3,7 +3,6 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/compat/dat
 import firebase from 'firebase/compat/app';
 import { AppUser } from 'shared/models/app-user';
 import { Observable, of} from 'rxjs';
-import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -11,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
     
-  constructor(private auth: AuthService, private db: AngularFireDatabase) { 
+  constructor(private db: AngularFireDatabase) { 
   }
 
   getAppUser(user: firebase.User | null) 
