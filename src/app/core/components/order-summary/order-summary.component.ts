@@ -39,8 +39,8 @@ export class OrderSummaryComponent implements OnDestroy{
       this.orderService.getOrder(this.id)
       .subscribe(order => {
         this.order = order;
-    
-        if(this.order)
+        console.log(`order summary component calling getOrder() sets this.order to ${this.order}`);
+        if(this.order?.order)
         {
           this.formattedDate = formatDate(this.order.datePlaced, 'MM/dd/yyyy', 'en-US');
           this.formattedTime = formatDate(this.order.datePlaced, 'hh:mm aa', 'en-US');

@@ -9,11 +9,13 @@ import { CustomValidators } from 'Validators/validators';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent{
-  form;
-  focused: boolean = false;
-  formVals?: any;
-  stepOne?: boolean = true;
   @Output('onDisplayLogin') onDisplayLogin = new EventEmitter();
+  form;
+  emailControlFocused: boolean = false;
+  pwControlFocused: boolean = false;
+  formVals?: any;
+  formSubmitted: boolean = false;
+  registerSequence: "email-pw" | "username" | "error" = "email-pw";
   
   constructor(private auth: AuthService, fb: FormBuilder) {
     this.form = fb.group({
@@ -45,11 +47,11 @@ export class RegisterComponent{
   {
     this.formVals = this.form.getRawValue();
     if (this.formVals.email && this.formVals.password)
-    this.stepOne = false;
-    // this.auth.login("register", this.formVals.email, this.formVals.password);
+    this.registerSequence = "username";
+    else this.formSubmitted = true;
   }
 
-  submit(event: any)
+  async submit(event: any)
   {
     if (this.form.valid)
     {
@@ -57,13 +59,24 @@ export class RegisterComponent{
       const { ['confirm']: remove, ...rest } = this.formVals;
       // Combining properties
       this.formVals = {...rest, ...event }
-      this.auth.registerUser(this.formVals)
+      let registerResults = await this.auth.registerUser(this.formVals)
+      console.log(`registerResults is ${registerResults}`);
+      if (typeof(registerResults) == 'string')
+      {
+        this.registerSequence = "error";
+      }
     }
   }
 
   displayLogin()
   {
     this.onDisplayLogin.emit();
+  }
+
+  showRegistrationForm()
+  {
+    this.registerSequence = "email-pw";
+    this.form.reset();
   }
 }
 

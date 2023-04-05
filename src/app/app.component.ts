@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
       }
       return;
     })
+    console.log(`scrollY is ${window.scrollY}`);
   }
   ngOnInit(): void {
     this.displayCartService.displayCart$
@@ -72,8 +73,10 @@ export class AppComponent implements OnInit {
   }
 
   _setDisplayProductNav() {
-    if (this.path === "/shopping-cart")
+    console.log(`this.path is ${this.path.slice(0,4)}`);
+    if (this.path !== "/" && this.path.slice(0,4) !== "?cat" && this.path !== '')
     {
+        // don't display product navigation controls
       this.displayProductNav = false;
       return;
     }

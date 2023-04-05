@@ -51,75 +51,87 @@ export class AuthService {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     localStorage.setItem('returnUrl', returnUrl!);
    
-    this.afAuth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-    if(userCredential.user)
-    {
-        // If user is logging in fromthe pop-up login menu on the nav bar
-      if(id === 'loginNav')
-      { 
-        this.screenBrightnessService.changeBrightness();
-        this.displayLoginService._setDisplayLogin(false);
-      }
-      if (stateObj=== '/check-out/login' ||
-      stateObj === '/check-out/sign-up') 
-      {
-        // localStorage.setItem('returnUrl','check-out');
-        this.router.navigate(['/check-out']);
-      }
-        
-      if (!returnUrl || returnUrl == "null")
-      {   
-        this.router.navigate([''])
-      }
-      return true;
-    }
-    else {
-      return false;
-    }
-  
-    })
-    .catch(function(error){ 
-    // console.log(error)
-    return error
+    return new Promise((resolve, reject) => {
+      this.afAuth.signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        if(userCredential.user)
+        {
+            // If user is logging in fromthe pop-up login menu on the nav bar
+          if(id === 'loginNav')
+          { 
+            this.screenBrightnessService.changeBrightness();
+            this.displayLoginService._setDisplayLogin(false);
+          }
+          if (stateObj=== '/check-out/login' ||
+          stateObj === '/check-out/sign-up') 
+          {
+            // localStorage.setItem('returnUrl','check-out');
+            this.router.navigate(['/check-out']);
+          }
+            
+          if (!returnUrl || returnUrl == "null")
+          {   
+            this.router.navigate([''])
+          }
+          resolve(true);
+        }
+        else {
+          resolve(false);
+        }
+    
+      })
+      .catch(function(err: firebase.FirebaseError){ 
+        console.log(`login() error spot 2`); 
+        console.log(`message`, err.message);
+        console.log(`code`, err.code);
+        // code auth/too-many-requests
+        // code auth/wrong-password
+        resolve(err.code);
+      })
     })
   }
 
   logout() 
   {
     console.log('logout')
-    this.afAuth.signOut()
+    this.afAuth.signOut();
     this.router.navigate(['/'])
   }
 
   async registerUser(user: any)
   {
-    let newUser = (await this.afAuth.createUserWithEmailAndPassword(user.email, user.password))
-    // If user has bee created
-    if (newUser.user)
-    {  
-      // update user with properties from registration form 
-      (await this.db.object('/users/' + newUser.user.uid)
-        .update({
-          email: newUser.user.email,
-          isAdmin: false,
-          displayName: user.displayName
-        }))
-        this.login('register', user.email, user.password)
-        // if (this.user && this.user.uid  === newUser?.user?.uid)
-        // {
-        //   this.router.navigate([''])
-        // }
+    return new Promise(async (resolve, reject) => {
       
-      // this.user$.subscribe(user => {
-      //   if (user?.uid === newUser?.user?.uid)
-      //   {
-      //     this.router.navigate([''])
-      //   }
-      //   else {
-      //     // TODO
-      //   }
-    }
+      let newUser = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+      .catch(function(err: firebase.FirebaseError)
+      {
+        // console.log(`message`, err.message);
+        // console.log(`code`, err.code);
+        resolve(err.code);
+      })
+      // If user has bee created
+      if (newUser && newUser.user)
+      {  
+        // update user with properties from registration form 
+        await this.db.object('/users/' + newUser.user.uid)
+        .update({
+            email: newUser.user.email,
+            isAdmin: false,
+            displayName: user.displayName
+        })
+        await this.login('register', user.email, user.password)
+        if (this.user && this.user.uid === newUser?.user?.uid)
+        {
+          this.router.navigate(['']);
+        }
+        else {
+          resolve("Error while registering")
+          this.afAuth.signOut();
+        }
+      }
+      resolve(true)
+
+    })
   }
 }
 

@@ -1,65 +1,79 @@
-<div  *ngIf="stepOne; then step1; else step2"></div>
-<ng-template class="text-center mt-1" #step1>
-    <h4>Sign Up</h4>
-    <form [formGroup]="form" class="form">
-        <div class="form-group">
-            <!-- "focused" is just a boolean switch. Why didn't I think of this sooner? -->
-            <input
-                (focus)="focused = true"
-                (blur)="focused = false" 
-                type="text" 
-                placeholder="enter email" 
-                formControlName="email"
-                class="form-control"
-            ><br>
-            <div *ngIf="email?.errors && email?.touched && !focused" class="alert alert-danger">
-                <div *ngIf="email?.errors?.['customMinLength']">
-                    An email address is required
+<div [ngSwitch]="this.registerSequence">
+    <div *ngSwitchDefault class="text-center mt-1">
+        <h4>Sign Up</h4>
+        <form [formGroup]="form" class="form mt--1">
+            <div class="form-group">
+                <!-- "focused" is a boolean switch. -->
+                <input
+                    (focus)="emailControlFocused = true"
+                    (blur)="emailControlFocused = false" 
+                    type="text" 
+                    placeholder="enter email" 
+                    formControlName="email"
+                    class="form-control"
+                ><br>
+                <div *ngIf="email?.errors && formSubmitted && !emailControlFocused" class="alert alert-danger">
+                    <div *ngIf="email?.errors?.['customMinLength']">
+                        An email address is required
+                    </div>
+                    <div *ngIf="email?.errors?.['email']">
+                        Entry is not a valid email
+                    </div>
                 </div>
-                <div *ngIf="email?.errors?.['email']">
-                    Entry is not a valid email
+            </div>
+            <div class="form-group">
+                <input 
+                    (focus)="pwControlFocused = true"
+                    (blur)="pwControlFocused = false" 
+                    type="text" 
+                    placeholder="choose password" 
+                    formControlName="password"
+                    id="password"  
+                    class="form-control"
+                ><br>
+                <div *ngIf="password?.errors && formSubmitted && !pwControlFocused" class="alert alert-danger">
+                    <p *ngIf="password?.errors?.['minlength']">Your password must be 6 characters long.</p>
+                    <p *ngIf="!password?.errors?.['minlength']">A password is required</p>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <input 
-                type="text" 
-                placeholder="choose password" 
-                formControlName="password"
-                id="password"  
-                class="form-control"
-            ><br>
-            <div *ngIf="password?.errors && password?.touched"class="alert alert-danger">
-                <p *ngIf="password?.errors?.['minlength']">Your password must be 6 characters long.</p>
-                <p *ngIf="!password?.errors?.['minlength']">A password is required</p>
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    placeholder="confirm password" 
+                    formControlName="confirm"
+                    name="confirm"
+                    id="confirm" 
+                    class="form-control"
+                ><br>
+                <div *ngIf="confirm?.errors && confirm?.touched" class="alert alert-danger">
+                    <div *ngIf="confirm?.errors?.['required']; then test; else match"> </div>
+                        <ng-template #test > Please confirm your password.</ng-template>
+                        <ng-template #match> Passwords do not match.</ng-template>
+                </div>
             </div>
+        </form>
+        <button
+            class="btn btn-primary"
+            (click)="registerSubmit()" 
+            >Register 
+        </button>
+        
+        <div class="text-center">
+            <p>Already have an account?</p>
+            <a routerLink="/check-out/login" href="">Log in</a>
         </div>
-        <div class="form-group">
-            <input 
-                type="text" 
-                placeholder="confirm password" 
-                formControlName="confirm"
-                name="confirm"
-                id="confirm" 
-                class="form-control"
-            ><br>
-            <div *ngIf="confirm?.errors && confirm?.touched" class="alert alert-danger">
-                <div *ngIf="confirm?.errors?.['required']; then test; else match"> </div>
-                    <ng-template #test > Please confirm your password.</ng-template>
-                    <ng-template #match> Passwords do not match.</ng-template>
-            </div>
-        </div>
-    </form>
-    <button
-        class="btn btn-primary"
-        (click)="registerSubmit()" 
-        >Register 
-    </button>
-    <div class="text-center">
-        <p>Already have an account?</p>
-        <a routerLink="/check-out/login">Log in</a>
     </div>
-</ng-template>
-<ng-template #step2>
-    <username-form (submitEvent)="submit($event)"></username-form>
-</ng-template>
+    <div *ngSwitchCase="'username'">
+        <username-form (submitEvent)="submit($event)"></username-form>
+    </div>
+    <div *ngSwitchCase="'error'">
+        <div class="text-center">
+            <p class="mt--5 color-red">Something went wrong during registration. Please try again later.</p>
+            <div class=" mt--1 text-center">
+                <p>If you would like to try again</p>
+                <a (click)="showRegistrationForm()" href=""> Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
+

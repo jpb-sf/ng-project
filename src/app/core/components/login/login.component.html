@@ -39,6 +39,7 @@
             >SIGN IN 
             </button>
         </div>
+        <div class="mt--10p color-red" *ngIf="this.loginError">{{ this.loginErrorMessage }}</div>
         <p *ngIf="displayLoginNav" class="t--callout-sml">New user?</p>
         <div *ngIf="displayLoginNav; else signup" class="d-grid">
             <button
@@ -49,7 +50,7 @@
             class="text-dec-none btn-login"
             >CHECKOUT</button>
             </div>
-            <p class="mt--5p" *ngIf="emptyCartError">Your bag is currently empty.</p>
+            <p class="mt--5p fw-bold" *ngIf="emptyCartError">Your bag is currently empty.</p>
         <ng-template #signup >
             <div class="text-center">
                 <p>Don't have an account?</p>

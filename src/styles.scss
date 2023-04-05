@@ -26,6 +26,7 @@ time, mark, audio, video {
   text-decoration: underline;
 }
 
+
 .bold {
   text-decoration: bold;
 }
@@ -40,11 +41,11 @@ time, mark, audio, video {
 }
 
 .bg-color-2 {
-    background-color: #FFDD00;
+  background-color: #FFDD00;
 }
 
 .bg-color-8 {
-    background-color: #eee;
+  background-color: #eee;
 }
 
 .color-1 {
@@ -56,11 +57,15 @@ time, mark, audio, video {
 }
 
 .color-6 {
-    color: white;
+  color: white;
 }
 
 .color-7 {
-    color: black;
+  color: black;
+}
+
+.color-red {
+  color: red;
 }
   
 .color-8 {
@@ -91,19 +96,34 @@ time, mark, audio, video {
   margin-left: 10px;
 }
 
+.ml--1 {
+  margin-left: 1rem;
+}
+
+.ml--3 {
+  margin-left: 3rem;
+}
+
 .mt--2 {
   margin-top: 1.3rem; 
 }
 
 .mt--5p {
-    margin-top: 5px;
-  }
+  margin-top: 5px;
+}
   
-
 .mt--10p {
   margin-top: 10px;
 }
 
+.mt--1 {
+  margin-top: 1rem;
+}
+
+.mt--5 {
+  margin-top: 5rem;
+}
+  
 .mr--5p {
   margin-right: 5px;
 }
@@ -144,6 +164,12 @@ time, mark, audio, video {
   width: 14rem;
 }
 
+.page-header {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .max-content--h {
   height: max-content;
 }
@@ -166,6 +192,18 @@ time, mark, audio, video {
   z-index: 5;
 }
 
+.navbar-mycustom {
+  background-color: white;
+}
+
+.top-promo-container {
+  background-color: #ffe49c;
+}
+
+.top-promo-container p {
+    color: #4f4a3c;
+}
+
 .qty-btn {
   display: flex;
   justify-content: center;
@@ -175,6 +213,7 @@ time, mark, audio, video {
   height: 15px;
   width: 15px;
 }
+
 .qty-container {
   display: flex;
   justify-content: center;
@@ -245,13 +284,6 @@ time, mark, audio, video {
   display: none;
 }
 
-.products-nav-wrapper {
-  position: sticky;
-  top: 2.5rem;
-  z-index: 4;
-  width: 100%;
-}
-
 // Only for flyout
 .shopping-cart-wrapper { 
   position: fixed;
@@ -294,8 +326,21 @@ time, mark, audio, video {
 }
 
 .products-wrapper {
-  margin-top: .1rem;
+  margin-top: .05rem;
   position: static !important;
+}
+
+.products-nav-wrapper {
+  position: sticky;
+  top: 2.5rem;
+  z-index: 4;
+  width: 100%;
+  background-color: white;
+  padding-bottom: 1rem;
+}
+
+.products-nav-wrapper.shadow {
+  box-shadow: 0 -10px #aaa;
 }
 
 .products-nav-container {
@@ -311,6 +356,22 @@ time, mark, audio, video {
 
 .nav-item {
   left: -1px;
+}
+
+.sticky-top {
+  top: 80px; 
+}
+
+.nav-link.active-btn {
+  text-decoration-line: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 6px;
+  text-decoration-color: #D6896E;
+  color: #564000;
+}
+
+.nav-link:hover {
+  color: #564000;
 }
 
 .shopping-cart-mobile-wrapper {
@@ -333,10 +394,6 @@ time, mark, audio, video {
   border-style: none;
   background-color: transparent !important;
 }
-
-// .btn-color2:hover { 
-//   background-color: #e0ac1d;
-// }
 
 .flex {
   display: flex;
@@ -489,6 +546,14 @@ time, mark, audio, video {
 .btn-login:hover {
   border: 1px solid #FFDD00;
   color: #111;
+}
+
+.btn-admin-add-product {
+  font-size: .9rem;
+}
+
+.btn-admin-add-product:hover {
+  background-color: #aaa;
 }
 
 .login-container {

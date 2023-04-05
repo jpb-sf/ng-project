@@ -1,10 +1,11 @@
 <!-- Mobile/Small Screen -->
 <div *ngIf="currentBreakingPoint === 'xs' ||
-        currentBreakingPoint === 'sm'; else desktop"  class="products-nav-dropdown-container shadow bg-body rounded">
+        currentBreakingPoint === 'sm'; else desktop"  class="products-nav-dropdown-container 
+        shadow bg-body rounded">
     <div class="list-group">
         <a routerLink="/"
         ngbDropdownItem 
-        class="list-group-item list-group-item-action"
+        class="list-group-item list-group-item-action color-2"
         [class.active-btn]="!category"
         >All categories 
         </a>
@@ -12,10 +13,10 @@
         routerLink="/"
         ngbDropdownItem 
         [queryParams]="{ category: c['key'] }"
-        class="list-group-item list-group-item-action"
+        class="list-group-item list-group-item-action color-2"
         [class.active-btn]="category === c['key']">
         {{ c['name'] }}
-        </a>
+        </a>d
     </div>
 </div>
 <!-- Medium to all larger screen -->
@@ -24,18 +25,18 @@
     <li class="nav-item flex btn-color2">
       <a routerLink="/"
       aria-current="page"
-      class="nav-link active color-2"
+      class="nav-link color-2"
       [class.active-btn]="!category">All
     </a>
     </li>
     <li *ngFor="let c of categories$ | async" class="nav-item flex btn-color2">
       <a routerLink="/"
       [queryParams]="{ category: c['key'] }"
-      class="nav-link active color-2"
+      class="nav-link color-2"
       [class.active-btn]="category === c['key']">
       {{ c['name'] }}
       </a>
-      <span class="nav-link-vertical-line"></span>
+      <!-- <span class="nav-link-vertical-line"></span> -->
     </li>
   </ul>
 </ng-template>

@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   focused: boolean = false;
   @Input('displayLoginNav') displayLoginNav: boolean = false;
   emptyCartError: boolean = false;
+  loginError: boolean = false;
+  loginErrorMessage: string = '';
 
   constructor(
     private auth: AuthService, 
@@ -44,15 +46,31 @@ export class LoginComponent implements OnInit {
     }) 
   }
   
-  onSubmit(id: string)
+  async onSubmit(id: string)
   {
     if (this.form.valid)
     {
       const formVals = this.form.getRawValue();
       if (formVals.email && formVals.password)
       {
-        const loginResult = this.auth.login(id, formVals.email, formVals.password);
-        console.log(`loginResult is ${loginResult}`)
+        const loginResult = await this.auth.login(id, formVals.email, formVals.password);
+        console.log(`loginResult is ${loginResult }`)
+        if (loginResult == "auth/too-many-requests")
+        {
+          this.loginError = true; 
+          this.loginErrorMessage = "For security purposes, this account has beeb temporalily locked. Please try again later." 
+        }
+        if (loginResult == "auth/wrong-password")
+        {
+          this.loginError = true;
+          this.loginErrorMessage = "The password is invalid. Please try again."   
+        }
+
+        if (loginResult == "auth/user-not-found")
+        {
+            this.loginError = true;
+            this.loginErrorMessage = "This email address is not recognized."
+        }
       }
     }
   }

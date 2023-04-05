@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, Input} from '@angular/core';
 import { OrderService } from 'shared/services/order.service';
 import { Order } from 'src/app/shared/models/order';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { OrderViewService } from 'shared/services/order-view.service';
 
 export class OrderSelectComponent  implements OnDestroy, OnInit {
   @ViewChild(DataTableDirective, {static: false} )
-  dtOptions: DataTables.Settings = {};
+  dtOptions!: DataTables.Settings;
   dtTrigger: Subject<any> = new Subject();
   dtElement!: DataTableDirective;
   isDtInitialized:boolean = false;
@@ -36,16 +36,16 @@ export class OrderSelectComponent  implements OnDestroy, OnInit {
     this.baseroute = this.route.snapshot.url.join('/').slice(0,5);
   }
   ngOnInit(): void {
-
+    // check route and call appropriate order method
     if(this.baseroute == 'admin')
     {
-    this.orderServiceMethod = this.orderService.getAll();
-    this.orderDisplay = 'admin';
+      this.orderServiceMethod = this.orderService.getAll();
+      this.orderDisplay = 'admin';
     }
     if (this.baseroute == 'my-or')
     {
-    this.orderServiceMethod = this.orderService.getAllByUser();
-    this.orderDisplay = 'my';
+      this.orderServiceMethod = this.orderService.getAllByUser();
+      this.orderDisplay = 'my';
     }
     
     this.subscription = this.orderServiceMethod

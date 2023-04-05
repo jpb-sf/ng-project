@@ -1,16 +1,16 @@
 <div class="w-100">
     <div *ngIf="orderDisplay === 'admin'; then admin; else my"></div>
     <ng-template #admin>
-        <h5>Orders</h5>
+        <h5 class="page-header">Orders</h5>
     </ng-template>
     <ng-template #my>
-
-        <h5> My Orders</h5>
+        <h5 class="page-header"> My Orders</h5>
     </ng-template>
-    <div class="row order-manage-container" [ngClass]="{'relative': swMediumOrSmaller}">
+    <div *ngIf="orders.length > 0; else noOrders" class="row order-manage-container" [ngClass]="{'relative': swMediumOrSmaller}">
         <div class="col-md-6">
             <order-select
-            [swMediumOrSmaller]="swMediumOrSmaller"></order-select>
+            [swMediumOrSmaller]="swMediumOrSmaller">
+            [orders]="orders"</order-select>
         </div>
         <div class="col-md-6 order-summary-wrapper" 
             [ngClass]="{'absolute': swMediumOrSmaller && !displayCart}"
@@ -21,5 +21,8 @@
             [orderIsSelected]="orderIsSelected"></order-summary>
         </div>
     </div>
+    <ng-template #noOrders>
+        <p>You have not placed any orders.</p>
+    </ng-template>
 </div>
  

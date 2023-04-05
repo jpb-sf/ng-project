@@ -14,6 +14,7 @@ export class ProductsNavComponent implements OnInit {
     faBars = faBars; 
     category: any = '';
     currentBreakingPoint!: string;
+    scrollY: number = NaN;
     
     constructor(
       private route: ActivatedRoute, 
@@ -29,6 +30,15 @@ export class ProductsNavComponent implements OnInit {
         .subscribe(params => {
             this.category = params.get('category')
       })
+    }
+
+    _setScrollY(scroll: any) {
+        console.log(scroll);
+        this.scrollY = window.scrollY;
+    }
+    
+    get window(): any {
+        return window;
     }
 
 }
