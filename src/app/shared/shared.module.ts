@@ -14,6 +14,7 @@ import { faPlus as fasPlus } from '@fortawesome/free-solid-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBreadSlice } from '@fortawesome/free-solid-svg-icons'
 
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { ProductsQuantityComponent } from './components/products-quantity/products-quantity.component';
@@ -93,6 +94,7 @@ export class SharedModule {
       fasPlus, 
       faShoppingBag, 
       faCaretDown,
-      faUser)
+      faUser,
+      faBreadSlice)
   }
 }

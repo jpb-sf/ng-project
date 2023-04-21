@@ -1,14 +1,14 @@
  <!-- Mobile/Small Screen Nav -->
 <nav *ngIf="currentBreakingPoint === 'xs' ||
             currentBreakingPoint === 'sm'; else desktop" 
-            class="products-nav-wrapper" (window:scroll)="_setScrollY($event)" [class.shadow]="scrollY > 0">
-    <div class="products-nav-container flex ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
+            class="products-nav-wrapper page-container" (window:scroll)="_setScrollY($event)" [class.shadow]="scrollY > 0">
+    <div class="products-nav-container flex ">
         <div class="nav-item" ngbDropdown>
             <a ngbDropdownToggle id="dropdownMenuButton"
                 class="nav-link active dropdown-toggles" 
                 data-toggle="dropdown" aria-haspopup="true" 
                 aria-expanded="false">
-                <fa-icon [icon]="faBars" class="color2"></fa-icon>   
+                <fa-icon [icon]="faBars" class="color-2"></fa-icon>   
             </a>
             <div ngbDropdownMenu class="border-none" aria-labelledby="dropdownBasic2">
                 <!-- Populate categories -->
@@ -19,9 +19,9 @@
             </div>
         </div>
         <div>
-            <p *ngIf="category; else all" class="ml--10p color1">{{ category }}</p>
+            <p *ngIf="category; else all" class="ml--10p color-2">{{ category }}</p>
             <ng-template #all>
-                <p class="ml--10p color1">All</p>
+                <p class="ml--10p color-2">All</p>
             </ng-template>
         </div>  
     </div>

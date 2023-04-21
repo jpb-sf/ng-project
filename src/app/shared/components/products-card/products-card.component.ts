@@ -13,7 +13,9 @@ export class ProductsCardComponent  {
   @Input('show-actions') showActions!: boolean;
   @Input('shopping-cart') shoppingCart!: ShoppingCart;
   @Input('filteredProducts') filteredProducts!: ProductAndKey[];
+  @Input('hasButton') hasbutton: boolean = true;
   displayQuantityMenu: boolean = false;
+  hover: boolean = false;
 
   constructor(private cartService: ShoppingCartService) { }
 
@@ -25,6 +27,10 @@ export class ProductsCardComponent  {
   showQuantityMenu() 
   {
     this.displayQuantityMenu = true;
+  }
+
+  _setHover() {
+    this.hover =!this.hover;
   }
 
   addToCart(quantity: number) {

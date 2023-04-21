@@ -2,7 +2,7 @@
 <top-promo></top-promo>
 <bs-navbar (onShowLogin)="_setDisplayLogin()" (showCart)="_setDisplayCart()"></bs-navbar>
 <products-nav [hidden]="!displayProductNav"></products-nav>
-<div class="page-wrapper ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
+<div class="page-wrapper">
     <router-outlet ></router-outlet>
 </div>
 <login [displayLoginNav]="displayLoginNav" *ngIf="displayLoginNav"></login>

@@ -1,5 +1,5 @@
-<h4>Delivery Address</h4>
-<form #f="ngForm" (ngSubmit)="submit(f)">
+
+<form #f="ngForm" (ngSubmit)="submit(f)" class="form-border">
     <div class="mb-2">
         <label for="name" class="form-label">Name</label>
         <input type="text" id="name" class="form-control" ngModel name="name" required>
@@ -16,5 +16,5 @@
         <label for="city" class="form-label">City</label>
         <input type="text" class="form-control" ngModel name="city" required>
     </div>
-    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Place Order</button>
+    <button [disabled]="!f.valid" type="submit" class="btn-admin-add-product btn btn-light btn-outline-dark">Place Order</button>
 </form>

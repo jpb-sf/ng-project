@@ -1,74 +1,75 @@
-<div *ngIf="order">
-    <div *ngIf="(!swMediumOrSmaller || orderIsSelected)" 
-    [ngClass]="{'absolute': swMediumOrSmaller && !displayCart}" class="order-summary-container border rounded ps-3 pe-3 pb-3 pt-3">
+
+    <div *ngIf="order && (!swMediumOrSmaller || orderIsSelected)" class="order-summary-container" 
+    [ngClass]="{'absolute': swMediumOrSmaller && !displayCart}">
         <div *ngIf="orderIsSelected; then selected; else notSelected"></div>
         <ng-template #notSelected>
-            <div  class="text-center">
-                <p>Orders will be displayed here.</p>
+            <div class="admin-message-container">
+                <p class="admin-message-text">Orders will be displayed here.</p>
             </div>
         </ng-template>
    
-    <ng-template #selected>
-        <div class="card-container-c">
-            <fa-icon 
-            role="button"
-            (click)="onDeselect()"
-            [icon]="['fas', 'xmark']"
-            [styles]="{'color': '#ddd', 'display': 'flex', 'margin-left': 'auto', 'margin-bottom': '.5rem', 'font-size': '1.5rem' }"></fa-icon>
-           <div class="card-header-c">
-                <h6 >Order# {{ order.datePlaced}}</h6>
-            </div>
-            <div class="card-body-c">
-                <h6 class="inline-block">Date: &nbsp;</h6> 
-                <p class="inline-block">{{ this.formattedDate }} at {{this.formattedTime }}</p>
-                <br>
-                <h6 class="inline-block">Name: &nbsp;</h6> 
-                <p class="inline-block">{{ order.shipping.name }}</p>
-                <br>
-                <h6>Delivery Address:
-                    <fa-icon
-                    role="button" 
-                    [icon]="['fas', 'caret-down']"
-                    [style]="{
-                        'paddingLeft': '5px',
-                        'color': '#aaa'
-                    }"
-                    (click)="onDropDown()">
-                    </fa-icon>
-                </h6>
-                <div *ngIf="showAddress" class="card-c-address-container">
-                    <p>{{ order.shipping.addressFirst }}</p>
-                    <p *ngIf="order.shipping.addressSecond">{{ order.shipping.addressSecond }}</p>
-                    <p>{{ order.shipping.city }}</p>
+        <ng-template #selected>
+            <div class="card-container-c border rounded ps-3 pe-3 pb-3 pt-3">
+                <fa-icon 
+                role="button"
+                (click)="onDeselect()"
+                [icon]="['fas', 'xmark']"
+                [styles]="{'color': '#ddd', 'display': 'flex', 'margin-left': 'auto', 'margin-bottom': '.5rem', 'font-size': '1.5rem' }"></fa-icon>
+            <div class="card-header-c">
+                    <h6 >Order# {{ order.datePlaced}}</h6>
                 </div>
-                <table class="table card-c-table">
-                    <thead>
-                        <tr>
-                            <th class="text-end">Qty</th>
-                            <th class="text-center">Item</th>
-                            <th class="text-end">Price</th>
-                            <th class="text-end">Subtotals</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of order.order.items" >
-                            <td class="text-end">{{ item.quantity }}</td>
-                            <td>{{ item.title }}</td>
-                            <td class="text-end">{{ item.price | currency: 'USD' : true  }}</td>
-                            <td class="text-end">{{ item.quantity * item.price | currency: 'USD' : true }}</td>
-                        </tr>
-    
-                        <tr>
-                            <td class="border-bottom-0"></td><td class="border-bottom-0"></td>
-                            <td class="text-end border-bottom-0" scope="col" colspan="2">Subtotal: {{ order.order.totalPrice | currency: 'USD' : true }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="card-body-c">
+                    <h6 class="inline-block">Date: &nbsp;</h6> 
+                    <p class="inline-block">{{ this.formattedDate }} at {{this.formattedTime }}</p>
+                    <br>
+                    <h6 class="inline-block">Name: &nbsp;</h6> 
+                    <p class="inline-block">{{ order.shipping.name }}</p>
+                    <br>
+                    <h6>Delivery Address:
+                        <fa-icon
+                        role="button" 
+                        [icon]="['fas', 'caret-down']"
+                        [style]="{
+                            'paddingLeft': '5px',
+                            'color': '#aaa'
+                        }"
+                        (click)="onDropDown()">
+                        </fa-icon>
+                    </h6>
+                    <div *ngIf="showAddress" class="card-c-address-container">
+                        <p>{{ order.shipping.addressFirst }}</p>
+                        <p *ngIf="order.shipping.addressSecond">{{ order.shipping.addressSecond }}</p>
+                        <p>{{ order.shipping.city }}</p>
+                    </div>
+                    <table class="table card-c-table">
+                        <thead>
+                            <tr>
+                                <th class="text-end">Qty</th>
+                                <th class="text-center">Item</th>
+                                <th class="text-end">Price</th>
+                                <th class="text-end">Subtotals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of order.order.items" >
+                                <td class="text-end">{{ item.quantity }}</td>
+                                <td>{{ item.title }}</td>
+                                <td class="text-end">{{ item.price | currency: 'USD' : true  }}</td>
+                                <td class="text-end">{{ item.quantity * item.price | currency: 'USD' : true }}</td>
+                            </tr>
+        
+                            <tr>
+                                <td class="border-bottom-0"></td><td class="border-bottom-0"></td>
+                                <td class="text-end border-bottom-0" scope="col" colspan="2">
+                                    Subtotal: {{ order.order.totalPrice | currency: 'USD' : true }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </ng-template>
+        </ng-template>
     </div>
-</div>
+
                         
    
 

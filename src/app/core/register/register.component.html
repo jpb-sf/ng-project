@@ -1,7 +1,7 @@
 <div [ngSwitch]="this.registerSequence">
-    <div *ngSwitchDefault class="text-center mt-1">
-        <h4>Sign Up</h4>
-        <form [formGroup]="form" class="form mt--1">
+    <div *ngSwitchDefault class="text-center">
+        <form [formGroup]="form" class="form form-border">
+            <h3 class="t--user-header"> SIGN UP</h3>
             <div class="form-group">
                 <!-- "focused" is a boolean switch. -->
                 <input
@@ -51,17 +51,20 @@
                         <ng-template #match> Passwords do not match.</ng-template>
                 </div>
             </div>
+            <div class="d-grid">
+                <button
+                    role="button"
+                    id="register"
+                    (click)="registerSubmit()" 
+                    routerLink="/check-out/sign-up"
+                    class="text-dec-none btn-login"
+                >Register</button>
+            </div>
+            <div class="text-center mt--1">
+                <p>Already have an account?</p>
+                <a routerLink="/check-out/login" href="">Log in</a>
+            </div>
         </form>
-        <button
-            class="btn btn-primary"
-            (click)="registerSubmit()" 
-            >Register 
-        </button>
-        
-        <div class="text-center">
-            <p>Already have an account?</p>
-            <a routerLink="/check-out/login" href="">Log in</a>
-        </div>
     </div>
     <div *ngSwitchCase="'username'">
         <username-form (submitEvent)="submit($event)"></username-form>

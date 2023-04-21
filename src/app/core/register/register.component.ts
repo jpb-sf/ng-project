@@ -47,8 +47,13 @@ export class RegisterComponent{
   {
     this.formVals = this.form.getRawValue();
     if (this.formVals.email && this.formVals.password)
-    this.registerSequence = "username";
-    else this.formSubmitted = true;
+    {
+      this.registerSequence = "username";
+    } 
+    else 
+    {
+      this.formSubmitted = true;
+    }
   }
 
   async submit(event: any)

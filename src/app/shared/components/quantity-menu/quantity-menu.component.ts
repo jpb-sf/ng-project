@@ -33,11 +33,9 @@ export class QuantityMenuComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  addToCart(quantity?: number | HTMLElement) {
-    if (quantity)
-    {
-      this.onAddToCart.emit(quantity);
-    }
+  addToCart(quantity?: number | HTMLElement) 
+  {
+    this.onAddToCart.emit(quantity);
   }
 
   deselect() 

@@ -1,5 +1,5 @@
 <div class=" qty-container">
-    <div  *ngIf="btnSize == 'small'">{{ shoppingCart!.getQuantity(key) }}</div>
+    <div *ngIf="btnSize == 'small'">{{ shoppingCart!.getQuantity(key) }}</div>
     <div class="qty-btn-container">
         <button 
         role="button"
@@ -9,24 +9,3 @@
         </button>
     </div>
 </div>
-
-<!-- <div class="row no-gutters">
-    <div class="col-2" [ngClass]="{'qty-btn-container__small': btnSize == 'small'}">
-        <button  
-        role="button"
-        (click)="subtractFromCart()" 
-        [ngClass]="btnSize == 'small' ? 'qty-btn' : 'btn'"
-        [style.background-color]="color? '#FFDD00' : '#DDD'"> -
-    </button>
-    </div>
-    <div class="col text-center" *ngIf="btnSize == 'small'">{{ shoppingCart!.getQuantity(key) }}</div>
-    <div class="col text-center qty-center" *ngIf="btnSize == 'large'"> {{ shoppingCart!.getQuantity(key) }} in bag </div>
-    <div class="col-2 qty-btn-add-container" [ngClass]="{'qty-btn-container__small': btnSize == 'small'}">
-        <button 
-        role="button"
-        (click)="addToCart()" 
-        [ngClass]="btnSize == 'small' ? 'qty-btn' : 'btn'"
-        [style.background-color]="color? '#FFDD00' : '#DDD'"> +
-        </button>
-    </div>
-</div> -->

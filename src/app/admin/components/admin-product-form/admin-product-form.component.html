@@ -1,61 +1,70 @@
 <div class="row">
     <div class="col-md-6">
-      <form [formGroup]="form" (ngSubmit)="save(form)">
-          <div class="form-group">
-              <label for="title">Title</label>
-              <input formControlName="title" [(ngModel)]="product.title"  class="form-control" id="title" type="text" required>
-              <div class="alert alert-danger" *ngIf="title?.touched && title?.invalid">
-                  Title is required.
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="price">Price</label>
-              <div class="input-group">
-                  <div class="input-group-prepend">
+        <h5 class="page-header">Add New Product</h5>
+        <form [formGroup]="form" (ngSubmit)="save(form)" class="form-border">
+            <div class="form-group mt--10p mb--10p">
+                <label for="title">Title</label>
+                <input formControlName="title" [(ngModel)]="product.title"  class="form-control form-control--c" id="title" type="text" required>
+                <div class="alert alert-danger" *ngIf="formSubmitted && title?.invalid">
+                    Title is required.
+                </div>
+            </div>
+            <div class="form-group mt--10p mb--10p">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupPrepend2">$</span>
-                  </div>
-                  <input formControlName="price" [(ngModel)]="product!.price" class="form-control" id="price" type="number" required>
-              </div>
-              <div class="alert alert-danger" *ngIf="price?.touched && price?.errors?.['required']">
-                  Price is required.
-              </div>
-              <div class="alert alert-danger" *ngIf="price?.touched && price?.errors?.['min']">
-                  Please enter a positive amount.
-              </div>
-          </div>
-          <div class="form-group">
-              <label for="category">Category</label>
-              <select formControlName="category" [(ngModel)]="product!.category" class="form-control" id="category" required>
-                  <option value=""></option>
-                  <option 
+                    </div>
+                    <input formControlName="price" [(ngModel)]="product!.price" class="form-control form-control--c" id="price" type="number" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="formSubmitted && price?.errors?.['required']">
+                    Price is required.
+                </div>
+                <div class="alert alert-danger" *ngIf="formSubmitted && price?.errors?.['min']">
+                    Please enter a positive amount.
+                </div>
+            </div>
+            <div class="form-group mt--10p mb--10p">
+                <label for="category">Category</label>
+                <select formControlName="category" [(ngModel)]="product!.category" class="form-control form-control--c" id="category" required>
+                    <option value=""></option>
+                    <option 
                     *ngFor="let c of categories$ | async;" 
                     [value]="c['key']"
                     >
-                     {{ c['name'] }}
-                  </option>
-              </select>
-              <div class="alert alert-danger" *ngIf="category?.touched && category?.invalid">
-                  Category is required.
-              </div>
-          </div> 
-          <div class="form-group">
-              <label for="imageUrl">Image URL</label>
-              <input formControlName="imageUrl" [(ngModel)]="product!.imageUrl" class="form-control" id="image" type="url" required minlength="1">
-              <div class="alert alert-danger" *ngIf="imageUrl?.touched && imageUrl?.errors?.['required']">
-                  A image URL is required.
-              </div>
-              <div class="alert alert-danger" *ngIf="imageUrl?.touched && imageUrl?.errors?.['pattern']">
-                  Must be a valid URL.
-              </div>
-          </div>
-          <button class="btn btn-primary">Save</button>
-          <button class="btn btn-danger" type="button" (click)="deleteItem()">Delete</button>
-          <a (click)="getCat()" class="btn btn-primary">getCat()</a>
+                        {{ c['name'] }}
+                    </option>
+                </select>
+                <div class="alert alert-danger" *ngIf="formSubmitted && category?.invalid">
+                    Category is required.
+                </div>
+            </div> 
+            <div class="form-group mt--10p mb--10p">
+                <label for="imageUrl">Image URL</label>
+                <input formControlName="imageUrl" [(ngModel)]="product!.imageUrl" class="form-control form-control--c" id="image" type="url" required minlength="1">
+                <div class="alert alert-danger" *ngIf="formSubmitted && imageUrl?.errors?.['required']">
+                    A image URL is required.
+                </div>
+                <div class="alert alert-danger" *ngIf="formSubmitted && imageUrl?.errors?.['pattern']">
+                    Must be a valid URL.
+                </div>
+            </div>
+            <div class="mt--1">
+                <button class="btn btn-light btn-outline-dark btn-product-form">Save</button>
+                <button class="btn btn-light btn-outline-dark btn-product-form ml--1" type="button" (click)="deleteItem()">Delete</button>
+            </div>
       </form>
     </div>
-    <div class="col-4">
-        <products-card *ngIf="product.title" [product]="product"></products-card>
+    <div *ngIf="product.title; else default" class="col-6 pt--1">
+        <products-card [product]="product" [hasButton]="false"></products-card>
     </div>
-    </div>
+    <ng-template #default>
+        <div class="col-6">
+            <div class="admin-message-container">
+                <p class="admin-message-text">Product card will be displayed Here.</p>
+            </div>
+        </div>
+    </ng-template>
+</div>
 
   

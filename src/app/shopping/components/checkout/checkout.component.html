@@ -1,4 +1,4 @@
-<p>Check Out</p>
+<p class="page-header">Check Out</p>
 
 <div class="row">
     <div *ngIf="address === 'check-out'" class="col-md-6">
@@ -12,7 +12,7 @@
     class="col-md-6">
         <login></login>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" [ngClass]="{'mt--2': swMediumOrSmaller}">
         <shopping-cart-summary [cart]="cart"></shopping-cart-summary>
     </div>
 </div>

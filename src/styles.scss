@@ -17,6 +17,7 @@ time, mark, audio, video {
     padding: 0;
 }
 
+
 .text-dec-none {
   text-decoration: none;
 }
@@ -26,10 +27,20 @@ time, mark, audio, video {
   text-decoration: underline;
 }
 
-
 .bold {
   text-decoration: bold;
 }
+
+.form-border {
+  border-radius: 8px;
+  border: 1px solid #888;
+  padding: 1rem;
+  // box-shadow: 2px 2px 4px #ccc;
+}
+
+// .form-control--c {
+//   border-color: #888;
+// }
 
 .inline-block {
     display: inline-block;
@@ -105,7 +116,11 @@ time, mark, audio, video {
 }
 
 .mt--2 {
-  margin-top: 1.3rem; 
+  margin-top: 2rem; 
+}
+
+.mt--3 {
+  margin-top: 3rem;
 }
 
 .mt--5p {
@@ -114,6 +129,14 @@ time, mark, audio, video {
   
 .mt--10p {
   margin-top: 10px;
+}
+
+.mb--5p {
+  margin-bottom: 5px;      
+}
+
+.mb--10p {
+  margin-bottom: 10px;      
 }
 
 .mt--1 {
@@ -165,7 +188,7 @@ time, mark, audio, video {
 }
 
 .page-header {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -189,7 +212,7 @@ time, mark, audio, video {
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 13;
 }
 
 .navbar-mycustom {
@@ -326,17 +349,18 @@ time, mark, audio, video {
 }
 
 .products-wrapper {
-  margin-top: .05rem;
+  margin-top: -.75rem;
   position: static !important;
 }
 
 .products-nav-wrapper {
   position: sticky;
   top: 2.5rem;
-  z-index: 4;
+  z-index: 12;
   width: 100%;
   background-color: white;
   padding-bottom: 1rem;
+  padding-top: .4rem;
 }
 
 .products-nav-wrapper.shadow {
@@ -352,6 +376,25 @@ time, mark, audio, video {
 
 .products-nav-dropdown-container {
   line-height: 20px;
+}
+
+.admin-message-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-message-text {
+  height: max-content;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
 }
 
 .nav-item {
@@ -418,7 +461,7 @@ time, mark, audio, video {
    object-fit: cover;
 }
 
-.card-btn {
+.btn-card {
   padding-top: .4rem;
   padding-bottom: .4rem;
   padding-left: 1rem;
@@ -428,11 +471,17 @@ time, mark, audio, video {
   color: white;
 
 }
-.card-btn.selected {
+.btn-card.selected {
   color:#FFDD00;
   background-color: white;
   border: 1px solid #FFDD00;
 }
+
+.btn-card.hover {
+  background-color:#ffe647;
+  color: white;
+}
+
 
 .card-body-bottom {
   margin-bottom: 0;
@@ -443,7 +492,8 @@ time, mark, audio, video {
   padding-top: .5rem;
   padding-bottom: .5rem;
   padding-left: .5rem;
-  padding-right: .5rem;    
+  padding-right: .5rem;
+  background-color: white;    
 }
 
 .card-header-c {
@@ -509,6 +559,10 @@ time, mark, audio, video {
   margin-top: .5rem;
  }
 
+ .order-summary-container {
+    height: 100%;
+ }
+
 .order-summary-container.absolute {
   position: absolute;
   display: inline-block;
@@ -523,6 +577,7 @@ time, mark, audio, video {
 }
 
 .t--user-header {
+ text-align: center;
   font-size: 1.25rem;
   font-weight: 300;
   padding-bottom: 1rem;
@@ -542,7 +597,7 @@ time, mark, audio, video {
   background-color: white;
   border: 1px solid #111;
 }
-
+e
 .btn-login:hover {
   border: 1px solid #FFDD00;
   color: #111;
@@ -552,8 +607,11 @@ time, mark, audio, video {
   font-size: .9rem;
 }
 
-.btn-admin-add-product:hover {
-  background-color: #aaa;
+.btn-admin-add-product:hover, .btn-product-form:hover, .btn-admin-add-product:focus, .btn-product-form:focus {
+  background-color: white;
+  color: #333;
+  outline: none;
+  box-shadow: none;
 }
 
 .login-container {
@@ -565,7 +623,7 @@ time, mark, audio, video {
   background-color: white;
 }
 
-.login-container.locationOfLogin {
+.login-container.location-of-login {
     position: absolute;
     right: 5rem;
     top: 1.5rem;
@@ -580,7 +638,7 @@ time, mark, audio, video {
 .quantity-form-wrapper {
   position: relative;
   width: max-content;
-  z-index: 20;
+  z-index: 10;
   background-color: #f0f0f0;
   padding-left: .5rem;
   padding-right: .5rem;
@@ -672,16 +730,52 @@ div:focus {
   background-color: #888;
   height: 100%; 
 }
-  
-@media (min-width: 1200px) { 
-    .page-wrapper, .page-container {
-        padding-left: 5rem;
-        padding-right: 5rem;
-    }
+.page-container {
+  padding: 0;
+}
 
-    @media (min-width: 762px) { 
-      .login-container {
-        right: 11.5rem;
-      }
-    }
+@media (min-width: 762px) { 
+  .login-container {
+    right: 11.5rem; 
   }
+}
+
+@media (min-width: 1200px) { 
+  .page-wrapper, .page-container {
+    width: 68rem;    /* Your required max width here. */
+    max-width: 100%; /* Set max-width to 100%. */
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) { 
+  .page-wrapper, .page-container  {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 767px) { 
+  .page-wrapper, .page-container  {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 767px) { 
+  .page-wrapper, .page-container  {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+}
+
+@media (max-width: 767px) { 
+  .page-wrapper, .page-container  {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+}
+  
+
+
+

@@ -1,6 +1,11 @@
-<div class="login-container text-center" [ngClass]="{'locationOfLogin': displayLoginNav}">
-    <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
-    <form [formGroup]="form" class="form" (ngSubmit)="onSubmit($event.submitter.id)">
+<div    
+    [ngClass]="{
+        'location-of-login': displayLoginNav,
+        'login-container': displayLoginNav,
+        'text-center': displayLoginNav }">
+    <form [formGroup]="form" class="form" [ngClass]="{'form-border': !displayLoginNav}"
+    (ngSubmit)="onSubmit($event.submitter.id)">
+        <h3 class="t--user-header"><fa-icon [icon]="['fas', 'user']"></fa-icon> SIGN IN / CREATE ACCOUNT</h3>
         <div class="form-group">
             <input
                 (focus)="focused = true"
@@ -49,10 +54,10 @@
             routerLink="/check-out/sign-up"
             class="text-dec-none btn-login"
             >CHECKOUT</button>
-            </div>
-            <p class="mt--5p fw-bold" *ngIf="emptyCartError">Your bag is currently empty.</p>
+        </div>
+        <p class="mt--5p fw-bold" *ngIf="emptyCartError">Your bag is currently empty.</p>
         <ng-template #signup >
-            <div class="text-center">
+            <div class="text-center mt--1">
                 <p>Don't have an account?</p>
                 <a routerLink="/check-out/sign-up"> Sign Up</a>
             </div>

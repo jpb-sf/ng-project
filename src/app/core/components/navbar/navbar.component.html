@@ -1,19 +1,19 @@
 <nav class="navbar navbar-expand navbar-light navbar-mycustom fixed-top py-0">
-  <div class="page-container container-fluid ms-3 me-3 ms-sm-4 me-sm-4 ms-md-5 me-md-5">
-    <a class="navbar-brand" routerLink="/">MyShop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="page-container container-fluid">
+    <a class="navbar-brand" routerLink="/">
+        <fa-icon class="mr--5p color-1" [icon]="['fas', 'bread-slice']"></fa-icon>
+    </a>
+    
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav ms-auto mb-1 mb-md-0">
+        <!-- if not logged in -->
         <ng-template #anonymousUser>
             <li class="nav-item">
-                <a role="button" class="nav-link active" aria-current="page" (click)="onLogin()">
-                    <fa-icon class="mr--5p" [icon]="['fas', 'user']"></fa-icon>SIGN IN</a>
+                <a role="button" class="nav-link active color-2" aria-current="page" (click)="onLogin()">
+                    <fa-icon class="mr--5p color-2" [icon]="['fas', 'user']"></fa-icon>SIGN IN</a>
             </li>
         </ng-template>
-    
+        <!-- if logged in -->
         <li *ngIf="appUser$ | async as appUser; else anonymousUser" class="nav-item" ngbDropdown>
             <a ngbDropdownToggle id="dropdownMenuButton"
                 class="nav-link active" 
@@ -21,9 +21,10 @@
                 aria-expanded="false">
                 Hi {{ appUser.displayName }}
             </a>
-            <!-- Navbar user dropdown -->
+            <!-- NGB Navbar user dropdown -->
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
                 <a ngbDropdownItem routerLink="/my-orders">My Orders</a>
+                <!-- Show these buttons if user has admin access-->
                 <ng-container *ngIf="appUser.isAdmin">
                     <a ngbDropdownItem routerLink="/admin/admin-orders">Manage Orders</a>
                     <a ngbDropdownItem routerLink="admin/products">Manage Products</a>

@@ -14,53 +14,12 @@
     class="quantity-menu-component"
     >
     </quantity-menu>
-    <div class="text-end">
-        <button (click)="showQuantityMenu()" class="btn card-btn"
-        [ngClass]="{'selected': displayQuantityMenu}">
+    <div *ngIf="hasbutton" class="text-end">
+        <button (click)="showQuantityMenu()" class="btn btn-card" (mouseover)="_setHover()" (mouseout)="_setHover()"
+        [ngClass]="{'selected': displayQuantityMenu, 'hover': hover && !displayQuantityMenu}">
             <fa-icon [icon]="['fas', 'plus']" ></fa-icon>
         </button>
     </div>
-    <!-- <ng-template #manageQuantity>
-    <div class="card-footer">
-        <products-quantity 
-            [shopping-cart]="shoppingCart" 
-            [product]="product" 
-            [key]="product.key"
-            [color]="true"
-            [btnSize]="'large'">
-        </products-quantity>
-    </div>
-    </ng-template> -->
 </div>
-
-
-<!-- <div class="card h-100" *ngIf="product">
-    <div class="card-img-container">
-        <img *ngIf="product.imageUrl" [src]="product.imageUrl" class="card-img-top" alt="...">
-    </div>
-    <div class="card-body card-body-bottom">
-      <h5 class="card-title color-2">{{ product.title }}</h5>
-      <p class="card-text color-2">{{ product.price | currency : 'USD' : true }}</p>
-    </div>
-    
-    <div *ngIf="showActions && shoppingCart && 
-    shoppingCart.getQuantity(product.key) === 0; else manageQuantity"
-    class="text-end">
-    <button (click)="addToCart()" class="btn card-btn color-6 bg-color-2">
-        <fa-icon [icon]="['fas', 'plus']" ></fa-icon>
-    </button>
-    </div>
-    <ng-template #manageQuantity>
-    <div class="card-footer">
-        <products-quantity 
-            [shopping-cart]="shoppingCart" 
-            [product]="product" 
-            [key]="product.key"
-            [color]="true"
-            [btnSize]="'large'">
-        </products-quantity>
-    </div>
-    </ng-template>
-</div> -->
 
   

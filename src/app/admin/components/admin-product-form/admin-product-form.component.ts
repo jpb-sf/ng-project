@@ -26,8 +26,9 @@ export class AdminProductFormComponent implements OnInit {
       category: '',
       imageUrl: ''
   }
-  test:string = "test";
-  id:string | null = '';
+  test: string = "test";
+  id: string | null = '';
+  formSubmitted: boolean = false;
   
   constructor(
     private fb: FormBuilder, 
@@ -61,10 +62,12 @@ export class AdminProductFormComponent implements OnInit {
     if (this.id) 
     {
       let item;
-      try {
+      try 
+      {
         item = this.productService.get(this.id)
       }
-      catch{
+      catch 
+      {
         console.log('Error returning ProductService.get() | Handled on AdminProductForm ')
       }
 
@@ -81,9 +84,9 @@ export class AdminProductFormComponent implements OnInit {
   }
     
   get title() { return this.form.get('title'); }
-	get price() { return this.form.get('price'); }
-	get category() { return this.form.get('category'); }
-	get imageUrl() { return this.form.get('imageUrl'); }
+  get price() { return this.form.get('price'); }
+  get category() { return this.form.get('category'); }
+  get imageUrl() { return this.form.get('imageUrl'); }
 
 	getCat() {
 		let result = this.categories$.subscribe(
@@ -107,7 +110,8 @@ export class AdminProductFormComponent implements OnInit {
 				const control = this.form.get(field);
 				control?.markAsTouched({ onlySelf: true })
 			})
-			console.log('Error(s) in the AdminProductForm form values; form not valid. | Handled on AdminProductForm')
+			console.log('Error(s) in the AdminProductForm form values; form not valid. | Handled on AdminProductForm');
+      this.formSubmitted = true;
 			return false;
 		} 
 		return this.router.navigate(['/admin/products']);

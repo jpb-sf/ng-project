@@ -1,6 +1,6 @@
 import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, debounceTime } from 'rxjs';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 import { ShoppingCart } from 'shared/models/shopping-cart';
 import { ResponsiveService } from 'shared/services/responsive.service';
@@ -47,6 +47,8 @@ export class ShoppingCartComponent implements OnInit {
   
   clearCart(){
     this.shoppingCartService.clearCart();
+    setTimeout(()=> { this.onHide()}, 400)
+    
   }
 
   addToCart(product: any, quantity: number) {
