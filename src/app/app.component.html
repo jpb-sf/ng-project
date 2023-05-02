@@ -2,6 +2,12 @@
 <top-promo></top-promo>
 <bs-navbar (onShowLogin)="_setDisplayLogin()" (showCart)="_setDisplayCart()"></bs-navbar>
 <products-nav [hidden]="!displayProductNav"></products-nav>
+    <a href="https://www.jasonbergland.com/projects" class="nav__homelink--wrapper" >
+        <div class="nav__homelink--container">
+            <div class="nav__homelink--rule"></div>
+            <h6 class="nav__homelink--text"> Return to <br> my portfolio</h6>
+        </div>
+	</a>
 <div class="page-wrapper">
     <router-outlet ></router-outlet>
 </div>

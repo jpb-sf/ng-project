@@ -1,0 +1,31 @@
+// styles from portfolio website
+.nav__homelink--wrapper {
+  display: block;
+  text-decoration: none;  
+}
+  .nav__homelink--container {
+    position: fixed;
+    right: 0;
+    top: 20rem;
+    width: 7rem;
+    height: 4rem;
+    z-index: 1;
+    background-color: white;
+  }
+  .nav__homelink--rule {
+    margin-left: auto; 
+    margin-right: 1rem;
+    margin-top: .5rem;
+    border-top: 6px solid #aaa;
+    width: 3rem;
+  }
+  .nav__homelink--text {
+    margin-top: .2rem;
+    margin-left: auto; 
+    margin-right: 1rem;
+    padding: 0;
+    color: #aaa;
+    font-size: .9rem;
+    text-decoration: none;
+    text-align: right;
+  }
